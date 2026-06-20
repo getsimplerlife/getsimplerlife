@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #6C63FF;
+  --primary-dark: #5A52D5;
+  --secondary: #00C9A7;
+  --dark: #1A1A2E;
+  --gray-600: #4A4A6A;
+  --gray-200: #E8E8F0;
+  --gray-50: #F7F7FC;
+  --white: #FFFFFF;
+  --accent-warm: #FF6B6B;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--gray-50);
+  color: var(--dark);
+}
