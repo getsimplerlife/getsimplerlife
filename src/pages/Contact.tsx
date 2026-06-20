@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import { CheckCircle2, MessageSquare, Phone, Mail, Building, Send } from 'lucide-react'
+import { CheckCircle2, Phone, Mail, Building, Send } from 'lucide-react'
 
 export default function Contact() {
   const [formData, setFormData] = useState({
