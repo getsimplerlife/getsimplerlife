@@ -33,7 +33,12 @@ export const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
-      { path: '*', element: <NotFound /> },
     ],
+  },
+  // Catch-all wildcard as a separate top-level route (not nested under Layout)
+  // This ensures /book is NOT matched by the wildcard
+  {
+    path: '*',
+    element: <NotFound />,
   },
 ])

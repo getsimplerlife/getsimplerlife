@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import axios from 'axios'
 import { CheckCircle2, Phone, Mail, Building, Send } from 'lucide-react'
+import apiService from '../services/api'
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -27,10 +27,8 @@ export default function Contact() {
     e.preventDefault()
     setLoading(true)
     try {
-      const response = await axios.post('/api/leads', formData)
-      if (response.status === 201 || response.status === 200) {
-        setStatus('success')
-      }
+      await apiService.submitLead(formData)
+      setStatus('success')
     } catch (err) {
       console.error(err)
       setStatus('error')
