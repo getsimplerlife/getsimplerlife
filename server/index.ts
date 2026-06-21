@@ -6,10 +6,13 @@ import helmet from 'helmet'
 import dotenv from 'dotenv'
 import crypto from 'crypto'
 import axios from 'axios'
+import { Resend } from 'resend'
 import { db, initDb } from './config/db.js'
 import automationsRouter from './routes/automations.js'
 
 dotenv.config()
+
+const resend = new Resend(process.env.RESEND_API_KEY || 're_placeholder_key')
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -87,13 +90,73 @@ export const verifyToken = (req: any, res: any, next: any) => {
 };
 
 // Public Authentication / Token Route
-app.get('/api/auth/token', (_req, res) => {
-  const token = generateToken({ client: "Doe Logistics" });
+app.get('/api/auth/token', async (req, res) => {
+  const email = req.query.email as string;
+  let payload = { client: "Doe Logistics", email: "client@company.com", hasLead: false };
+
+  if (email && typeof email === 'string' && email.trim() !== '') {
+    try {
+      const result = await db.execute({
+        sql: "SELECT * FROM leads WHERE email = ? LIMIT 1",
+        args: [email.trim()]
+      });
+
+      if (result.rows && result.rows.length > 0) {
+        const lead = result.rows[0];
+        payload = {
+          client: (lead.company as string) || (lead.name as string),
+          email: lead.email as string,
+          hasLead: true
+        };
+      } else {
+        // Fallback for demo/guest emails
+        payload = {
+          client: email.split('@')[0].charAt(0).toUpperCase() + email.split('@')[0].slice(1) + " Corp",
+          email: email.trim(),
+          hasLead: false
+        };
+      }
+    } catch (err) {
+      console.error('[Simpler Life Backend] Error looking up lead email:', err);
+    }
+  }
+
+  const token = generateToken(payload);
   return res.json({ token });
 });
 
 // Automations Simulation Routes
 app.use('/api/automations', automationsRouter);
+
+// API Route - Get Scheduled Bookings
+app.get('/api/bookings', async (req, res) => {
+  try {
+    const result = await db.execute(`
+      SELECT message FROM leads 
+      WHERE message LIKE '%[MOCK CALENDAR BOOKING]%'
+    `);
+
+    const bookings: { date: string; time: string }[] = [];
+    
+    for (const row of result.rows) {
+      const message = (row.message as string) || '';
+      const dateMatch = message.match(/Scheduled Date:\s*([^\r\n]+)/);
+      const timeMatch = message.match(/Scheduled Time:\s*([^\r\n]+)/);
+      
+      if (dateMatch && timeMatch) {
+        bookings.push({
+          date: dateMatch[1].trim(),
+          time: timeMatch[1].trim()
+        });
+      }
+    }
+
+    return res.json({ success: true, bookings });
+  } catch (err: any) {
+    console.error('[Simpler Life Server] Error fetching bookings:', err);
+    return res.status(500).json({ success: false, error: 'Failed to fetch bookings' });
+  }
+});
 
 // API Routes - Original Lead Submission Route
 app.post('/api/leads', async (req, res) => {
@@ -196,6 +259,34 @@ app.post('/api/leads', async (req, res) => {
       sql: `UPDATE leads SET sync_status = ? WHERE id = ?`,
       args: [syncStatus, leadId]
     });
+
+    // Send automated lead notification to the owner
+    try {
+      await resend.emails.send({
+        from: 'Simpler Life Alerts <onboarding@resend.dev>',
+        to: ['electric.vortexz@gmail.com'],
+        subject: `🔔 [NEW LEAD] ${name} from ${company || 'General SMB'}`,
+        html: `
+          <div style="font-family: sans-serif; max-width: 600px; color: #333; line-height: 1.6;">
+            <h2 style="color: #4F46E5;">New Lead Ingested Successfully!</h2>
+            <p>A new prospect has reached out via the Simpler Life booking funnel:</p>
+            <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+              <tr style="background: #F9FAFB;"><td style="padding: 10px; border: 1px solid #E5E7EB; font-weight: bold;">Name:</td><td style="padding: 10px; border: 1px solid #E5E7EB;">${name}</td></tr>
+              <tr><td style="padding: 10px; border: 1px solid #E5E7EB; font-weight: bold;">Email:</td><td style="padding: 10px; border: 1px solid #E5E7EB;">${email}</td></tr>
+              <tr style="background: #F9FAFB;"><td style="padding: 10px; border: 1px solid #E5E7EB; font-weight: bold;">Phone:</td><td style="padding: 10px; border: 1px solid #E5E7EB;">${phone || 'N/A'}</td></tr>
+              <tr><td style="padding: 10px; border: 1px solid #E5E7EB; font-weight: bold;">Company:</td><td style="padding: 10px; border: 1px solid #E5E7EB;">${company || 'N/A'}</td></tr>
+              <tr style="background: #F9FAFB;"><td style="padding: 10px; border: 1px solid #E5E7EB; font-weight: bold;">Automation Needs:</td><td style="padding: 10px; border: 1px solid #E5E7EB;">${needs ? JSON.stringify(needs) : 'N/A'}</td></tr>
+              <tr><td style="padding: 10px; border: 1px solid #E5E7EB; font-weight: bold;">Inquiry Message:</td><td style="padding: 10px; border: 1px solid #E5E7EB;">${message || 'N/A'}</td></tr>
+              <tr style="background: #F9FAFB;"><td style="padding: 10px; border: 1px solid #E5E7EB; font-weight: bold;">Calculated Intent Score:</td><td style="padding: 10px; border: 1px solid #E5E7EB; font-weight: bold; color: #10B981;">${score} points</td></tr>
+            </table>
+            <p style="font-size: 12px; color: #9CA3AF; margin-top: 30px;">🔒 This notification was automatically triggered and delivered via your Resend Integration.</p>
+          </div>
+        `
+      });
+      console.log(`[Simpler Life Backend] Automated lead notification sent successfully to electric.vortexz@gmail.com.`);
+    } catch (err: any) {
+      console.error(`[Simpler Life Backend] Automated lead notification failed to send:`, err.message);
+    }
 
     return res.status(201).json({
       success: true,
@@ -428,14 +519,14 @@ app.post('/api/insurance-quote', async (req, res) => {
       if (leadCheck.rows.length === 0) {
         await db.execute({
           sql: `INSERT INTO leads (id, name, email, company, needs) VALUES (?, ?, ?, ?, ?)`,
-          args: [finalLeadId, 'Placeholder for Insurance Quote', 'insurance-placeholder@simplerlife.com', 'Insurance Lead Co', '["Insurance Quote"]']
+          args: [finalLeadId, 'Placeholder for Insurance Quote', 'insurance-placeholder@simplerlife.io', 'Insurance Lead Co', '["Insurance Quote"]']
         });
       }
     } else {
       finalLeadId = `ld_${crypto.randomUUID()}`;
       await db.execute({
         sql: `INSERT INTO leads (id, name, email, company, needs) VALUES (?, ?, ?, ?, ?)`,
-        args: [finalLeadId, 'Placeholder for Insurance Quote', 'insurance-placeholder@simplerlife.com', 'Insurance Lead Co', '["Insurance Quote"]']
+        args: [finalLeadId, 'Placeholder for Insurance Quote', 'insurance-placeholder@simplerlife.io', 'Insurance Lead Co', '["Insurance Quote"]']
       });
     }
 
@@ -686,29 +777,107 @@ app.post('/api/compliance-audit', async (req, res) => {
 });
 
 // Original metrics route for dynamic performance tracking
-app.get('/api/metrics', verifyToken, async (_req, res) => {
-  console.log(`[Simpler Life Backend] Fetching Performance Metrics...`);
+app.get('/api/metrics', verifyToken, async (req: any, res) => {
+  console.log(`[Simpler Life Backend] Fetching Performance Metrics for:`, req.user?.client);
+  const email = req.user?.email || '';
+  const clientName = req.user?.client || 'Doe Logistics';
+
   try {
-    const leadsCountRes = await db.execute("SELECT COUNT(*) as count FROM leads");
-    // Aggregate processed leads dynamically
-    const dbCount = Number(leadsCountRes.rows[0].count) || 0;
+    // Check if we have a personalized lead
+    const result = await db.execute({
+      sql: "SELECT * FROM leads WHERE email = ? LIMIT 1",
+      args: [email]
+    });
+
+    let needs: string[] = [];
+    let leadScore = 0;
+    let hasPersonalizedLead = false;
+
+    if (result.rows && result.rows.length > 0) {
+      const lead = result.rows[0];
+      leadScore = Number(lead.score) || 0;
+      hasPersonalizedLead = true;
+      try {
+        if (lead.needs) {
+          needs = JSON.parse(lead.needs as string) || [];
+        }
+      } catch (e) {
+        // needs might be comma-separated or plain text
+        if (typeof lead.needs === 'string') {
+          needs = (lead.needs as string).split(',').map(s => s.trim());
+        }
+      }
+    }
+
+    // Generate personalized KPI metrics
+    let hoursSaved = 42.5;
+    let leadsProcessed = 312;
+    let avgResponseTime = 1.8;
+    let targetReduction = 92.5;
+
+    if (hasPersonalizedLead) {
+      // Calculate realistic metrics dynamically based on their lead data
+      const needsCount = needs.length || 1;
+      hoursSaved = Math.round((18.4 + (needsCount * 12.2)) * 10) / 10;
+      leadsProcessed = Math.round(54 + (leadScore * 4));
+      avgResponseTime = Math.round((2.4 - (needsCount * 0.25)) * 10) / 10;
+      if (avgResponseTime < 0.4) avgResponseTime = 0.4;
+      targetReduction = Math.round((100 - (avgResponseTime / 24) * 100) * 10) / 10;
+    } else {
+      // Fallback/Demo metrics
+      const hash = email ? email.split('').reduce((acc: number, char: string) => acc + char.charCodeAt(0), 0) : 100;
+      hoursSaved = Math.round((30 + (hash % 45)) * 10) / 10;
+      leadsProcessed = 80 + (hash % 250);
+      avgResponseTime = Math.round((1.2 + (hash % 10) / 10) * 10) / 10;
+      targetReduction = 92.5;
+    }
+
+    // Map lead needs to active workflows
+    const activeWorkflowsList: { name: string; description: string; status: string }[] = [];
     
-    // Get metrics from DB
-    const processedRes = await db.execute("SELECT value FROM kpi_metrics WHERE metric_key = 'leads_processed'");
-    const leadsProcessed = Number(processedRes.rows[0]?.value) || (312 + dbCount);
+    if (needs.length > 0) {
+      needs.forEach(need => {
+        if (need === 'Lead Routing') {
+          activeWorkflowsList.push({
+            name: `Contact Form → ${clientName} Lead Router`,
+            description: "Automatically routes warm inbound inquiries directly to sales reps",
+            status: "Active"
+          });
+        } else if (need === 'CRM Database Sync') {
+          activeWorkflowsList.push({
+            name: `Inbound Sync → SQLite Operational DB Sync`,
+            description: "Updates performance telemetry and logs lead states in real time",
+            status: "Active"
+          });
+        } else {
+          activeWorkflowsList.push({
+            name: `${need} Automation Pipeline`,
+            description: `Custom-tailored background automation for ${need.toLowerCase()}`,
+            status: "Active"
+          });
+        }
+      });
+    }
 
-    const hoursSavedRes = await db.execute("SELECT value FROM kpi_metrics WHERE metric_key = 'hours_saved'");
-    const hoursSaved = Number(hoursSavedRes.rows[0]?.value) || 42.5;
-
-    const avgResponseTimeRes = await db.execute("SELECT value FROM kpi_metrics WHERE metric_key = 'avg_response_time'");
-    const avgResponseTime = Number(avgResponseTimeRes.rows[0]?.value) || 1.8;
-
-    const targetReductionRes = await db.execute("SELECT value FROM kpi_metrics WHERE metric_key = 'target_response_reduction'");
-    const targetReduction = Number(targetReductionRes.rows[0]?.value) || 92.5;
+    // Always ensure at least 2 active workflows
+    if (activeWorkflowsList.length === 0) {
+      activeWorkflowsList.push({
+        name: "Web Contact Form → CRM Router",
+        description: "Triggers immediately upon user form submission",
+        status: "Active"
+      });
+    }
+    if (activeWorkflowsList.length < 2) {
+      activeWorkflowsList.push({
+        name: "Expert diagnostic engine → Email delivery",
+        description: "Compiles ROI Roadmap & sends report directly to inbox",
+        status: "Active"
+      });
+    }
 
     return res.status(200).json({
-      client: "Doe Logistics",
-      activeWorkflows: 12, // Updated from 2 to 12 to reflect the 10 new integrations + 2 original
+      client: clientName,
+      activeWorkflows: activeWorkflowsList.length,
       kpis: {
         hoursSavedThisMonth: hoursSaved,
         leadsProcessed: leadsProcessed,
@@ -720,7 +889,8 @@ app.get('/api/metrics', verifyToken, async (_req, res) => {
         { week: "W2", hoursSaved: Math.round((hoursSaved / 4) * 1.05 * 10) / 10 },
         { week: "W3", hoursSaved: Math.round((hoursSaved / 4) * 1.02 * 10) / 10 },
         { week: "W4", hoursSaved: Math.round((hoursSaved / 4) * 1.03 * 10) / 10 }
-      ]
+      ],
+      customWorkflows: activeWorkflowsList
     });
   } catch (err: any) {
     console.error(`[Simpler Life Backend] GET /api/metrics error:`, err);

@@ -46,10 +46,11 @@ export const apiService = {
   },
 
   /**
-   * Retrieve a secure JWT authentication token for the Client Portal (Doe Logistics)
+   * Retrieve a secure JWT authentication token for the Client Portal (personalized with email)
    */
-  fetchToken: async () => {
-    const response = await api.get<{ token: string }>('/api/auth/token');
+  fetchToken: async (email?: string) => {
+    const url = email ? `/api/auth/token?email=${encodeURIComponent(email)}` : '/api/auth/token';
+    const response = await api.get<{ token: string }>(url);
     return response.data.token;
   },
 
@@ -62,6 +63,14 @@ export const apiService = {
         Authorization: `Bearer ${token}`,
       },
     });
+    return response.data;
+  },
+
+  /**
+   * Fetch all scheduled bookings
+   */
+  fetchBookings: async () => {
+    const response = await api.get<{ success: boolean; bookings: { date: string; time: string }[] }>('/api/bookings');
     return response.data;
   },
 };

@@ -13,6 +13,49 @@ export default function Home() {
       {/* Hero — Value Prop + CTA */}
       <HeroSection />
 
+      {/* Industry Solutions — New feature section */}
+      <section className="py-20 bg-white" id="solutions">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl font-bold text-dark mb-4">Explore Our Automation Solutions</h2>
+          <p className="text-gray-600 max-w-2xl mx-auto mb-16">
+            Interactive demos of our most powerful automation pipelines. Click any solution to try it live.
+          </p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              { title: 'Insurance Quote Engine', desc: 'Multi-carrier quote generation in under 60 seconds with interactive risk profiling.', icon: '🛡️', path: '/solutions/insurance-quotes', color: 'indigo' },
+              { title: 'Construction Bid Generator', desc: 'Flawless line-item estimates with material costs, labor breakdowns, and Procore sync.', icon: '🏗️', path: '/solutions/construction-bids', color: 'amber' },
+              { title: 'B2B Proposal Writing', desc: 'Auto-generate beautiful, CRM-hydrated proposals with AI-powered executive summaries.', icon: '📄', path: '/solutions/proposal-writing', color: 'violet' },
+              { title: 'Vendor Onboarding Portal', desc: 'Auto-verify tax IDs, scan COIs, validate bank accounts, and provision to ERP in 5 minutes.', icon: '🤝', path: '/solutions/vendor-onboarding', color: 'cyan' },
+              { title: 'Procurement Automation', desc: 'Auto-generate POs from inventory thresholds, approve via Slack, dispatch to suppliers.', icon: '📦', path: '/solutions/procurement-automation', color: 'orange' },
+              { title: 'Compliance Dashboard', desc: 'Tamper-proof audit logs, daily checklists, HMAC-signed evidence, and auto-generated PDF reports.', icon: '✅', path: '/solutions/compliance-dashboard', color: 'emerald' },
+            ].map((sol, i) => {
+              const colorMap: Record<string, { bg: string, text: string, hover: string, border: string }> = {
+                indigo: { bg: 'bg-indigo-50', text: 'text-primary', hover: 'hover:border-primary', border: 'border-indigo-100' },
+                amber: { bg: 'bg-amber-50', text: 'text-amber-600', hover: 'hover:border-amber-400', border: 'border-amber-100' },
+                violet: { bg: 'bg-violet-50', text: 'text-violet-600', hover: 'hover:border-violet-400', border: 'border-violet-100' },
+                cyan: { bg: 'bg-cyan-50', text: 'text-cyan-600', hover: 'hover:border-cyan-400', border: 'border-cyan-100' },
+                orange: { bg: 'bg-orange-50', text: 'text-orange-600', hover: 'hover:border-orange-400', border: 'border-orange-100' },
+                emerald: { bg: 'bg-emerald-50', text: 'text-emerald-600', hover: 'hover:border-emerald-400', border: 'border-emerald-100' },
+              };
+              const c = colorMap[sol.color];
+              return (
+                <a key={i} href={sol.path}
+                  className={`p-6 border-2 ${c.border} rounded-2xl shadow-sm ${c.hover} transition text-left bg-white group`}>
+                  <div className={`w-12 h-12 rounded-xl ${c.bg} ${c.text} flex items-center justify-center text-2xl mb-4`}>
+                    {sol.icon}
+                  </div>
+                  <h3 className="text-lg font-bold text-dark mb-2 transition">{sol.title}</h3>
+                  <p className="text-sm text-gray-500 leading-relaxed mb-4">{sol.desc}</p>
+                  <span className={`text-sm font-semibold ${c.text} inline-flex items-center gap-1`}>
+                    Try Demo → <span className="text-xs">Live</span>
+                  </span>
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       {/* Services / Automation Offerings */}
       <section className="py-20 bg-white" id="services">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

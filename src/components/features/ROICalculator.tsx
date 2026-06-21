@@ -119,7 +119,7 @@ export default function ROICalculator() {
             ) : isHigh ? (
               <span className="text-accent-warm font-semibold">
                 🚨 Whoa — {total}h/week on admin? Let's talk ASAP.{' '}
-                <Link to="/book" className="text-primary underline font-semibold">Schedule your free audit →</Link>
+                <Link to="/book" className="text-primary underline font-semibold">Schedule your audit →</Link>
               </span>
             ) : (
               <span>
@@ -131,7 +131,7 @@ export default function ROICalculator() {
 
           <div className="text-center mt-6">
             <Link to="/book" className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition shadow-md">
-              Get My Free Automation Audit <ArrowRight size={20} />
+              Get My Automation Audit <ArrowRight size={20} />
             </Link>
           </div>
 

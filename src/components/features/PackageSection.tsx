@@ -4,17 +4,20 @@ const plans = [
   {
     name: 'Starter', setup: '$1,500', monthly: '$150', popular: false,
     features: ['Up to 3 workflow automations', 'Lead capture + response automation', 'Calendar sync', 'Email support (48h response)'],
-    paymentLink: 'https://buy.stripe.com/8x27sL9AA9SX9O6bta08g00'
+    paymentLink: 'https://buy.stripe.com/dRm3cveUU0in8K21SA08g03',
+    discounted: '$1,200'
   },
   {
     name: 'Growth', setup: '$3,000', monthly: '$300', popular: true,
     features: ['Up to 8 workflow automations', 'Everything in Starter', 'CRM integration & data sync', 'Client onboarding automation', 'Priority support (12h response)', 'Monthly optimization review'],
-    paymentLink: 'https://buy.stripe.com/28E28r0000in3pIdBi08g01'
+    paymentLink: 'https://buy.stripe.com/aFacN5cMM3uz5xQfJq08g04',
+    discounted: '$2,400'
   },
   {
     name: 'Scale', setup: '$5,000', monthly: '$500', popular: false,
     features: ['Unlimited workflows', 'Everything in Growth', 'Multi-app integration (Slack, HubSpot, QuickBooks)', 'Custom AI agent training', 'Dedicated support (4h response)', 'Weekly performance reports'],
-    paymentLink: 'https://buy.stripe.com/eVqaEXdQQ1mr7FY2WE08g02'
+    paymentLink: 'https://buy.stripe.com/28E14neUUaX17FYcxe08g05',
+    discounted: '$4,000'
   },
 ]
 
@@ -42,7 +45,12 @@ export default function PackageSection() {
                 </div>
               )}
               <h3 className="text-xl font-bold text-dark mb-2">{plan.name}</h3>
-              <div className="mb-3"><span className="text-sm text-gray-400">Setup </span><span className="text-2xl font-bold text-dark">{plan.setup}</span></div>
+              <div className="mb-3">
+                <span className="text-sm text-gray-400">Setup </span>
+                <span className="text-2xl font-bold text-dark line-through opacity-40">{plan.setup}</span>
+                <span className="text-2xl font-bold text-secondary ml-2">{plan.discounted}</span>
+                <span className="ml-2 bg-secondary/10 text-secondary text-[10px] px-1.5 py-0.5 rounded font-bold uppercase">Launch 20% Off</span>
+              </div>
               <div className="mb-6"><span className="text-sm text-gray-400">then </span><span className="text-lg font-semibold text-primary">{plan.monthly}</span><span className="text-sm text-gray-400">/mo</span></div>
               <div className="space-y-3 mb-8">
                 {plan.features.map(f => (

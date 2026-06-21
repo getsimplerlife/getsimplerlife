@@ -53,7 +53,7 @@ export default function ContactSection() {
           <CheckCircle2 size={64} className="text-secondary mx-auto mb-6" />
           <h2 className="text-3xl sm:text-4xl font-bold text-dark mb-4">Thanks, {form.name}!</h2>
           <p className="text-gray-600 mb-6">
-            We&apos;ll be in touch within <strong>24 hours</strong> to schedule your free automation audit.
+            We will begin compiling your custom automation audit right away and deliver it within <strong>24 hours</strong>.
           </p>
           <div className="flex items-center justify-center gap-2 text-sm text-gray-400">
             <Clock size={16} />
@@ -72,11 +72,11 @@ export default function ContactSection() {
             Ready to <span className="text-primary">Take Back Your Time</span>?
           </h2>
           <p className="text-gray-500 max-w-md mx-auto mb-6">
-            Tell us a bit about your business, and we&apos;ll show you exactly what you can automate — for free.
+            Tell us a bit about your business, and we&apos;ll show you exactly what you can automate.
           </p>
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary text-white text-sm font-semibold">
             <Clock size={16} />
-            Free 15-minute audit. No sales pitch.
+            Asynchronous audit. Delivered in 24 hours.
           </div>
         </div>
 

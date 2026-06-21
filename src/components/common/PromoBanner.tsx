@@ -15,13 +15,13 @@ export default function PromoBanner() {
           </span>
           <p className="text-sm font-bold tracking-wide flex items-center gap-2">
             <span className="bg-white text-primary px-2 py-0.5 rounded text-[10px] uppercase tracking-tighter">Grand Launch</span>
-            <span>Celebrate our launch! 50% OFF setup fees for the first 10 pilot clients.</span>
+            <span>🚀 GRAND LAUNCH: Get an Asynchronous Automation Audit & save 20% on any custom workflow build!</span>
           </p>
           <a 
             href="/book" 
             className="ml-4 px-3 py-1 bg-white text-primary rounded-full text-xs font-black uppercase hover:bg-opacity-90 transition shadow-sm whitespace-nowrap"
           >
-            Claim Offer
+            Claim Discount
           </a>
         </div>
         <button 

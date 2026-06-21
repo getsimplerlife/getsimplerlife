@@ -42,7 +42,7 @@ export default function Contact() {
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
           <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-dark mb-4">
-            Request Your Free Automation Audit
+            Request Your Automation Audit
           </h1>
           <p className="text-gray-600 max-w-2xl mx-auto">
             Tell us a bit about your business, and our team will map out exactly what workflows you can automate to save 10–30 hours each week.
@@ -57,7 +57,7 @@ export default function Contact() {
               <div className="space-y-4 text-sm text-gray-600">
                 <div className="flex items-center space-x-3">
                   <Mail className="h-5 w-5 text-primary" />
-                  <span>support@simplerlife.com</span>
+                  <span>support@simplerlife.io</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <Phone className="h-5 w-5 text-primary" />

@@ -18,14 +18,14 @@ export default function HeroSection() {
             </p>
             <div className="flex flex-col sm:flex-row sm:justify-center lg:justify-start gap-4">
               <Link to="/book" className="inline-flex items-center justify-center px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition shadow-md">
-                Get Your Free Automation Audit
+                Get Your Automation Audit
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
               <a href="#solutions" className="inline-flex items-center justify-center px-6 py-3 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-100 transition bg-white">
                 Learn How It Works
               </a>
             </div>
-            <p className="mt-4 text-xs text-gray-400">No commitment. 15-minute call. See exactly what you can automate.</p>
+            <p className="mt-4 text-xs text-gray-400">No commitment. Asynchronous delivery. See exactly what you can automate.</p>
           </div>
           <div className="mt-12 lg:mt-0 lg:col-span-6 flex justify-center">
             <div className="w-full max-w-md bg-white border border-gray-100 rounded-2xl shadow-xl p-6">

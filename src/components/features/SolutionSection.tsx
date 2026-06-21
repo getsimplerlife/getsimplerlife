@@ -1,7 +1,7 @@
 import { Search, PenTool, Rocket, Activity } from 'lucide-react'
 
 const steps = [
-  { icon: Search, title: '1. Audit', desc: 'We map your current workflow in a 30-minute discovery call to identify every automation opportunity.' },
+  { icon: Search, title: '1. Audit', desc: 'We map your current workflow via our asynchronous diagnostic engine to identify every automation opportunity.' },
   { icon: PenTool, title: '2. Design', desc: 'We build a custom automation flow using AI + no-code tools tailored exactly to your business processes.' },
   { icon: Rocket, title: '3. Deploy', desc: 'Your workflows go live within days, not months. We handle all the setup and testing.' },
   { icon: Activity, title: '4. Monitor', desc: 'We maintain, optimize, and scale everything for you — so you never have to think about it.' },

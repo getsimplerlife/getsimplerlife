@@ -8,6 +8,7 @@ export default function Dashboard() {
   const [metrics, setMetrics] = useState<MetricsResponse | null>(null)
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<string | null>(null)
+  const [emailInput, setEmailInput] = useState<string>('')
 
   const loadMetrics = async (authToken: string) => {
     setLoading(true)
@@ -38,7 +39,7 @@ export default function Dashboard() {
     setLoading(true)
     setError(null)
     try {
-      const fetchedToken = await apiService.fetchToken()
+      const fetchedToken = await apiService.fetchToken(emailInput)
       localStorage.setItem('simpler_life_client_token', fetchedToken)
       setToken(fetchedToken)
     } catch (err: any) {
@@ -53,6 +54,7 @@ export default function Dashboard() {
     localStorage.removeItem('simpler_life_client_token')
     setToken(null)
     setMetrics(null)
+    setEmailInput('')
   }
 
   // If not authenticated, prompt to log in and generate a JWT token
@@ -80,6 +82,24 @@ export default function Dashboard() {
           )}
 
           <div className="mt-8 space-y-4">
+            <div>
+              <label htmlFor="email" className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
+                Company Email Address
+              </label>
+              <input
+                type="email"
+                id="email"
+                placeholder="e.g., client@company.com"
+                value={emailInput}
+                onChange={(e) => setEmailInput(e.target.value)}
+                onKeyDown={(e) => { if (e.key === 'Enter') handleLogin() }}
+                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm transition"
+              />
+              <p className="text-[10px] text-gray-400 mt-1.5 leading-relaxed">
+                Note: Entering a registered booking/purchase email will load your custom workflows and active performance stats. Leaving it blank or entering a guest email will load a live interactive demo.
+              </p>
+            </div>
+
             <button
               onClick={handleLogin}
               disabled={loading}
@@ -93,7 +113,7 @@ export default function Dashboard() {
               ) : (
                 <>
                   <Sparkles className="h-5 w-5 mr-2" />
-                  Authenticate as Doe Logistics
+                  {emailInput.trim() ? 'Access Personal Portal' : 'Access Interactive Demo'}
                 </>
               )}
             </button>
@@ -213,26 +233,43 @@ export default function Dashboard() {
             <div className="bg-white border border-gray-100 rounded-2xl shadow-sm p-6">
               <h3 className="font-bold text-dark text-lg mb-6">Active Workflows</h3>
               <div className="space-y-4">
-                <div className="flex items-center justify-between p-4 bg-gray-50 rounded-xl border border-gray-100">
-                  <div className="flex items-center space-x-3">
-                    <Bot className="h-5 w-5 text-primary" />
-                    <div>
-                      <p className="text-sm font-semibold text-dark">Web Contact Form → FollowUpBoss CRM</p>
-                      <p className="text-xs text-gray-500">Triggers immediately upon user form submission</p>
+                {metrics && (metrics as any).customWorkflows ? (
+                  (metrics as any).customWorkflows.map((workflow: any, idx: number) => (
+                    <div key={idx} className="flex items-center justify-between p-4 bg-gray-50 rounded-xl border border-gray-100">
+                      <div className="flex items-center space-x-3">
+                        {idx % 2 === 0 ? <Bot className="h-5 w-5 text-primary" /> : <Clock className="h-5 w-5 text-primary" />}
+                        <div>
+                          <p className="text-sm font-semibold text-dark">{workflow.name}</p>
+                          <p className="text-xs text-gray-500">{workflow.description}</p>
+                        </div>
+                      </div>
+                      <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full">{workflow.status}</span>
                     </div>
-                  </div>
-                  <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full">Active</span>
-                </div>
-                <div className="flex items-center justify-between p-4 bg-gray-50 rounded-xl border border-gray-100">
-                  <div className="flex items-center space-x-3">
-                    <Clock className="h-5 w-5 text-primary" />
-                    <div>
-                      <p className="text-sm font-semibold text-dark">Cal.com Event → Google Docs Agenda Creator</p>
-                      <p className="text-xs text-gray-500">Generates custom briefings and pre-meeting notes</p>
+                  ))
+                ) : (
+                  <>
+                    <div className="flex items-center justify-between p-4 bg-gray-50 rounded-xl border border-gray-100">
+                      <div className="flex items-center space-x-3">
+                        <Bot className="h-5 w-5 text-primary" />
+                        <div>
+                          <p className="text-sm font-semibold text-dark">Web Contact Form → FollowUpBoss CRM</p>
+                          <p className="text-xs text-gray-500">Triggers immediately upon user form submission</p>
+                        </div>
+                      </div>
+                      <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full">Active</span>
                     </div>
-                  </div>
-                  <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full">Active</span>
-                </div>
+                    <div className="flex items-center justify-between p-4 bg-gray-50 rounded-xl border border-gray-100">
+                      <div className="flex items-center space-x-3">
+                        <Clock className="h-5 w-5 text-primary" />
+                        <div>
+                          <p className="text-sm font-semibold text-dark">Cal.com Event → Google Docs Agenda Creator</p>
+                          <p className="text-xs text-gray-500">Generates custom briefings and pre-meeting notes</p>
+                        </div>
+                      </div>
+                      <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full">Active</span>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
 
