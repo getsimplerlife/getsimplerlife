@@ -10,7 +10,7 @@ import Layout from './components/common/Layout'
 // Mock Authentication Guard for the Client Portal
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   // Let's bypass or allow easy entry for demonstration/agency purposes
-  const token = localStorage.getItem('autoflow_client_token') || 'demo'
+  const token = localStorage.getItem('simpler_life_client_token') || 'demo'
   if (!token) {
     return <Navigate to="/" replace />
   }

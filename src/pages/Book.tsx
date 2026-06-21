@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { Calendar, ArrowLeft } from 'lucide-react'
 
 export default function Book() {
-  const calLink = "https://cal.com/autoflow-ai/strategy-session"
+  const calLink = "https://cal.com/simpler-life/strategy-session"
   const themeParams = "theme=light&primaryColor=%234f46e5"
 
   return (
@@ -31,7 +31,7 @@ export default function Book() {
         <div className="bg-white rounded-2xl border border-gray-100 shadow-xl overflow-hidden" style={{ height: "650px" }}>
           <iframe
             src={`${calLink}?${themeParams}`}
-            title="Schedule a strategy session with AutoFlow AI"
+            title="Schedule a strategy session with Simpler Life"
             width="100%"
             height="100%"
             frameBorder="0"

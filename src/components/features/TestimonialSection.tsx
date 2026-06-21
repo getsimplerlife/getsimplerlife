@@ -1,5 +1,5 @@
 const testimonials = [
-  { quote: 'AutoFlow AI saved us 20+ hours a week on lead follow-up. Our response time went from 4 hours to 30 seconds. Game changer.', name: 'Sarah M.', role: 'Real Estate Agent, Denver' },
+  { quote: 'Simpler Life saved us 20+ hours a week on lead follow-up. Our response time went from 4 hours to 30 seconds. Game changer.', name: 'Sarah M.', role: 'Real Estate Agent, Denver' },
   { quote: 'I was skeptical, but the audit showed me exactly what I was losing. We signed up on the spot and haven\'t looked back.', name: 'James K.', role: 'HVAC Business Owner, Austin' },
   { quote: 'Setup took 3 days. I\'ve already reclaimed my weekends. Worth every penny.', name: 'Priya R.', role: 'Marketing Agency Owner, NYC' },
 ]

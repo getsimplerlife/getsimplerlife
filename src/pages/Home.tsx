@@ -45,7 +45,7 @@ export default function Home() {
       <section className="py-16 bg-gray-50 border-t border-b border-gray-100">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="inline-flex p-3 bg-indigo-50 text-primary rounded-full mb-4"><ShieldCheck className="h-8 w-8" /></div>
-          <h2 className="text-2xl font-bold text-dark mb-4">The AutoFlow Guarantee</h2>
+          <h2 className="text-2xl font-bold text-dark mb-4">The Simpler Life Guarantee</h2>
           <p className="text-gray-600 leading-relaxed mb-6">
             We are dedicated to SMB success. If we don't save you at least 10 hours a week on admin
             within the first 30 days of implementation, we&apos;ll refund your setup fee completely.

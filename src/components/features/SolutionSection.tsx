@@ -22,7 +22,7 @@ export default function SolutionSection() {
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {steps.map((step, i) => (
+          {steps.map((step) => (
             <div key={step.title} className="text-center">
               <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-indigo-50 border-2 border-indigo-100 flex items-center justify-center">
                 <step.icon size={28} className="text-primary" />

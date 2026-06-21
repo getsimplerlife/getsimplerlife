@@ -14,7 +14,7 @@ export default function HeroSection() {
               Tired of Wasting Hours on Tasks AI Could Do in Seconds?
             </h1>
             <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-              Stop manually entering data, following up on leads, and juggling spreadsheets. AutoFlow AI builds custom automation workflows so your small business runs itself — while you focus on growth.
+              Stop manually entering data, following up on leads, and juggling spreadsheets. Simpler Life builds custom automation workflows so your small business runs itself — while you focus on growth.
             </p>
             <div className="flex flex-col sm:flex-row sm:justify-center lg:justify-start gap-4">
               <Link to="/book" className="inline-flex items-center justify-center px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition shadow-md">
@@ -38,7 +38,7 @@ export default function HeroSection() {
                 <div className="h-6 w-0.5 bg-indigo-200 mx-auto ml-5" />
                 <div className="flex items-center space-x-3 p-3 bg-emerald-50 border border-emerald-100 rounded-lg">
                   <Bot className="h-5 w-5 text-secondary" />
-                  <div><p className="text-sm font-semibold text-dark">AutoFlow AI Processes</p><p className="text-xs text-gray-500">Score lead, auto-assign, draft reply</p></div>
+                  <div><p className="text-sm font-semibold text-dark">Simpler Life Processes</p><p className="text-xs text-gray-500">Score lead, auto-assign, draft reply</p></div>
                 </div>
                 <div className="h-6 w-0.5 bg-indigo-200 mx-auto ml-5" />
                 <div className="flex items-center space-x-3 p-3 bg-indigo-50 border border-indigo-100 rounded-lg">

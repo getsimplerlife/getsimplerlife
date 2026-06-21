@@ -4,7 +4,7 @@ import { Clock, Bot, Zap, ArrowUpRight, ArrowLeft, ShieldAlert, LogOut, Loader2,
 import apiService, { MetricsResponse } from '../services/api'
 
 export default function Dashboard() {
-  const [token, setToken] = useState<string | null>(localStorage.getItem('autoflow_client_token'))
+  const [token, setToken] = useState<string | null>(localStorage.getItem('simpler_life_client_token'))
   const [metrics, setMetrics] = useState<MetricsResponse | null>(null)
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<string | null>(null)
@@ -39,7 +39,7 @@ export default function Dashboard() {
     setError(null)
     try {
       const fetchedToken = await apiService.fetchToken()
-      localStorage.setItem('autoflow_client_token', fetchedToken)
+      localStorage.setItem('simpler_life_client_token', fetchedToken)
       setToken(fetchedToken)
     } catch (err: any) {
       console.error(err)
@@ -50,7 +50,7 @@ export default function Dashboard() {
   }
 
   const handleLogout = () => {
-    localStorage.removeItem('autoflow_client_token')
+    localStorage.removeItem('simpler_life_client_token')
     setToken(null)
     setMetrics(null)
   }

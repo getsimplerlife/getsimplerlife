@@ -9,7 +9,7 @@ export default function Layout() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <Link to="/" className="flex items-center space-x-2 text-primary font-bold text-xl">
             <Activity className="h-6 w-6 text-primary" />
-            <span>AutoFlow AI</span>
+            <span>Simpler Life</span>
           </Link>
           <nav className="flex items-center space-x-6">
             <Link to="/" className="text-gray-600 hover:text-primary transition font-medium">Home</Link>
@@ -30,10 +30,10 @@ export default function Layout() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:flex sm:items-center sm:justify-between">
           <div className="flex items-center justify-center sm:justify-start space-x-2 text-white font-bold text-lg mb-4 sm:mb-0">
             <Activity className="h-5 w-5 text-secondary" />
-            <span>AutoFlow AI</span>
+            <span>Simpler Life</span>
           </div>
           <p className="text-gray-400 text-sm">
-            &copy; {new Date().getFullYear()} AutoFlow AI. All rights reserved.
+            &copy; {new Date().getFullYear()} Simpler Life. All rights reserved.
           </p>
         </div>
       </footer>

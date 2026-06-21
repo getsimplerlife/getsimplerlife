@@ -15,13 +15,13 @@ const __dirname = path.dirname(__filename)
 
 const app = express()
 const PORT = process.env.PORT || 3000
-const JWT_SECRET = process.env.JWT_SECRET || 'autoflow_super_secret_key_987'
+const JWT_SECRET = process.env.JWT_SECRET || 'simpler_life_super_secret_key_987'
 
 // Initialize Operational Database
 initDb().then(() => {
-  console.log('[AutoFlow Server] Database initialization complete.')
+  console.log('[Simpler Life Server] Database initialization complete.')
 }).catch(err => {
-  console.error('[AutoFlow Server] Database initialization failed:', err)
+  console.error('[Simpler Life Server] Database initialization failed:', err)
 })
 
 // Security & Request Parsing Middleware
@@ -94,7 +94,7 @@ app.get('/api/auth/token', (_req, res) => {
 // API Routes
 app.post('/api/leads', async (req, res) => {
   const { name, email, phone, company, needs, message } = req.body
-  console.log(`[AutoFlow Backend] Received New Lead Submission:`, { name, email, phone, company, needs, message })
+  console.log(`[Simpler Life Backend] Received New Lead Submission:`, { name, email, phone, company, needs, message })
 
   // 1. Validation
   if (!name || typeof name !== 'string' || name.trim() === '') {
@@ -170,20 +170,20 @@ app.post('/api/leads', async (req, res) => {
 
     // Forward to n8n webhook
     const n8nUrl = process.env.N8N_WEBHOOK_URL || 'http://localhost:5678/webhook/leads';
-    console.log(`[AutoFlow Backend] Forwarding lead ${leadId} to n8n at ${n8nUrl}...`);
+    console.log(`[Simpler Life Backend] Forwarding lead ${leadId} to n8n at ${n8nUrl}...`);
 
     let syncStatus = 'synced';
     try {
       await axios.post(n8nUrl, webhookPayload, {
         headers: {
           'Content-Type': 'application/json',
-          'X-AutoFlow-Signature': signature
+          'X-Simpler-Life-Signature': signature
         },
         timeout: 5000 // 5 seconds timeout
       });
-      console.log(`[AutoFlow Backend] Webhook successfully forwarded to n8n.`);
+      console.log(`[Simpler Life Backend] Webhook successfully forwarded to n8n.`);
     } catch (err: any) {
-      console.error(`[AutoFlow Backend] Webhook forwarding to n8n failed:`, err.message);
+      console.error(`[Simpler Life Backend] Webhook forwarding to n8n failed:`, err.message);
       syncStatus = 'failed';
     }
 
@@ -200,7 +200,7 @@ app.post('/api/leads', async (req, res) => {
     });
 
   } catch (err: any) {
-    console.error(`[AutoFlow Backend] POST /api/leads error:`, err);
+    console.error(`[Simpler Life Backend] POST /api/leads error:`, err);
     return res.status(500).json({
       success: false,
       error: 'Internal Server Error',
@@ -210,7 +210,7 @@ app.post('/api/leads', async (req, res) => {
 })
 
 app.get('/api/metrics', verifyToken, async (_req, res) => {
-  console.log(`[AutoFlow Backend] Fetching Performance Metrics...`);
+  console.log(`[Simpler Life Backend] Fetching Performance Metrics...`);
   try {
     const leadsCountRes = await db.execute("SELECT COUNT(*) as count FROM leads");
     // Aggregate processed leads dynamically
@@ -246,7 +246,7 @@ app.get('/api/metrics', verifyToken, async (_req, res) => {
       ]
     });
   } catch (err: any) {
-    console.error(`[AutoFlow Backend] GET /api/metrics error:`, err);
+    console.error(`[Simpler Life Backend] GET /api/metrics error:`, err);
     return res.status(500).json({
       success: false,
       error: 'Internal Server Error',
@@ -266,5 +266,5 @@ app.get('*', (_req, res) => {
 
 // Bind to 0.0.0.0 on port 3000
 app.listen(Number(PORT), '0.0.0.0', () => {
-  console.log(`[AutoFlow Express Server] Live on port ${PORT} (explicitly bound to 0.0.0.0)`)
+  console.log(`[Simpler Life Server] Live on port ${PORT} (explicitly bound to 0.0.0.0)`)
 })
