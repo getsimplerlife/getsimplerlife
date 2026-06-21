@@ -1,9 +1,13 @@
 import { Outlet, Link } from 'react-router-dom'
 import { Activity } from 'lucide-react'
+import PromoBanner from './PromoBanner'
 
 export default function Layout() {
   return (
     <div className="min-h-screen flex flex-col bg-gray-50 text-dark">
+      {/* Grand Launch Promo Banner */}
+      <PromoBanner />
+
       {/* Header */}
       <header className="sticky top-0 z-50 bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
