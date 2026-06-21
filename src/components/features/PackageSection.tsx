@@ -1,18 +1,20 @@
-import { Link } from 'react-router-dom'
 import { Check, Star } from 'lucide-react'
 
 const plans = [
   {
     name: 'Starter', setup: '$1,500', monthly: '$150', popular: false,
     features: ['Up to 3 workflow automations', 'Lead capture + response automation', 'Calendar sync', 'Email support (48h response)'],
+    paymentLink: 'https://buy.stripe.com/8x27sL9AA9SX9O6bta08g00'
   },
   {
     name: 'Growth', setup: '$3,000', monthly: '$300', popular: true,
     features: ['Up to 8 workflow automations', 'Everything in Starter', 'CRM integration & data sync', 'Client onboarding automation', 'Priority support (12h response)', 'Monthly optimization review'],
+    paymentLink: 'https://buy.stripe.com/28E28r0000in3pIdBi08g01'
   },
   {
     name: 'Scale', setup: '$5,000', monthly: '$500', popular: false,
     features: ['Unlimited workflows', 'Everything in Growth', 'Multi-app integration (Slack, HubSpot, QuickBooks)', 'Custom AI agent training', 'Dedicated support (4h response)', 'Weekly performance reports'],
+    paymentLink: 'https://buy.stripe.com/eVqaEXdQQ1mr7FY2WE08g02'
   },
 ]
 
@@ -50,9 +52,9 @@ export default function PackageSection() {
                   </div>
                 ))}
               </div>
-              <Link to="/book" className="block text-center w-full py-2.5 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition">
+              <a href={plan.paymentLink} target="_blank" rel="noopener noreferrer" className="block text-center w-full py-2.5 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition">
                 Get Started
-              </Link>
+              </a>
             </div>
           ))}
         </div>
