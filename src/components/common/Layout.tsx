@@ -1,5 +1,5 @@
 import { Outlet, Link } from 'react-router-dom'
-import { Activity, ChevronDown, Shield, HardHat, FileText, UserPlus, Package, ClipboardCheck, Bot, Home as HomeIcon, Scale, FileSearch, Sparkles } from 'lucide-react'
+import { Activity, ChevronDown, Shield, HardHat, FileText, UserPlus, Package, ClipboardCheck, Bot, Home as HomeIcon, Scale, FileSearch, Sparkles, Zap } from 'lucide-react'
 import { useState, useEffect, useRef } from 'react'
 import PromoBanner from './PromoBanner'
 
@@ -83,6 +83,9 @@ export default function Layout() {
                   </Link>
                   <div className="border-t border-gray-100 my-1" />
                   <div className="px-4 py-1.5 text-xs font-semibold text-gray-400 uppercase tracking-wider">Diagnostics</div>
+                  <Link to="/solutions/configurator" className="flex items-center gap-3 px-4 py-2.5 hover:bg-indigo-50 text-gray-700 hover:text-primary transition text-sm">
+                    <Zap className="h-4 w-4 text-primary" /> Workflow Configurator
+                  </Link>
                   <Link to="/checklist" className="flex items-center gap-3 px-4 py-2.5 hover:bg-indigo-50 text-gray-700 hover:text-primary transition text-sm font-semibold bg-indigo-50/20">
                     <Sparkles className="h-4 w-4 text-indigo-600" /> 18-Vertical Master Audit
                   </Link>
@@ -92,11 +95,19 @@ export default function Layout() {
             <Link to="/checklist" className="text-gray-600 hover:text-primary transition font-medium">18-Vertical Checklist</Link>
             <Link to="/book" className="text-gray-600 hover:text-primary transition font-medium">Book Audit</Link>
             <Link to="/contact" className="text-gray-600 hover:text-primary transition font-medium">Contact</Link>
+            <Link to="/sandbox" className="text-indigo-600 hover:text-indigo-800 transition font-semibold flex items-center gap-1.5 bg-indigo-50/50 px-3 py-1 rounded-lg border border-indigo-100">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+              </span>
+              API Sandbox
+            </Link>
             <Link to="/dashboard" className="text-gray-600 hover:text-primary transition font-medium">Client Portal</Link>
           </nav>
           {/* Mobile nav - simplified */}
           <div className="md:hidden flex items-center space-x-3">
             <Link to="/checklist" className="text-sm text-gray-600 hover:text-primary transition font-medium">Checklist</Link>
+            <Link to="/sandbox" className="text-sm text-indigo-600 hover:text-indigo-800 transition font-bold">Sandbox</Link>
             <Link to="/dashboard" className="text-sm text-gray-600 hover:text-primary transition font-medium">Portal</Link>
             <Link to="/book" className="text-sm bg-primary text-white px-3 py-1.5 rounded-lg font-semibold hover:bg-primary-dark transition">Book</Link>
           </div>
