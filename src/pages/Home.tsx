@@ -1,4 +1,5 @@
-import { ShieldCheck, Clock, Zap } from 'lucide-react'
+import { useRef } from 'react'
+import { ShieldCheck, Clock, Zap, ChevronLeft, ChevronRight } from 'lucide-react'
 import HeroSection from '../components/features/HeroSection'
 import ProblemSection from '../components/features/ProblemSection'
 import SolutionSection from '../components/features/SolutionSection'
@@ -8,19 +9,71 @@ import TestimonialSection from '../components/features/TestimonialSection'
 import ContactSection from '../components/features/ContactSection'
 
 export default function Home() {
+  const scrollContainerRef = useRef<HTMLDivElement>(null)
+
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: -380, behavior: 'smooth' })
+    }
+  }
+
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: 380, behavior: 'smooth' })
+    }
+  }
+
   return (
     <div className="bg-white">
       {/* Hero — Value Prop + CTA */}
       <HeroSection />
 
-      {/* Industry Solutions — New feature section */}
+      {/* Industry Solutions — Upgraded with Horizontal Scroll Wheel Carousel */}
       <section className="py-20 bg-white" id="solutions">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-dark mb-4">Explore Our Automation Solutions</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto mb-16">
-            Interactive demos of our most powerful automation pipelines. Click any solution to try it live.
-          </p>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <style dangerouslySetInnerHTML={{__html: `
+            .hide-scrollbar::-webkit-scrollbar {
+              display: none;
+            }
+          `}} />
+
+          {/* Section Header with Premium Navigation Arrows */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
+            <div className="text-left">
+              <span className="text-xs font-bold text-primary uppercase tracking-wider block mb-2">Interactive Demonstrations</span>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-dark tracking-tight">Explore Our Automation Solutions</h2>
+              <p className="text-gray-500 max-w-2xl mt-3 text-sm sm:text-base leading-relaxed">
+                Click any solution to launch a fully simulated interactive workflow. Swipe or use the arrow buttons to explore the entire 9-Vertical Automation Suite.
+              </p>
+            </div>
+            
+            {/* Smooth Control Buttons */}
+            <div className="flex items-center space-x-3 mt-6 md:mt-0">
+              <button
+                type="button"
+                onClick={scrollLeft}
+                className="p-3 rounded-full border border-gray-200 hover:border-primary hover:bg-indigo-50 text-gray-500 hover:text-primary transition shadow-sm bg-white"
+                aria-label="Scroll left"
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </button>
+              <button
+                type="button"
+                onClick={scrollRight}
+                className="p-3 rounded-full border border-gray-200 hover:border-primary hover:bg-indigo-50 text-gray-500 hover:text-primary transition shadow-md bg-white"
+                aria-label="Scroll right"
+              >
+                <ChevronRight className="h-5 w-5" />
+              </button>
+            </div>
+          </div>
+
+          {/* Horizontal Flex Scroll Track */}
+          <div 
+            ref={scrollContainerRef}
+            className="flex overflow-x-auto gap-6 pb-8 pt-2 scroll-smooth hide-scrollbar snap-x snap-mandatory"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
             {[
               { title: 'Insurance Quote Engine', desc: 'Multi-carrier quote generation in under 60 seconds with interactive risk profiling.', icon: '🛡️', path: '/solutions/insurance-quotes', color: 'indigo' },
               { title: 'Construction Bid Generator', desc: 'Flawless line-item estimates with material costs, labor breakdowns, and Procore sync.', icon: '🏗️', path: '/solutions/construction-bids', color: 'amber' },
@@ -47,15 +100,20 @@ export default function Home() {
               };
               const c = colorMap[sol.color];
               return (
-                <a key={i} href={sol.path}
-                  className={`p-6 border-2 ${c.border} rounded-2xl shadow-sm ${c.hover} transition text-left bg-white group`}>
-                  <div className={`w-12 h-12 rounded-xl ${c.bg} ${c.text} flex items-center justify-center text-2xl mb-4`}>
-                    {sol.icon}
+                <a 
+                  key={i} 
+                  href={sol.path}
+                  className={`p-6 border-2 ${c.border} rounded-2xl shadow-sm ${c.hover} transition text-left bg-white group min-w-[280px] sm:min-w-[340px] flex-shrink-0 snap-start flex flex-col justify-between`}
+                >
+                  <div>
+                    <div className={`w-12 h-12 rounded-xl ${c.bg} ${c.text} flex items-center justify-center text-2xl mb-4`}>
+                      {sol.icon}
+                    </div>
+                    <h3 className="text-lg font-bold text-dark mb-2 transition group-hover:text-primary">{sol.title}</h3>
+                    <p className="text-sm text-gray-500 leading-relaxed mb-4">{sol.desc}</p>
                   </div>
-                  <h3 className="text-lg font-bold text-dark mb-2 transition">{sol.title}</h3>
-                  <p className="text-sm text-gray-500 leading-relaxed mb-4">{sol.desc}</p>
-                  <span className={`text-sm font-semibold ${c.text} inline-flex items-center gap-1`}>
-                    Try Demo → <span className="text-xs">Live</span>
+                  <span className={`text-sm font-semibold ${c.text} inline-flex items-center gap-1 mt-auto`}>
+                    Try Demo → <span className="text-[10px] uppercase font-bold tracking-wider bg-emerald-50 text-emerald-600 px-1.5 py-0.5 rounded-full animate-pulse">Live</span>
                   </span>
                 </a>
               );
