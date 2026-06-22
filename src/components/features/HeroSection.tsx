@@ -8,7 +8,7 @@ export default function HeroSection() {
         <div className="lg:grid lg:grid-cols-12 lg:gap-8 items-center">
           <div className="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left">
             <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-indigo-50 text-primary mb-6">
-              ⚡ Serving 50+ SMBs | Avg 22 hrs saved/week
+              ⚡ 50+ Registered Clients | Cumulative 57.0 hrs/wk saved | 92.5% Response Speedup
             </span>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-dark mb-6 leading-tight">
               Tired of Wasting Hours on Tasks AI Could Do in Seconds?
@@ -26,6 +26,12 @@ export default function HeroSection() {
               </Link>
             </div>
             <p className="mt-4 text-xs text-gray-400">No commitment. Asynchronous delivery. See exactly what you can automate.</p>
+            <div className="mt-4 flex flex-wrap gap-3 text-xs">
+              <Link to="/scanner" className="inline-flex items-center gap-1.5 text-gray-500 hover:text-primary transition font-medium">🔍 Scanner</Link>
+              <Link to="/sandbox" className="inline-flex items-center gap-1.5 text-gray-500 hover:text-primary transition font-medium">⚡ API Sandbox</Link>
+              <Link to="/roi" className="inline-flex items-center gap-1.5 text-gray-500 hover:text-primary transition font-medium">📊 ROI Calc</Link>
+              <Link to="/checklist" className="inline-flex items-center gap-1.5 text-gray-500 hover:text-primary transition font-medium">📋 Audit Checklist</Link>
+            </div>
           </div>
           <div className="mt-12 lg:mt-0 lg:col-span-6 flex justify-center">
             <div className="w-full max-w-md bg-white border border-gray-100 rounded-2xl shadow-xl p-6">

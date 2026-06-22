@@ -46,10 +46,15 @@ export const apiService = {
   },
 
   /**
-   * Retrieve a secure JWT authentication token for the Client Portal (personalized with email)
+   * Retrieve a secure JWT authentication token for the Client Portal (personalized with email and optional password)
    */
-  fetchToken: async (email?: string) => {
-    const url = email ? `/api/auth/token?email=${encodeURIComponent(email)}` : '/api/auth/token';
+  fetchToken: async (email?: string, password?: string) => {
+    let url = '/api/auth/token';
+    const params = [];
+    if (email) params.push(`email=${encodeURIComponent(email)}`);
+    if (password) params.push(`password=${encodeURIComponent(password)}`);
+    if (params.length > 0) url += `?${params.join('&')}`;
+    
     const response = await api.get<{ token: string }>(url);
     return response.data.token;
   },
@@ -77,16 +82,36 @@ export const apiService = {
   /**
    * Fetch all leads (Admin only)
    */
-  fetchAdminLeads: async () => {
-    const response = await api.get<{ success: boolean; leads: any[] }>('/api/admin/leads');
+  fetchAdminLeads: async (token: string) => {
+    const response = await api.get<{ success: boolean; leads: any[] }>('/api/admin/leads', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     return response.data;
   },
 
   /**
    * Trigger report generation for a lead (Admin only)
    */
-  generateReport: async (leadId: string) => {
-    const response = await api.post<{ success: boolean; message: string; htmlReport?: string }>('/api/admin/generate-report', { leadId });
+  generateReport: async (leadId: string, token: string) => {
+    const response = await api.post<{ success: boolean; message: string; htmlReport?: string }>('/api/admin/generate-report', { leadId }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  },
+
+  /**
+   * Trigger the Webhook Sandbox simulation
+   */
+  triggerSandbox: async (event: string, platform: string) => {
+    const response = await api.post<{ 
+      success: boolean; 
+      simulation_id: string; 
+      steps: any[] 
+    }>('/api/sandbox/trigger', { event, platform });
     return response.data;
   },
 };

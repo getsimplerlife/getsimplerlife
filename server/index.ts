@@ -94,32 +94,46 @@ export const verifyToken = (req: any, res: any, next: any) => {
 // Public Authentication / Token Route
 app.get('/api/auth/token', async (req, res) => {
   const email = req.query.email as string;
+  const password = req.query.password as string;
   let payload = { client: "Doe Logistics", email: "client@company.com", hasLead: false };
 
   if (email && typeof email === 'string' && email.trim() !== '') {
-    try {
-      const result = await db.execute({
-        sql: "SELECT * FROM leads WHERE email = ? LIMIT 1",
-        args: [email.trim()]
-      });
-
-      if (result.rows && result.rows.length > 0) {
-        const lead = result.rows[0];
-        payload = {
-          client: (lead.company as string) || (lead.name as string),
-          email: lead.email as string,
-          hasLead: true
-        };
-      } else {
-        // Fallback for demo/guest emails
-        payload = {
-          client: email.split('@')[0].charAt(0).toUpperCase() + email.split('@')[0].slice(1) + " Corp",
-          email: email.trim(),
-          hasLead: false
-        };
+    const trimmedEmail = email.trim();
+    if (trimmedEmail.toLowerCase() === 'admin@simplerlife.io') {
+      const adminPass = process.env.ADMIN_PASSWORD || 'simpler_life_admin_pass_2026';
+      if (!password || password !== adminPass) {
+        return res.status(401).json({ success: false, error: 'Unauthorized', details: ['Invalid or missing admin password'] });
       }
-    } catch (err) {
-      console.error('[Simpler Life Backend] Error looking up lead email:', err);
+      payload = {
+        client: "Simpler Life Operations",
+        email: trimmedEmail.toLowerCase(),
+        hasLead: true
+      };
+    } else {
+      try {
+        const result = await db.execute({
+          sql: "SELECT * FROM leads WHERE email = ? LIMIT 1",
+          args: [trimmedEmail]
+        });
+
+        if (result.rows && result.rows.length > 0) {
+          const lead = result.rows[0];
+          payload = {
+            client: (lead.company as string) || (lead.name as string),
+            email: lead.email as string,
+            hasLead: true
+          };
+        } else {
+          // Fallback for demo/guest emails
+          payload = {
+            client: trimmedEmail.split('@')[0].charAt(0).toUpperCase() + trimmedEmail.split('@')[0].slice(1) + " Corp",
+            email: trimmedEmail,
+            hasLead: false
+          };
+        }
+      } catch (err) {
+        console.error('[Simpler Life Backend] Error looking up lead email:', err);
+      }
     }
   }
 
@@ -161,7 +175,10 @@ app.get('/api/bookings', async (req, res) => {
 });
 
 // Admin Route - Get all leads for Control Panel
-app.get('/api/admin/leads', async (req, res) => {
+app.get('/api/admin/leads', verifyToken, async (req: any, res: any) => {
+  if (req.user.email !== 'admin@simplerlife.io') {
+    return res.status(403).json({ success: false, error: 'Forbidden', details: ['Admin privileges required'] });
+  }
   try {
     const result = await db.execute("SELECT * FROM leads ORDER BY created_at DESC");
     return res.json({ success: true, leads: result.rows });
@@ -172,7 +189,10 @@ app.get('/api/admin/leads', async (req, res) => {
 });
 
 // Admin Route - Trigger Asynchronous Audit Engine
-app.post('/api/admin/generate-report', async (req, res) => {
+app.post('/api/admin/generate-report', verifyToken, async (req: any, res: any) => {
+  if (req.user.email !== 'admin@simplerlife.io') {
+    return res.status(403).json({ success: false, error: 'Forbidden', details: ['Admin privileges required'] });
+  }
   const { leadId } = req.body;
   if (!leadId) {
     return res.status(400).json({ success: false, error: 'leadId is required' });
@@ -239,6 +259,73 @@ app.post('/api/admin/generate-report', async (req, res) => {
     console.error(`[Simpler Life Admin] POST /api/admin/generate-report error:`, err);
     return res.status(500).json({ success: false, error: err.message || 'Internal Server Error' });
   }
+});
+
+// Sandbox Route - Webhook Playground Simulation
+app.post('/api/sandbox/trigger', async (req, res) => {
+  const { event, platform } = req.body;
+  
+  if (!event || !platform) {
+    return res.status(400).json({ success: false, error: 'Event and platform are required' });
+  }
+
+  const timestamp = new Date().toISOString();
+  console.log(`[Simpler Life Sandbox] Triggering simulation for ${event} on ${platform}...`);
+
+  // Simulate rich telemetry steps
+  const steps = [
+    { 
+      timestamp: new Date(Date.now() + 50).toISOString(), 
+      step: 'Payload Received', 
+      status: 'success', 
+      details: `Incoming ${platform} webhook detected for ${event}`,
+      latency: '12ms'
+    },
+    { 
+      timestamp: new Date(Date.now() + 150).toISOString(), 
+      step: 'HMAC Security Validation', 
+      status: 'success', 
+      details: `Cryptographic signature X-Simpler-Life-Signature verified using SHA-256`,
+      latency: '42ms'
+    },
+    { 
+      timestamp: new Date(Date.now() + 300).toISOString(), 
+      step: 'Data Schema Parsing', 
+      status: 'success', 
+      details: `Successfully extracted structured data fields for ${platform} schema`,
+      latency: '28ms'
+    },
+    { 
+      timestamp: new Date(Date.now() + 450).toISOString(), 
+      step: 'PII Scrubbing & Redaction', 
+      status: 'success', 
+      details: `Sensitive customer data identified and masked in application logs`,
+      latency: '85ms'
+    },
+    { 
+      timestamp: new Date(Date.now() + 600).toISOString(), 
+      step: 'CRM Sync Pipeline', 
+      status: 'success', 
+      details: `Contact records updated and deal status moved to 'Inquiry' stage`,
+      latency: '115ms'
+    },
+    { 
+      timestamp: new Date(Date.now() + 850).toISOString(), 
+      step: 'Automated Response Dispatch', 
+      status: 'success', 
+      details: `Acknowledgement SMS sent via Twilio and Slack notification fired`,
+      latency: '210ms'
+    }
+  ];
+
+  return res.json({
+    success: true,
+    platform,
+    event,
+    simulation_id: `sim_${crypto.randomUUID().slice(0, 8)}`,
+    triggered_at: timestamp,
+    steps
+  });
 });
 
 // API Routes - Original Lead Submission Route

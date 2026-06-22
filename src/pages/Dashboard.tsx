@@ -9,6 +9,7 @@ export default function Dashboard() {
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<string | null>(null)
   const [emailInput, setEmailInput] = useState<string>('')
+  const [passwordInput, setPasswordInput] = useState<string>('')
   
   // Admin states
   const [isAdmin, setIsAdmin] = useState<boolean>(false)
@@ -42,9 +43,9 @@ export default function Dashboard() {
     }
   }
 
-  const fetchLeads = async () => {
+  const fetchLeads = async (authToken: string) => {
     try {
-      const data = await apiService.fetchAdminLeads()
+      const data = await apiService.fetchAdminLeads(authToken)
       setLeads(data.leads)
     } catch (err) {
       console.error('Failed to fetch leads:', err)
@@ -52,10 +53,11 @@ export default function Dashboard() {
   }
 
   const handleGenerateAudit = async (leadId: string) => {
+    if (!token) return
     setIsGeneratingReport(leadId)
     setGenerationSuccess(null)
     try {
-      const response = await apiService.generateReport(leadId)
+      const response = await apiService.generateReport(leadId, token)
       setGenerationSuccess(leadId)
       if (response.htmlReport) {
         setSelectedAuditHtml(response.htmlReport)
@@ -74,7 +76,7 @@ export default function Dashboard() {
       loadMetrics(token)
       if (savedEmail.toLowerCase() === 'admin@simplerlife.io') {
         setIsAdmin(true)
-        fetchLeads()
+        fetchLeads(token)
       }
     }
   }, [token])
@@ -83,13 +85,17 @@ export default function Dashboard() {
     setLoading(true)
     setError(null)
     try {
-      const fetchedToken = await apiService.fetchToken(emailInput)
+      const fetchedToken = await apiService.fetchToken(emailInput, passwordInput)
       localStorage.setItem('simpler_life_client_token', fetchedToken)
       localStorage.setItem('simpler_life_client_email', emailInput)
       setToken(fetchedToken)
     } catch (err: any) {
       console.error(err)
-      setError('Authentication failed. Please ensure the backend is running.')
+      if (err.response?.status === 401) {
+        setError('Invalid admin credentials. Please verify your password.')
+      } else {
+        setError('Authentication failed. Please ensure the backend is running.')
+      }
     } finally {
       setLoading(false)
     }
@@ -142,6 +148,22 @@ export default function Dashboard() {
                 onKeyDown={(e) => { if (e.key === 'Enter') handleLogin() }}
                 className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm transition"
               />
+              {emailInput.trim().toLowerCase() === 'admin@simplerlife.io' && (
+                <div className="mt-4 animate-in fade-in duration-300">
+                  <label htmlFor="password" className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
+                    Admin Password
+                  </label>
+                  <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter secure admin password"
+                    value={passwordInput}
+                    onChange={(e) => setPasswordInput(e.target.value)}
+                    onKeyDown={(e) => { if (e.key === 'Enter') handleLogin() }}
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm transition"
+                  />
+                </div>
+              )}
               <p className="text-[10px] text-gray-400 mt-1.5 leading-relaxed">
                 Note: Entering a registered booking/purchase email will load your custom workflows and active performance stats. Leaving it blank or entering a guest email will load a live interactive demo.
               </p>
@@ -649,7 +671,7 @@ export default function Dashboard() {
                 AUTHORIZED ADMIN SESSION ONLY • HMAC SECURED WEBHOOKS
               </p>
               <button 
-                onClick={fetchLeads}
+                onClick={() => token && fetchLeads(token)}
                 className="text-[10px] font-bold text-indigo-600 hover:underline"
               >
                 Refresh Lead List

@@ -29,6 +29,9 @@ export default function Home() {
               { title: 'Procurement Automation', desc: 'Auto-generate POs from inventory thresholds, approve via Slack, dispatch to suppliers.', icon: '📦', path: '/solutions/procurement-automation', color: 'orange' },
               { title: 'Compliance Dashboard', desc: 'Tamper-proof audit logs, daily checklists, HMAC-signed evidence, and auto-generated PDF reports.', icon: '✅', path: '/solutions/compliance-dashboard', color: 'emerald' },
               { title: 'Workflow Configurator', desc: 'Design your own custom AI automation pipeline and see instant ROI projections for your specific industry.', icon: '⚡', path: '/solutions/configurator', color: 'primary' },
+              { title: 'Website Scanner', desc: 'Enter your URL and get an instant audit score with remediation recommendations — free.', icon: '🔍', path: '/scanner', color: 'sky' },
+              { title: 'API Webhook Sandbox', desc: 'Simulate ServiceTitan, Stripe, QuickBooks, and Cal.com events in a live pipeline visualizer.', icon: '⚙️', path: '/sandbox', color: 'purple' },
+              { title: 'Leaked Lead ROI Calc', desc: 'See exactly how much revenue you lose from missed leads — interactive calculator with live animations.', icon: '📊', path: '/roi', color: 'red' },
             ].map((sol, i) => {
               const colorMap: Record<string, { bg: string, text: string, hover: string, border: string }> = {
                 indigo: { bg: 'bg-indigo-50', text: 'text-primary', hover: 'hover:border-primary', border: 'border-indigo-100' },
@@ -38,6 +41,9 @@ export default function Home() {
                 orange: { bg: 'bg-orange-50', text: 'text-orange-600', hover: 'hover:border-orange-400', border: 'border-orange-100' },
                 emerald: { bg: 'bg-emerald-50', text: 'text-emerald-600', hover: 'hover:border-emerald-400', border: 'border-emerald-100' },
                 primary: { bg: 'bg-indigo-50', text: 'text-primary', hover: 'hover:border-primary', border: 'border-indigo-100' },
+                sky: { bg: 'bg-sky-50', text: 'text-sky-600', hover: 'hover:border-sky-400', border: 'border-sky-100' },
+                purple: { bg: 'bg-purple-50', text: 'text-purple-600', hover: 'hover:border-purple-400', border: 'border-purple-100' },
+                red: { bg: 'bg-red-50', text: 'text-red-600', hover: 'hover:border-red-400', border: 'border-red-100' },
               };
               const c = colorMap[sol.color];
               return (

@@ -1,5 +1,5 @@
 import { Outlet, Link } from 'react-router-dom'
-import { Activity, ChevronDown, Shield, HardHat, FileText, UserPlus, Package, ClipboardCheck, Bot, Home as HomeIcon, Scale, FileSearch, Sparkles, Zap } from 'lucide-react'
+import { Activity, ChevronDown, Shield, HardHat, FileText, UserPlus, Package, ClipboardCheck, Bot, Home as HomeIcon, Scale, FileSearch, Sparkles, Zap, Globe, Server } from 'lucide-react'
 import { useState, useEffect, useRef } from 'react'
 import PromoBanner from './PromoBanner'
 
@@ -89,10 +89,17 @@ export default function Layout() {
                   <Link to="/checklist" className="flex items-center gap-3 px-4 py-2.5 hover:bg-indigo-50 text-gray-700 hover:text-primary transition text-sm font-semibold bg-indigo-50/20">
                     <Sparkles className="h-4 w-4 text-indigo-600" /> 18-Vertical Master Audit
                   </Link>
+                  <Link to="/scanner" className="flex items-center gap-3 px-4 py-2.5 hover:bg-indigo-50 text-gray-700 hover:text-primary transition text-sm">
+                    <Globe className="h-4 w-4 text-sky-600" /> Website Automation Scanner
+                  </Link>
+                  <Link to="/sandbox" className="flex items-center gap-3 px-4 py-2.5 hover:bg-indigo-50 text-gray-700 hover:text-primary transition text-sm">
+                    <Server className="h-4 w-4 text-purple-600" /> Webhook Playground
+                  </Link>
                 </div>
               )}
             </div>
-            <Link to="/checklist" className="text-gray-600 hover:text-primary transition font-medium">18-Vertical Checklist</Link>
+            <Link to="/checklist" className="text-gray-600 hover:text-primary transition font-medium">Checklist</Link>
+            <Link to="/roi" className="text-gray-600 hover:text-primary transition font-medium">ROI Calc</Link>
             <Link to="/book" className="text-gray-600 hover:text-primary transition font-medium">Book Audit</Link>
             <Link to="/contact" className="text-gray-600 hover:text-primary transition font-medium">Contact</Link>
             <Link to="/sandbox" className="text-indigo-600 hover:text-indigo-800 transition font-semibold flex items-center gap-1.5 bg-indigo-50/50 px-3 py-1 rounded-lg border border-indigo-100">
