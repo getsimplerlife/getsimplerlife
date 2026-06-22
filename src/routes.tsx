@@ -19,6 +19,7 @@ import MortgageLeads from './pages/solutions/MortgageLeads'
 import LegalIntake from './pages/solutions/LegalIntake'
 import ContractReview from './pages/solutions/ContractReview'
 import LeakedLeadROI from './pages/LeakedLeadROI'
+import Checklist from './pages/Checklist'
 
 // Mock Authentication Guard for the Client Portal
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -50,6 +51,7 @@ export const router = createBrowserRouter([
       { path: 'solutions/legal-intake', element: <LegalIntake /> },
       { path: 'solutions/contract-review', element: <ContractReview /> },
       { path: 'roi', element: <LeakedLeadROI /> },
+      { path: 'checklist', element: <Checklist /> },
       {
         path: 'dashboard',
         element: (

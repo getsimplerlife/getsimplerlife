@@ -84,15 +84,16 @@ export default function Layout() {
                 </div>
               )}
             </div>
+            <Link to="/checklist" className="text-gray-600 hover:text-primary transition font-medium">18-Vertical Checklist</Link>
             <Link to="/book" className="text-gray-600 hover:text-primary transition font-medium">Book Audit</Link>
             <Link to="/contact" className="text-gray-600 hover:text-primary transition font-medium">Contact</Link>
             <Link to="/dashboard" className="text-gray-600 hover:text-primary transition font-medium">Client Portal</Link>
           </nav>
           {/* Mobile nav - simplified */}
           <div className="md:hidden flex items-center space-x-3">
+            <Link to="/checklist" className="text-sm text-gray-600 hover:text-primary transition font-medium">Checklist</Link>
             <Link to="/dashboard" className="text-sm text-gray-600 hover:text-primary transition font-medium">Portal</Link>
-            <Link to="/contact" className="text-sm text-gray-600 hover:text-primary transition font-medium">Contact</Link>
-            <Link to="/book" className="text-sm bg-primary text-white px-3 py-1.5 rounded-lg font-semibold hover:bg-primary-dark transition">Book Audit</Link>
+            <Link to="/book" className="text-sm bg-primary text-white px-3 py-1.5 rounded-lg font-semibold hover:bg-primary-dark transition">Book</Link>
           </div>
         </div>
       </header>
