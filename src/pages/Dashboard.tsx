@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { 
   Clock, Bot, Zap, ArrowUpRight, ArrowLeft, ShieldAlert, LogOut, 
   Loader2, Sparkles, Database, Activity, FileText, CheckCircle2, 
   AlertCircle, Send, HardHat, Layers, Users, Settings, ArrowRight,
-  BadgeCheck, Check, Smartphone, Phone
+  BadgeCheck, Check, Smartphone, Phone, ChevronLeft, ChevronRight
 } from 'lucide-react'
 import apiService, { MetricsResponse } from '../services/api'
 
@@ -18,13 +18,15 @@ export default function Dashboard() {
   
   // Custom states for upgraded features
   const [selectedVertical, setSelectedVertical] = useState<string>('general')
-  const [activeTab, setActiveTab] = useState<'telemetry' | 'roadmap'>('telemetry')
+  const [activeTab, setActiveTab] = useState<'telemetry' | 'roadmap' | 'solutions'>('telemetry')
   const [smsNumber, setSmsNumber] = useState<string>('')
   const [smsStatus, setSmsStatus] = useState<'idle' | 'sending' | 'sent'>('idle')
   const [smsLogs, setSmsLogs] = useState<string[]>([])
   const [upgradeSuccess, setUpgradeSuccess] = useState<boolean>(false)
   const [selectedRetainer, setSelectedRetainer] = useState<string>('150')
   const [activeRetainerTier, setActiveRetainerTier] = useState<string>('Growth Retainer ($150/mo)')
+
+  const scrollRef = useRef<HTMLDivElement>(null)
 
   // Admin states
   const [isAdmin, setIsAdmin] = useState<boolean>(false)
@@ -227,6 +229,18 @@ export default function Dashboard() {
     setPasswordInput('')
   }
 
+  const scrollLeft = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: -340, behavior: 'smooth' })
+    }
+  }
+
+  const scrollRight = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: 340, behavior: 'smooth' })
+    }
+  }
+
   // Live SMS Simulation trigger
   const handleTestSms = () => {
     if (!signature) {
@@ -405,6 +419,11 @@ export default function Dashboard() {
 
   return (
     <div className="bg-gray-50 min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+      <style dangerouslySetInnerHTML={{__html: `
+        .hide-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+      `}} />
       <div className="max-w-6xl mx-auto">
         
         {/* Header */}
@@ -523,6 +542,16 @@ export default function Dashboard() {
           >
             18-Vertical Strategic Audit Vault 📋
           </button>
+          <button
+            onClick={() => setActiveTab('solutions')}
+            className={`pb-4 text-sm font-bold tracking-tight transition ${
+              activeTab === 'solutions' 
+                ? 'text-primary border-b-2 border-primary' 
+                : 'text-gray-400 hover:text-gray-600'
+            }`}
+          >
+            Solutions Suite 🚀
+          </button>
         </div>
 
         {/* Dashboard Grid */}
@@ -640,7 +669,7 @@ export default function Dashboard() {
                   </div>
                 </div>
               </>
-            ) : (
+            ) : activeTab === 'roadmap' ? (
               /* UPGRADE 2: Interactive 18-Vertical Roadmap Vault View */
               <div className="bg-white border border-gray-100 rounded-3xl shadow-sm p-8 space-y-6">
                 <div>
@@ -689,6 +718,75 @@ export default function Dashboard() {
                       <p className="text-xs font-bold text-indigo-500 uppercase tracking-wide mb-1.5">{vert.spec}</p>
                       <p className="text-xs text-gray-600 leading-relaxed">{vert.desc}</p>
                     </div>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              /* NEW: Solutions Suite 🚀 */
+              <div className="bg-white border border-gray-100 rounded-3xl shadow-sm p-8">
+                <div className="flex flex-col md:flex-row md:items-end justify-between mb-8">
+                  <div className="text-left">
+                    <span className="text-xs font-bold text-primary uppercase tracking-wider block mb-2">9-Vertical Automation Suite</span>
+                    <h2 className="text-2xl font-black text-dark tracking-tight">Active Solution Pathways</h2>
+                    <p className="text-gray-500 mt-2 text-xs leading-relaxed max-w-md">
+                      Explore our premium automation blueprints. Each pathway is designed to eliminate specific manual bottlenecks in your industry.
+                    </p>
+                  </div>
+                  
+                  <div className="flex items-center space-x-2 mt-4 md:mt-0">
+                    <button
+                      onClick={scrollLeft}
+                      className="p-2 rounded-full border border-gray-200 hover:border-primary hover:bg-indigo-50 text-gray-500 hover:text-primary transition shadow-sm bg-white"
+                    >
+                      <ChevronLeft className="h-5 w-5" />
+                    </button>
+                    <button
+                      onClick={scrollRight}
+                      className="p-2 rounded-full border border-gray-200 hover:border-primary hover:bg-indigo-50 text-gray-500 hover:text-primary transition shadow-sm bg-white"
+                    >
+                      <ChevronRight className="h-5 w-5" />
+                    </button>
+                  </div>
+                </div>
+
+                <div 
+                  ref={scrollRef}
+                  className="flex overflow-x-auto gap-4 pb-4 scroll-smooth hide-scrollbar snap-x snap-mandatory"
+                  style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+                >
+                  {[
+                    { title: 'Insurance Quotes', desc: 'Multi-carrier quote generation in under 60 seconds.', icon: '🛡️', path: '/solutions/insurance-quotes', color: 'indigo' },
+                    { title: 'Mortgage Leads', desc: 'Automated lead capture and qualification for brokers.', icon: '🏠', path: '/solutions/mortgage-leads', color: 'blue' },
+                    { title: 'Construction Bids', desc: 'Line-item estimates with material costs and labor.', icon: '🏗️', path: '/solutions/construction-bids', color: 'amber' },
+                    { title: 'Legal Intake', desc: 'Secure client onboarding and conflict checks.', icon: '⚖️', path: '/solutions/legal-intake', color: 'slate' },
+                    { title: 'Contract Review', desc: 'AI-powered clause analysis and risk detection.', icon: '📜', path: '/solutions/contract-review', color: 'emerald' },
+                    { title: 'Proposal Writing', desc: 'Auto-generate CRM-hydrated business proposals.', icon: '📄', path: '/solutions/proposal-writing', color: 'violet' },
+                    { title: 'Vendor Onboarding', desc: 'Tax ID verification and automated ERP provisioning.', icon: '🤝', path: '/solutions/vendor-onboarding', color: 'cyan' },
+                    { title: 'Procurement', desc: 'PO generation from inventory thresholds.', icon: '📦', path: '/solutions/procurement-automation', color: 'orange' },
+                    { title: 'Compliance Dashboard', desc: 'Tamper-proof audit logs and HMAC-signed evidence.', icon: '✅', path: '/solutions/compliance-dashboard', color: 'green' },
+                  ].map((sol, i) => (
+                    <Link 
+                      key={i} 
+                      to={sol.path}
+                      className="p-5 border border-gray-100 rounded-2xl shadow-sm hover:border-primary hover:shadow-md transition text-left bg-gray-50/50 group min-w-[240px] flex-shrink-0 snap-start flex flex-col justify-between"
+                    >
+                      <div>
+                        <div className="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition duration-300">
+                          {sol.icon}
+                        </div>
+                        <h3 className="text-sm font-bold text-dark mb-1 group-hover:text-primary transition">{sol.title}</h3>
+                        <p className="text-[10px] text-gray-500 leading-relaxed mb-4">{sol.desc}</p>
+                      </div>
+                      <div className="flex items-center justify-between mt-auto">
+                        <span className="text-[10px] font-bold text-primary flex items-center gap-1">
+                          View Path <ArrowRight size={12} />
+                        </span>
+                        <span className="text-[9px] uppercase font-bold tracking-wider bg-emerald-50 text-emerald-600 px-1.5 py-0.5 rounded-full flex items-center gap-1">
+                          <span className="h-1 w-1 bg-emerald-500 rounded-full animate-ping" />
+                          Live
+                        </span>
+                      </div>
+                    </Link>
                   ))}
                 </div>
               </div>
