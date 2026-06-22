@@ -1,6 +1,7 @@
 import express from 'express'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import { exec } from 'child_process'
 import cors from 'cors'
 import helmet from 'helmet'
 import dotenv from 'dotenv'
@@ -155,6 +156,60 @@ app.get('/api/bookings', async (req, res) => {
   } catch (err: any) {
     console.error('[Simpler Life Server] Error fetching bookings:', err);
     return res.status(500).json({ success: false, error: 'Failed to fetch bookings' });
+  }
+});
+
+// Admin Route - Get all leads for Control Panel
+app.get('/api/admin/leads', async (req, res) => {
+  try {
+    const result = await db.execute("SELECT * FROM leads ORDER BY created_at DESC");
+    return res.json({ success: true, leads: result.rows });
+  } catch (err: any) {
+    console.error(`[Simpler Life Admin] GET /api/admin/leads error:`, err);
+    return res.status(500).json({ success: false, error: 'Failed to fetch leads' });
+  }
+});
+
+// Admin Route - Trigger Asynchronous Audit Engine
+app.post('/api/admin/generate-report', async (req, res) => {
+  const { leadId } = req.body;
+  if (!leadId) {
+    return res.status(400).json({ success: false, error: 'leadId is required' });
+  }
+
+  try {
+    const leadResult = await db.execute({
+      sql: "SELECT * FROM leads WHERE id = ? LIMIT 1",
+      args: [leadId]
+    });
+
+    if (leadResult.rows.length === 0) {
+      return res.status(404).json({ success: false, error: 'Lead not found' });
+    }
+
+    const scriptPath = '/home/team/shared/audit_engine/generate_audit_report.py';
+    console.log(`[Simpler Life Admin] Triggering Audit Engine for lead: ${leadId}`);
+    
+    exec(`python3 ${scriptPath} --leadId ${leadId}`, (error, stdout, stderr) => {
+      if (error) {
+        console.error(`[Simpler Life Admin] Audit Engine Error:`, error);
+        return;
+      }
+      if (stderr) {
+        console.warn(`[Simpler Life Admin] Audit Engine Warning:`, stderr);
+      }
+      console.log(`[Simpler Life Admin] Audit Engine Output:`, stdout);
+    });
+
+    return res.json({ 
+      success: true, 
+      message: 'Audit generation started. The report will be available shortly.',
+      leadId 
+    });
+
+  } catch (err: any) {
+    console.error(`[Simpler Life Admin] POST /api/admin/generate-report error:`, err);
+    return res.status(500).json({ success: false, error: 'Internal Server Error' });
   }
 });
 

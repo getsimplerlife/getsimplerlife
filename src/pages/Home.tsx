@@ -28,6 +28,7 @@ export default function Home() {
               { title: 'Vendor Onboarding Portal', desc: 'Auto-verify tax IDs, scan COIs, validate bank accounts, and provision to ERP in 5 minutes.', icon: '🤝', path: '/solutions/vendor-onboarding', color: 'cyan' },
               { title: 'Procurement Automation', desc: 'Auto-generate POs from inventory thresholds, approve via Slack, dispatch to suppliers.', icon: '📦', path: '/solutions/procurement-automation', color: 'orange' },
               { title: 'Compliance Dashboard', desc: 'Tamper-proof audit logs, daily checklists, HMAC-signed evidence, and auto-generated PDF reports.', icon: '✅', path: '/solutions/compliance-dashboard', color: 'emerald' },
+              { title: 'Workflow Configurator', desc: 'Design your own custom AI automation pipeline and see instant ROI projections for your specific industry.', icon: '⚡', path: '/solutions/configurator', color: 'primary' },
             ].map((sol, i) => {
               const colorMap: Record<string, { bg: string, text: string, hover: string, border: string }> = {
                 indigo: { bg: 'bg-indigo-50', text: 'text-primary', hover: 'hover:border-primary', border: 'border-indigo-100' },
@@ -36,6 +37,7 @@ export default function Home() {
                 cyan: { bg: 'bg-cyan-50', text: 'text-cyan-600', hover: 'hover:border-cyan-400', border: 'border-cyan-100' },
                 orange: { bg: 'bg-orange-50', text: 'text-orange-600', hover: 'hover:border-orange-400', border: 'border-orange-100' },
                 emerald: { bg: 'bg-emerald-50', text: 'text-emerald-600', hover: 'hover:border-emerald-400', border: 'border-emerald-100' },
+                primary: { bg: 'bg-indigo-50', text: 'text-primary', hover: 'hover:border-primary', border: 'border-indigo-100' },
               };
               const c = colorMap[sol.color];
               return (

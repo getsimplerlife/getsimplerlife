@@ -20,6 +20,7 @@ import LegalIntake from './pages/solutions/LegalIntake'
 import ContractReview from './pages/solutions/ContractReview'
 import Configurator from './pages/solutions/Configurator'
 import LeakedLeadROI from './pages/LeakedLeadROI'
+import Scanner from './pages/solutions/Scanner'
 import Checklist from './pages/Checklist'
 import Sandbox from './pages/solutions/Sandbox'
 
@@ -54,6 +55,7 @@ export const router = createBrowserRouter([
       { path: 'solutions/contract-review', element: <ContractReview /> },
       { path: 'solutions/configurator', element: <Configurator /> },
       { path: 'roi', element: <LeakedLeadROI /> },
+      { path: 'scanner', element: <Scanner /> },
       { path: 'checklist', element: <Checklist /> },
       { path: 'sandbox', element: <Sandbox /> },
       {

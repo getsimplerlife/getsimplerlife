@@ -21,9 +21,9 @@ export default function HeroSection() {
                 Get Your Automation Audit
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
-              <a href="#solutions" className="inline-flex items-center justify-center px-6 py-3 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-100 transition bg-white">
-                Learn How It Works
-              </a>
+              <Link to="/solutions/configurator" className="inline-flex items-center justify-center px-6 py-3 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-100 transition bg-white">
+                Build Your Workflow
+              </Link>
             </div>
             <p className="mt-4 text-xs text-gray-400">No commitment. Asynchronous delivery. See exactly what you can automate.</p>
           </div>

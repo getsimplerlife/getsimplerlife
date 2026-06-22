@@ -73,6 +73,22 @@ export const apiService = {
     const response = await api.get<{ success: boolean; bookings: { date: string; time: string }[] }>('/api/bookings');
     return response.data;
   },
+
+  /**
+   * Fetch all leads (Admin only)
+   */
+  fetchAdminLeads: async () => {
+    const response = await api.get<{ success: boolean; leads: any[] }>('/api/admin/leads');
+    return response.data;
+  },
+
+  /**
+   * Trigger report generation for a lead (Admin only)
+   */
+  generateReport: async (leadId: string) => {
+    const response = await api.post<{ success: boolean; message: string }>('/api/admin/generate-report', { leadId });
+    return response.data;
+  },
 };
 
 export default apiService;

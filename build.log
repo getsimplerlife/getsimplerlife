@@ -1,0 +1,9 @@
+
+> simpler-life-agency@1.0.0 build
+> npm run build:frontend
+
+
+> simpler-life-agency@1.0.0 build:frontend
+> tsc && vite build
+
+src/pages/solutions/Configurator.tsx(205,28): error TS2304: Cannot find name 'Users'.
