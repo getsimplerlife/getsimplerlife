@@ -24,8 +24,8 @@ export default function Book() {
   const verticalParam = searchParams.get('vertical')
 
   const [selectedOption, setSelectedOption] = useState('strategy')
-  const [selectedDate, setSelectedDate] = useState('')
-  const [selectedTime, setSelectedTime] = useState('')
+  const [selectedDate, setSelectedDate] = useState('Instant 24/7 Delivery Queue')
+  const [selectedTime, setSelectedTime] = useState('Immediate')
   const [loading, setLoading] = useState(false)
   const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [errorMsg, setErrorMsg] = useState('')
@@ -90,44 +90,6 @@ export default function Book() {
       icon: <ShieldCheck className="h-5 w-5 text-violet-600" />
     }
   ]
-
-  // Dynamically generate the next 22 business days starting tomorrow (covers a full month)
-  const getNextBusinessDays = () => {
-    const days = []
-    let current = new Date()
-    
-    // 22 business days represent a full month of active options
-    while (days.length < 22) {
-      current.setDate(current.getDate() + 1)
-      const dayOfWeek = current.getDay()
-      // 0 = Sunday, 6 = Saturday (Skip weekends)
-      if (dayOfWeek !== 0 && dayOfWeek !== 6) {
-        const formatted = current.toLocaleDateString('en-US', {
-          weekday: 'short',
-          month: 'short',
-          day: 'numeric'
-        })
-        days.push(formatted)
-      }
-    }
-    return days
-  }
-
-  const businessDays = getNextBusinessDays()
-  const timeSlots = ["09:00 AM", "11:30 AM", "02:00 PM", "04:30 PM"]
-
-  // Helper to check if a date is fully booked (all 4 slots taken)
-  const isDateFullyBooked = (date: string) => {
-    const bookedTimesForDate = bookedSlots
-      .filter((b) => b.date === date)
-      .map((b) => b.time)
-    return timeSlots.every((slot) => bookedTimesForDate.includes(slot))
-  }
-
-  // Helper to check if a specific time slot on a date is already taken
-  const isTimeSlotTaken = (date: string, time: string) => {
-    return bookedSlots.some((b) => b.date === date && b.time === time)
-  }
 
   const activeOption = bookingOptions.find(opt => opt.id === selectedOption) || bookingOptions[0]
 
@@ -246,10 +208,10 @@ User Notes: ${form.message || 'No additional notes.'}`
                 <Calendar className="h-6 w-6" />
               </span>
               <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-dark mb-2">
-                Schedule Your Automation Diagnostic Delivery
+                Instant 24/7 Automation Diagnostic Blueprint
               </h1>
               <p className="text-gray-600 max-w-2xl mx-auto">
-                Select a custom diagnostic session below, choose an open delivery slot on our calendar, and our AI Expert system will build and deliver a comprehensive automation roadmap for your business.
+                Select a custom diagnostic session below, fill out your details, and our AI Expert System will build and deliver a comprehensive automation roadmap for your business asynchronously in under 24 hours. No call required, active 24/7.
               </p>
             </div>
 
@@ -302,88 +264,12 @@ User Notes: ${form.message || 'No additional notes.'}`
               </div>
             </div>
 
-            {/* Main scheduler split section */}
-            <form onSubmit={handleSubmit} className="grid md:grid-cols-12 gap-8 items-start">
-              {/* Step 2: Date & Time Picker */}
-              <div className="md:col-span-5 bg-white border border-gray-100 rounded-3xl p-6 shadow-md space-y-6">
-                <div>
-                  <h2 className="text-base font-bold text-gray-900 mb-3 flex items-center">
-                    <span className="bg-primary text-white h-5 w-5 rounded-full inline-flex items-center justify-center text-xs mr-2">2</span>
-                    Choose a Date (Full Month)
-                  </h2>
-                  <p className="text-[11px] text-gray-400 mb-3">Scroll to see all available dates for the next 30 days.</p>
-                  
-                  {/* Scrollable container for a full month of business days */}
-                  <div className="grid grid-cols-2 gap-2 max-h-64 overflow-y-auto pr-1.5 scrollbar-thin scrollbar-thumb-gray-200">
-                    {businessDays.map((day) => {
-                      const fullyBooked = isDateFullyBooked(day);
-                      return (
-                        <button
-                          key={day}
-                          type="button"
-                          disabled={fullyBooked}
-                          onClick={() => {
-                            setSelectedDate(day)
-                            setSelectedTime('') // Reset selected time when date changes
-                            setErrorMsg('')
-                          }}
-                          className={`py-2.5 px-3 rounded-xl border font-bold text-xs transition text-left flex items-center justify-between ${
-                            fullyBooked
-                              ? 'border-gray-100 bg-gray-50 text-gray-300 cursor-not-allowed line-through'
-                              : selectedDate === day
-                              ? 'border-primary bg-indigo-50/20 text-primary ring-1 ring-primary'
-                              : 'border-gray-200 hover:border-indigo-100 hover:bg-gray-50/50 text-gray-700 bg-white'
-                          }`}
-                        >
-                          <span className={fullyBooked ? 'opacity-60' : ''}>
-                            {day} {fullyBooked && '(Full)'}
-                          </span>
-                          {selectedDate === day && <Check className="h-3.5 w-3.5 text-primary" />}
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                <div>
-                  <h2 className="text-base font-bold text-gray-900 mb-3.5 flex items-center">
-                    <span className="bg-primary text-white h-5 w-5 rounded-full inline-flex items-center justify-center text-xs mr-2">3</span>
-                    Choose a Time Slot
-                  </h2>
-                  <div className="grid grid-cols-2 gap-2">
-                    {timeSlots.map((slot) => {
-                      const isTaken = selectedDate ? isTimeSlotTaken(selectedDate, slot) : false;
-                      return (
-                        <button
-                          key={slot}
-                          type="button"
-                          disabled={!selectedDate || isTaken}
-                          onClick={() => {
-                            setSelectedTime(slot)
-                            setErrorMsg('')
-                          }}
-                          className={`py-2.5 px-3 rounded-xl border font-bold text-xs transition text-center ${
-                            !selectedDate
-                              ? 'border-gray-100 bg-gray-50/50 text-gray-300 cursor-not-allowed'
-                              : isTaken
-                              ? 'border-gray-100 bg-gray-50 text-gray-300 cursor-not-allowed line-through'
-                              : selectedTime === slot
-                              ? 'border-primary bg-indigo-50/20 text-primary ring-1 ring-primary'
-                              : 'border-gray-200 hover:border-indigo-100 hover:bg-gray-50/50 text-gray-600'
-                          }`}
-                        >
-                          {slot} {isTaken && ' (Taken)'}
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-              </div>
-
-              {/* Step 3: Attendee Details Form */}
-              <div className="md:col-span-7 bg-white border border-gray-100 rounded-3xl p-8 shadow-md space-y-6">
+            {/* Main scheduler frictionless section */}
+            <form onSubmit={handleSubmit} className="max-w-3xl mx-auto">
+              {/* Step 2: Attendee Details Form */}
+              <div className="bg-white border border-gray-100 rounded-3xl p-8 shadow-md space-y-6">
                 <h2 className="text-base font-bold text-gray-900 mb-1 flex items-center">
-                  <span className="bg-primary text-white h-5 w-5 rounded-full inline-flex items-center justify-center text-xs mr-2">4</span>
+                  <span className="bg-primary text-white h-5 w-5 rounded-full inline-flex items-center justify-center text-xs mr-2">2</span>
                   Your Details
                 </h2>
 

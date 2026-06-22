@@ -352,7 +352,7 @@ export default function Checklist() {
           <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
           <div className="relative z-10 max-w-2xl">
             <span className="bg-indigo-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-4 inline-block">
-              Limited Staging Slots Available
+              24/7 Instant Intake Active
             </span>
             <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight mb-4">
               Inspect your business using this 18-Vertical Audit framework
