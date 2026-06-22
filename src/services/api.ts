@@ -86,7 +86,7 @@ export const apiService = {
    * Trigger report generation for a lead (Admin only)
    */
   generateReport: async (leadId: string) => {
-    const response = await api.post<{ success: boolean; message: string }>('/api/admin/generate-report', { leadId });
+    const response = await api.post<{ success: boolean; message: string; htmlReport?: string }>('/api/admin/generate-report', { leadId });
     return response.data;
   },
 };

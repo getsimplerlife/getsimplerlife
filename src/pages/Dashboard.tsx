@@ -15,6 +15,7 @@ export default function Dashboard() {
   const [leads, setLeads] = useState<any[]>([])
   const [isGeneratingReport, setIsGeneratingReport] = useState<string | null>(null)
   const [generationSuccess, setGenerationSuccess] = useState<string | null>(null)
+  const [selectedAuditHtml, setSelectedAuditHtml] = useState<string | null>(null)
 
   // Interactive states
   const [sowApproved, setSowApproved] = useState<boolean>(false)
@@ -54,8 +55,11 @@ export default function Dashboard() {
     setIsGeneratingReport(leadId)
     setGenerationSuccess(null)
     try {
-      await apiService.generateReport(leadId)
+      const response = await apiService.generateReport(leadId)
       setGenerationSuccess(leadId)
+      if (response.htmlReport) {
+        setSelectedAuditHtml(response.htmlReport)
+      }
     } catch (err) {
       console.error('Failed to generate audit:', err)
     } finally {
@@ -654,6 +658,54 @@ export default function Dashboard() {
           </div>
         )}
       </div>
+
+      {/* Audit Report Modal */}
+      {selectedAuditHtml && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300">
+          <div className="bg-white w-full max-w-5xl h-[90vh] rounded-3xl shadow-2xl overflow-hidden flex flex-col animate-in zoom-in-95 duration-300">
+            <div className="px-8 py-4 border-b border-gray-100 flex items-center justify-between bg-gray-50/80">
+              <div className="flex items-center gap-2">
+                <FileText className="text-primary h-5 w-5" />
+                <h3 className="font-bold text-dark text-sm tracking-tight uppercase">Generated Diagnostic Roadmap</h3>
+              </div>
+              <button 
+                onClick={() => setSelectedAuditHtml(null)}
+                className="p-2 hover:bg-gray-200 rounded-full transition text-gray-400 hover:text-dark"
+              >
+                <LogOut className="h-5 w-5" />
+              </button>
+            </div>
+            <div className="flex-1 overflow-y-auto p-0 bg-gray-100">
+              <iframe 
+                srcDoc={selectedAuditHtml} 
+                className="w-full h-full border-none"
+                title="Diagnostic Report"
+              />
+            </div>
+            <div className="px-8 py-4 border-t border-gray-100 flex items-center justify-end bg-gray-50/80 gap-4">
+              <button 
+                onClick={() => {
+                  const blob = new Blob([selectedAuditHtml], { type: 'text/html' });
+                  const url = URL.createObjectURL(blob);
+                  const a = document.createElement('a');
+                  a.href = url;
+                  a.download = `diagnostic_report_${new Date().getTime()}.html`;
+                  a.click();
+                }}
+                className="text-xs font-bold text-indigo-600 hover:underline flex items-center gap-2"
+              >
+                <ArrowRight size={14} className="rotate-90" /> Download HTML
+              </button>
+              <button 
+                onClick={() => setSelectedAuditHtml(null)}
+                className="px-6 py-2 bg-primary text-white text-xs font-bold rounded-xl hover:bg-primary-dark transition shadow-lg"
+              >
+                Close Blueprint
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

@@ -6,4 +6,17 @@
 > simpler-life-agency@1.0.0 build:frontend
 > tsc && vite build
 
-src/pages/solutions/Configurator.tsx(205,28): error TS2304: Cannot find name 'Users'.
+vite v5.4.21 building for production...
+transforming...
+✓ 1590 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.89 kB │ gzip:   0.51 kB
+dist/assets/index-B3ybkTHf.css   56.45 kB │ gzip:   9.36 kB
+dist/assets/index-DzkJ_G_8.js   533.26 kB │ gzip: 144.96 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 3.56s

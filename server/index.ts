@@ -2,6 +2,7 @@ import express from 'express'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { exec } from 'child_process'
+import { readFile } from 'fs/promises'
 import cors from 'cors'
 import helmet from 'helmet'
 import dotenv from 'dotenv'
@@ -187,29 +188,56 @@ app.post('/api/admin/generate-report', async (req, res) => {
       return res.status(404).json({ success: false, error: 'Lead not found' });
     }
 
-    const scriptPath = '/home/team/shared/audit_engine/generate_audit_report.py';
-    console.log(`[Simpler Life Admin] Triggering Audit Engine for lead: ${leadId}`);
+    const lead = leadResult.rows[0];
+    const company = (lead.company as string) || (lead.name as string) || 'Valued Prospect';
     
-    exec(`python3 ${scriptPath} --leadId ${leadId}`, (error, stdout, stderr) => {
-      if (error) {
-        console.error(`[Simpler Life Admin] Audit Engine Error:`, error);
-        return;
-      }
-      if (stderr) {
-        console.warn(`[Simpler Life Admin] Audit Engine Warning:`, stderr);
-      }
-      console.log(`[Simpler Life Admin] Audit Engine Output:`, stdout);
-    });
+    // Map lead data to script arguments
+    const industry = 'Service SMB';
+    const website = (lead.email as string).includes('@') ? `https://www.${(lead.email as string).split('@')[1]}` : '';
+    const leadsVolume = Math.max(25, Math.round(Number(lead.score) || 35));
+    
+    const scriptPath = '/home/team/shared/audit_engine/generate_audit_report.py';
+    const command = `python3 ${scriptPath} --company "${company}" --industry "${industry}" --website "${website}" --leads ${leadsVolume}`;
+    
+    console.log(`[Simpler Life Admin] Executing Audit Engine: ${command}`);
+    
+    // Use a promise to wait for the script to finish
+    const runAudit = () => {
+      return new Promise<{ htmlReport: string }>((resolve, reject) => {
+        exec(command, async (error, stdout, stderr) => {
+          if (error) {
+            console.error(`[Simpler Life Admin] Audit Engine Error:`, error);
+            return reject(new Error('Script execution failed'));
+          }
+          
+          try {
+            const output = JSON.parse(stdout);
+            if (output.status === 'success' && output.html_report_path) {
+              const htmlContent = await readFile(output.html_report_path, 'utf-8');
+              resolve({ htmlReport: htmlContent });
+            } else {
+              reject(new Error('Script returned failure status'));
+            }
+          } catch (e) {
+            console.error('[Simpler Life Admin] Failed to parse script output:', e);
+            reject(new Error('Failed to parse script output'));
+          }
+        });
+      });
+    };
+
+    const result = await runAudit();
 
     return res.json({ 
       success: true, 
-      message: 'Audit generation started. The report will be available shortly.',
-      leadId 
+      message: 'Audit report generated successfully.',
+      leadId,
+      htmlReport: result.htmlReport
     });
 
   } catch (err: any) {
     console.error(`[Simpler Life Admin] POST /api/admin/generate-report error:`, err);
-    return res.status(500).json({ success: false, error: 'Internal Server Error' });
+    return res.status(500).json({ success: false, error: err.message || 'Internal Server Error' });
   }
 });
 
