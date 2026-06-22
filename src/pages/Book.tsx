@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { 
   Calendar, 
   ArrowLeft, 
@@ -20,6 +20,9 @@ import {
 import apiService from '../services/api'
 
 export default function Book() {
+  const [searchParams] = useSearchParams()
+  const verticalParam = searchParams.get('vertical')
+
   const [selectedOption, setSelectedOption] = useState('strategy')
   const [selectedDate, setSelectedDate] = useState('')
   const [selectedTime, setSelectedTime] = useState('')
@@ -34,8 +37,17 @@ export default function Book() {
     email: '',
     company: '',
     phone: '',
-    message: ''
+    message: verticalParam ? `I would like to book an Asynchronous Audit specifically for: ${verticalParam}.` : ''
   })
+
+  React.useEffect(() => {
+    if (verticalParam) {
+      setForm(prev => ({
+        ...prev,
+        message: prev.message || `I would like to book an Asynchronous Audit specifically for: ${verticalParam}.`
+      }))
+    }
+  }, [verticalParam])
 
   // Fetch already booked slots from backend
   React.useEffect(() => {

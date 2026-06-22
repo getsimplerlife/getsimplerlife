@@ -1,5 +1,5 @@
 import { Outlet, Link } from 'react-router-dom'
-import { Activity, ChevronDown, Shield, HardHat, FileText, UserPlus, Package, ClipboardCheck, Bot, Home as HomeIcon, Scale, FileSearch } from 'lucide-react'
+import { Activity, ChevronDown, Shield, HardHat, FileText, UserPlus, Package, ClipboardCheck, Bot, Home as HomeIcon, Scale, FileSearch, Sparkles } from 'lucide-react'
 import { useState, useEffect, useRef } from 'react'
 import PromoBanner from './PromoBanner'
 
@@ -80,6 +80,11 @@ export default function Layout() {
                   </Link>
                   <Link to="/solutions/compliance-dashboard" className="flex items-center gap-3 px-4 py-2.5 hover:bg-emerald-50 text-gray-700 hover:text-emerald-700 transition text-sm">
                     <ClipboardCheck className="h-4 w-4 text-emerald-600" /> Compliance Dashboard
+                  </Link>
+                  <div className="border-t border-gray-100 my-1" />
+                  <div className="px-4 py-1.5 text-xs font-semibold text-gray-400 uppercase tracking-wider">Diagnostics</div>
+                  <Link to="/checklist" className="flex items-center gap-3 px-4 py-2.5 hover:bg-indigo-50 text-gray-700 hover:text-primary transition text-sm font-semibold bg-indigo-50/20">
+                    <Sparkles className="h-4 w-4 text-indigo-600" /> 18-Vertical Master Audit
                   </Link>
                 </div>
               )}

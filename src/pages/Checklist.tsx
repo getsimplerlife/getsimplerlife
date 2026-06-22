@@ -331,6 +331,15 @@ export default function Checklist() {
                         </div>
                       ))}
                     </div>
+                    <div className="mt-5 pt-4 border-t border-gray-200/60 flex items-center justify-between flex-wrap gap-3">
+                      <span className="text-xs text-gray-500">Diagnostic code: SL-AUD-{vertical.id.toString().padStart(2, '0')}</span>
+                      <Link 
+                        to={`/book?vertical=${encodeURIComponent(vertical.title)}`}
+                        className="inline-flex items-center gap-1.5 text-xs font-bold text-indigo-600 hover:text-indigo-800 transition bg-indigo-50/60 hover:bg-indigo-100 px-3 py-1.5 rounded-lg border border-indigo-100"
+                      >
+                        Book Audit for this Vertical <ArrowRight className="h-3.5 w-3.5" />
+                      </Link>
+                    </div>
                   </div>
                 )}
               </div>
