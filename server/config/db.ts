@@ -42,23 +42,6 @@ export const initDb = async () => {
 
     // --- Schema Updates for all 10 Industry-Specific Automations ---
 
-    // 3. AI SDR Leads Table
-    await db.execute(`
-      CREATE TABLE IF NOT EXISTS ai_sdr_leads (
-        id TEXT PRIMARY KEY,
-        prospect_name TEXT NOT NULL,
-        email TEXT NOT NULL,
-        phone TEXT,
-        company_name TEXT NOT NULL,
-        role TEXT,
-        fit_score REAL,
-        intent_score REAL,
-        outreach_status TEXT DEFAULT 'pending',
-        conversation_log TEXT,
-        created_at TEXT DEFAULT CURRENT_TIMESTAMP
-      )
-    `);
-
     // 4. Mortgage Qualification Table
     await db.execute(`
       CREATE TABLE IF NOT EXISTS mortgage_qualification (

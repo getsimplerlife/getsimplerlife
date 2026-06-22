@@ -2,7 +2,6 @@ import { Router } from 'express';
 import { db } from '../config/db.js';
 
 // Import services
-import { simulateSdrReply } from '../services/aiSdrService.js';
 import { qualifyMortgageLead } from '../services/mortgageService.js';
 import { generateInsuranceQuote } from '../services/insuranceService.js';
 import { processLegalIntake } from '../services/legalIntakeService.js';
@@ -30,16 +29,6 @@ router.post('/simulate/:serviceName', async (req, res) => {
 
   try {
     switch (serviceName.toLowerCase()) {
-      case 'ai-sdr':
-      case 'aisdr':
-        result = simulateSdrReply({
-          prospectName: payload.prospectName || 'John Doe',
-          companyName: payload.companyName || 'Acme Corporation',
-          inboundMessage: payload.inboundMessage || 'I am interested in your automation services and would love to see a demo or get some pricing details.'
-        });
-        hoursSavedIncrement = 0.5;
-        break;
-
       case 'mortgage':
       case 'mortgage-qualification':
         result = qualifyMortgageLead({
@@ -90,7 +79,7 @@ router.post('/simulate/:serviceName', async (req, res) => {
       case 'proposalwriter':
         result = writeSalesProposal({
           clientCompany: payload.clientCompany || 'TechVanguard LLC',
-          scopeNeeds: payload.scopeNeeds || ['AI SDR email sequences', 'Compliance Audit Trails', 'Three-Way Invoice Matching'],
+          scopeNeeds: payload.scopeNeeds || ['Lead Qualification Funnels', 'Compliance Audit Trails', 'Three-Way Invoice Matching'],
           budget: payload.budget || 5000
         });
         hoursSavedIncrement = 2.5;
@@ -148,7 +137,7 @@ router.post('/simulate/:serviceName', async (req, res) => {
         return res.status(400).json({
           success: false,
           error: 'Invalid Service Name',
-          details: [`Service '${serviceName}' is not recognized. Choose from: aisdr, mortgage, insurance, legal-intake, construction-bid, proposal-writer, contract-review, vendor-onboarding, procurement, compliance.`]
+          details: [`Service '${serviceName}' is not recognized. Choose from: mortgage, insurance, legal-intake, construction-bid, proposal-writer, contract-review, vendor-onboarding, procurement, compliance.`]
         });
     }
 

@@ -306,53 +306,6 @@ app.post('/api/leads', async (req, res) => {
 
 // --- API Endpoints for 10 New Industry-Specific Automations ---
 
-// 1. AI SDR Submission Endpoint
-app.post('/api/ai-sdr', async (req, res) => {
-  const { prospect_name, email, phone, company_name, role, fit_score, intent_score, outreach_status, conversation_log } = req.body;
-  
-  if (!prospect_name || typeof prospect_name !== 'string' || prospect_name.trim() === '') {
-    return res.status(400).json({ success: false, error: 'Validation Error', details: ['prospect_name is required'] });
-  }
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!email || typeof email !== 'string' || !emailRegex.test(email)) {
-    return res.status(400).json({ success: false, error: 'Validation Error', details: ['A valid email is required'] });
-  }
-  if (!company_name || typeof company_name !== 'string' || company_name.trim() === '') {
-    return res.status(400).json({ success: false, error: 'Validation Error', details: ['company_name is required'] });
-  }
-
-  const id = `sdr_${crypto.randomUUID()}`;
-  const finalFitScore = typeof fit_score === 'number' ? fit_score : Math.round(70 + Math.random() * 25);
-  const finalIntentScore = typeof intent_score === 'number' ? intent_score : Math.round(65 + Math.random() * 30);
-
-  try {
-    await db.execute({
-      sql: `INSERT INTO ai_sdr_leads (id, prospect_name, email, phone, company_name, role, fit_score, intent_score, outreach_status, conversation_log) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-      args: [
-        id,
-        prospect_name,
-        email,
-        phone || null,
-        company_name,
-        role || null,
-        finalFitScore,
-        finalIntentScore,
-        outreach_status || 'pending',
-        conversation_log || null
-      ]
-    });
-
-    await db.execute(`UPDATE kpi_metrics SET value = value + 1, updated_at = CURRENT_TIMESTAMP WHERE metric_key = 'leads_processed'`);
-    await db.execute(`UPDATE kpi_metrics SET value = value + 1.5, updated_at = CURRENT_TIMESTAMP WHERE metric_key = 'hours_saved'`);
-
-    return res.status(201).json({ success: true, message: 'AI SDR Lead ingested successfully', id });
-  } catch (err: any) {
-    console.error(`[Simpler Life Backend] POST /api/ai-sdr error:`, err);
-    return res.status(500).json({ success: false, error: 'Internal Server Error', details: [err.message] });
-  }
-});
-
 // 2. Mortgage Lead Qualification Endpoint
 app.post('/api/mortgage-qualify', async (req, res) => {
   const { applicant_name, email, phone, property_zip, property_type, estimated_price, loan_amount, employment_type, down_payment_saved, credit_score_range, assigned_loan_officer, status } = req.body;
