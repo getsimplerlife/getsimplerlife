@@ -226,6 +226,40 @@ const VERTICALS = [
       "API Key storage in secure, encrypted cloud KMS stores (never in code scripts).",
       "HMAC SHA-256 cryptographic signatures sealing operational records to secure a tamper-proof audit log."
     ]
+  },
+  {
+    id: 19,
+    title: "Sales Operations Audit",
+    icon: "💰",
+    color: "bg-emerald-50 text-emerald-700 border-emerald-100",
+    description: "Audits lead routing, CRM hygiene, and deal integrity to identify uncontacted leads, dead pipeline, and lost attribution.",
+    points: [
+      "Automated lead routing logic and multi-channel response triggers.",
+      "CRM hygiene scans to detect duplicate opportunities and stale records.",
+      "Deal stage integrity analysis to ensure accurate pipeline reporting.",
+      "Follow-up compliance monitoring and automated SDR activity logging.",
+      "AI sales assistant usage audits and prompt registry optimization.",
+      "Automated proposal generation and multi-tier quote approval workflows.",
+      "Proactive detection of uncontacted leads and dead pipeline segments.",
+      "Attribution mapping and marketing-to-sales handoff synchronization."
+    ]
+  },
+  {
+    id: 20,
+    title: "Marketing Systems Audit",
+    icon: "📣",
+    color: "bg-blue-50 text-blue-700 border-blue-100",
+    description: "Audits attribution, tracking pixels, and campaign reporting to identify broken tracking, duplicate spend, and untracked conversions.",
+    points: [
+      "End-to-end attribution modeling and multi-touch tracking validation.",
+      "Tracking pixel health checks (Meta, Google, LinkedIn, TikTok) and event firing.",
+      "Server-side Conversion API (CAPI) implementation and signal deduplication.",
+      "Lead magnet delivery automation and conversion rate optimization.",
+      "Unified campaign reporting dashboards and real-time spend tracking.",
+      "UTM governance and naming convention enforcement for clean data.",
+      "Ad spend leakage detection and low-performing placement pruning.",
+      "Disconnected form detection and webhook delivery verification."
+    ]
   }
 ]
 
@@ -254,10 +288,10 @@ export default function Checklist() {
             Our Diagnostic Standard
           </span>
           <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight sm:text-4xl">
-            The 18-Vertical Master Operational &amp; Automation Framework
+            The 20-Vertical Master Operational &amp; Automation Framework
           </h1>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-500">
-            We evaluate client operations across 18 specialized pillars. Expand any category below to inspect our rigid, high-standard technical checklists.
+            We evaluate client operations across 20 specialized pillars. Expand any category below to inspect our rigid, high-standard technical checklists.
           </p>
           
           <div className="mt-6 flex justify-center gap-4">
@@ -355,10 +389,10 @@ export default function Checklist() {
               24/7 Instant Intake Active
             </span>
             <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight mb-4">
-              Inspect your business using this 18-Vertical Audit framework
+              Inspect your business using this 20-Vertical Audit framework
             </h2>
             <p className="text-indigo-100 mb-6 leading-relaxed">
-              Book our <strong>Asynchronous Automation Audit Blueprint</strong>. For just $99.00, our senior integration architects analyze your entire operational footprint against all 18 verticals and compile a comprehensive 20-page strategic roadmap. 
+              Book our <strong>Asynchronous Automation Audit Blueprint</strong>. For just $99.00, our senior integration architects analyze your entire operational footprint against all 20 verticals and compile a comprehensive 20-page strategic roadmap. 
             </p>
             <div className="bg-indigo-950/40 p-4 rounded-xl border border-indigo-700/50 mb-6 flex items-start gap-3">
               <BadgeCheck className="h-6 w-6 text-emerald-400 shrink-0 mt-0.5" />
