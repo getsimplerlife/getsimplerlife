@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ChevronDown, ChevronUp, CheckCircle, AlertTriangle, Play, FileText, ArrowRight, Activity, ShieldAlert, BadgeCheck } from 'lucide-react'
 
-// Define the 21 verticals and their checkpoints
+// Define the 22 verticals and their checkpoints
 const VERTICALS = [
   {
     id: 1,
@@ -280,6 +280,23 @@ const VERTICALS = [
       "Duplicate payment detection algorithms scanning multi-vendor invoice history.",
       "Subscription creep audits flagging inactive software seats and auto-renewals."
     ]
+  },
+  {
+    id: 22,
+    title: "Cybersecurity & Access Audit",
+    icon: "🛡️",
+    color: "bg-red-50 text-red-700 border-red-100",
+    description: "Evaluates multi-factor authentication (MFA) adoption, privileged access controls, exposed credential monitoring, and endpoint compliance.",
+    points: [
+      "MFA adoption tracking and enforcement across all corporate and client-facing assets.",
+      "Privileged account auditing ensuring administrative controls follow least-privilege principles.",
+      "Exposed credential scanning to detect leaked company passwords on the dark web.",
+      "Dormant user purging workflows to automatically disable unused or stale accounts.",
+      "Centralized SaaS access management with unified permission levels and onboarding/offboarding.",
+      "Third-party vendor risk assessments and security compliance verification.",
+      "Endpoint compliance monitoring for device health, encryption, and patch status.",
+      "Tamper-proof audit logging of all access requests and permission changes."
+    ]
   }
 ]
 
@@ -308,10 +325,10 @@ export default function Checklist() {
             Our Diagnostic Standard
           </span>
           <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight sm:text-4xl">
-            The 21-Vertical Master Operational &amp; Automation Framework
+            The 22-Vertical Master Operational &amp; Automation Framework
           </h1>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-500">
-            We evaluate client operations across 21 specialized pillars. Expand any category below to inspect our rigid, high-standard technical checklists.
+            We evaluate client operations across 22 specialized pillars. Expand any category below to inspect our rigid, high-standard technical checklists.
           </p>
           
           <div className="mt-6 flex justify-center gap-4">
@@ -409,10 +426,10 @@ export default function Checklist() {
               24/7 Instant Intake Active
             </span>
             <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight mb-4">
-              Inspect your business using this 21-Vertical Audit framework
+              Inspect your business using this 22-Vertical Audit framework
             </h2>
             <p className="text-indigo-100 mb-6 leading-relaxed">
-              Book our <strong>Asynchronous Automation Audit Blueprint</strong>. For just $99.00, our senior integration architects analyze your entire operational footprint against all 21 verticals and compile a comprehensive 20-page strategic roadmap. 
+              Book our <strong>Asynchronous Automation Audit Blueprint</strong>. For just $99.00, our senior integration architects analyze your entire operational footprint against all 22 verticals and compile a comprehensive 20-page strategic roadmap. 
             </p>
             <div className="bg-indigo-950/40 p-4 rounded-xl border border-indigo-700/50 mb-6 flex items-start gap-3">
               <BadgeCheck className="h-6 w-6 text-emerald-400 shrink-0 mt-0.5" />
