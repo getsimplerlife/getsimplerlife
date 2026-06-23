@@ -1,5 +1,5 @@
 import { Outlet, Link } from 'react-router-dom'
-import { Activity, ChevronDown, Shield, HardHat, FileText, UserPlus, Package, ClipboardCheck, Bot, Home as HomeIcon, Scale, FileSearch, Sparkles, Zap, Globe, Server } from 'lucide-react'
+import { Activity, ChevronDown, Shield, HardHat, FileText, UserPlus, Package, ClipboardCheck, Bot, Home as HomeIcon, Scale, FileSearch, Sparkles, Zap, Globe, Server, ArrowRight } from 'lucide-react'
 import { useState, useEffect, useRef } from 'react'
 import PromoBanner from './PromoBanner'
 
@@ -45,56 +45,88 @@ export default function Layout() {
               {solutionsOpen && (
                 <div 
                   onClick={() => setSolutionsOpen(false)}
-                  className="absolute top-full left-0 mt-2 w-72 bg-white border border-gray-100 rounded-xl shadow-xl py-2 z-50"
+                  className="absolute top-full left-0 mt-2 w-80 bg-white border border-gray-100 rounded-2xl shadow-2xl py-3 z-50 animate-in fade-in slide-in-from-top-2 duration-200"
                 >
-                  <div className="px-4 py-1.5 text-xs font-semibold text-gray-400 uppercase tracking-wider">Sales &amp; Marketing</div>
-                  <Link to="/solutions/insurance-quotes" className="flex items-center gap-3 px-4 py-2.5 hover:bg-indigo-50 text-gray-700 hover:text-primary transition text-sm">
-                    <Shield className="h-4 w-4 text-primary" /> Insurance Quote Engine
-                  </Link>
-                  <div className="border-t border-gray-100 my-1" />
-                  <div className="px-4 py-1.5 text-xs font-semibold text-gray-400 uppercase tracking-wider">Financial</div>
-                  <Link to="/solutions/mortgage-leads" className="flex items-center gap-3 px-4 py-2.5 hover:bg-emerald-50 text-gray-700 hover:text-emerald-700 transition text-sm">
-                    <HomeIcon className="h-4 w-4 text-emerald-600" /> Mortgage Lead Qualification
-                  </Link>
-                  <Link to="/solutions/construction-bids" className="flex items-center gap-3 px-4 py-2.5 hover:bg-amber-50 text-gray-700 hover:text-amber-700 transition text-sm">
-                    <HardHat className="h-4 w-4 text-amber-600" /> Construction Bids
-                  </Link>
-                  <div className="border-t border-gray-100 my-1" />
-                  <div className="px-4 py-1.5 text-xs font-semibold text-gray-400 uppercase tracking-wider">Legal</div>
-                  <Link to="/solutions/legal-intake" className="flex items-center gap-3 px-4 py-2.5 hover:bg-violet-50 text-gray-700 hover:text-violet-700 transition text-sm">
-                    <Scale className="h-4 w-4 text-violet-600" /> Legal Intake Automation
-                  </Link>
-                  <Link to="/solutions/contract-review" className="flex items-center gap-3 px-4 py-2.5 hover:bg-amber-50 text-gray-700 hover:text-amber-700 transition text-sm">
-                    <FileSearch className="h-4 w-4 text-amber-600" /> Contract Review Workflows
-                  </Link>
-                  <div className="border-t border-gray-100 my-1" />
-                  <div className="px-4 py-1.5 text-xs font-semibold text-gray-400 uppercase tracking-wider">Operations</div>
-                  <Link to="/solutions/proposal-writing" className="flex items-center gap-3 px-4 py-2.5 hover:bg-violet-50 text-gray-700 hover:text-violet-700 transition text-sm">
-                    <FileText className="h-4 w-4 text-violet-600" /> Proposal Writing
-                  </Link>
-                  <Link to="/solutions/vendor-onboarding" className="flex items-center gap-3 px-4 py-2.5 hover:bg-cyan-50 text-gray-700 hover:text-cyan-700 transition text-sm">
-                    <UserPlus className="h-4 w-4 text-cyan-600" /> Vendor Onboarding
-                  </Link>
-                  <Link to="/solutions/procurement-automation" className="flex items-center gap-3 px-4 py-2.5 hover:bg-orange-50 text-gray-700 hover:text-orange-700 transition text-sm">
-                    <Package className="h-4 w-4 text-orange-600" /> Procurement Automation
-                  </Link>
-                  <Link to="/solutions/compliance-dashboard" className="flex items-center gap-3 px-4 py-2.5 hover:bg-emerald-50 text-gray-700 hover:text-emerald-700 transition text-sm">
-                    <ClipboardCheck className="h-4 w-4 text-emerald-600" /> Compliance Dashboard
-                  </Link>
-                  <div className="border-t border-gray-100 my-1" />
-                  <div className="px-4 py-1.5 text-xs font-semibold text-gray-400 uppercase tracking-wider">Diagnostics</div>
-                  <Link to="/solutions/configurator" className="flex items-center gap-3 px-4 py-2.5 hover:bg-indigo-50 text-gray-700 hover:text-primary transition text-sm">
-                    <Zap className="h-4 w-4 text-primary" /> Workflow Configurator
-                  </Link>
-                  <Link to="/checklist" className="flex items-center gap-3 px-4 py-2.5 hover:bg-indigo-50 text-gray-700 hover:text-primary transition text-sm font-semibold bg-indigo-50/20">
-                    <Sparkles className="h-4 w-4 text-indigo-600" /> 18-Vertical Master Audit
-                  </Link>
-                  <Link to="/scanner" className="flex items-center gap-3 px-4 py-2.5 hover:bg-indigo-50 text-gray-700 hover:text-primary transition text-sm">
-                    <Globe className="h-4 w-4 text-sky-600" /> Website Automation Scanner
-                  </Link>
-                  <Link to="/sandbox" className="flex items-center gap-3 px-4 py-2.5 hover:bg-indigo-50 text-gray-700 hover:text-primary transition text-sm">
-                    <Server className="h-4 w-4 text-purple-600" /> Webhook Playground
-                  </Link>
+                  <div className="px-5 py-2 text-[10px] font-black text-indigo-400 uppercase tracking-[0.2em] flex items-center justify-between">
+                    <span>24/7 Asynchronous Suite</span>
+                    <span className="flex h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  </div>
+                  
+                  <div className="px-2 space-y-1">
+                    <div className="px-3 py-1.5 text-[10px] font-bold text-gray-400 uppercase tracking-widest">Sales &amp; Marketing</div>
+                    <Link to="/solutions/insurance-quotes" className="group flex items-center justify-between px-3 py-2 rounded-xl hover:bg-indigo-50 transition">
+                      <div className="flex items-center gap-3">
+                        <Shield className="h-4 w-4 text-primary" />
+                        <span className="text-xs font-bold text-gray-700 group-hover:text-primary">Insurance Quote Engine</span>
+                      </div>
+                      <span className="text-[9px] font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-md">LIVE</span>
+                    </Link>
+                    
+                    <div className="px-3 py-1.5 text-[10px] font-bold text-gray-400 uppercase tracking-widest pt-2">Financial</div>
+                    <Link to="/solutions/mortgage-leads" className="group flex items-center justify-between px-3 py-2 rounded-xl hover:bg-emerald-50 transition">
+                      <div className="flex items-center gap-3">
+                        <HomeIcon className="h-4 w-4 text-emerald-600" />
+                        <span className="text-xs font-bold text-gray-700 group-hover:text-emerald-700">Mortgage Qualification</span>
+                      </div>
+                      <span className="text-[9px] font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-md">24/7</span>
+                    </Link>
+                    <Link to="/solutions/construction-bids" className="group flex items-center justify-between px-3 py-2 rounded-xl hover:bg-amber-50 transition">
+                      <div className="flex items-center gap-3">
+                        <HardHat className="h-4 w-4 text-amber-600" />
+                        <span className="text-xs font-bold text-gray-700 group-hover:text-amber-700">Construction Bids</span>
+                      </div>
+                    </Link>
+                    
+                    <div className="px-3 py-1.5 text-[10px] font-bold text-gray-400 uppercase tracking-widest pt-2">Legal</div>
+                    <Link to="/solutions/legal-intake" className="group flex items-center justify-between px-3 py-2 rounded-xl hover:bg-violet-50 transition">
+                      <div className="flex items-center gap-3">
+                        <Scale className="h-4 w-4 text-violet-600" />
+                        <span className="text-xs font-bold text-gray-700 group-hover:text-violet-700">Legal Intake</span>
+                      </div>
+                    </Link>
+                    <Link to="/solutions/contract-review" className="group flex items-center justify-between px-3 py-2 rounded-xl hover:bg-amber-50 transition">
+                      <div className="flex items-center gap-3">
+                        <FileSearch className="h-4 w-4 text-amber-600" />
+                        <span className="text-xs font-bold text-gray-700 group-hover:text-amber-700">Contract Review</span>
+                      </div>
+                    </Link>
+                    
+                    <div className="px-3 py-1.5 text-[10px] font-bold text-gray-400 uppercase tracking-widest pt-2">Operations</div>
+                    <Link to="/solutions/proposal-writing" className="group flex items-center justify-between px-3 py-2 rounded-xl hover:bg-violet-50 transition">
+                      <div className="flex items-center gap-3">
+                        <FileText className="h-4 w-4 text-violet-600" />
+                        <span className="text-xs font-bold text-gray-700 group-hover:text-violet-700">Proposal Writing</span>
+                      </div>
+                    </Link>
+                    <Link to="/solutions/vendor-onboarding" className="group flex items-center justify-between px-3 py-2 rounded-xl hover:bg-cyan-50 transition">
+                      <div className="flex items-center gap-3">
+                        <UserPlus className="h-4 w-4 text-cyan-600" />
+                        <span className="text-xs font-bold text-gray-700 group-hover:text-cyan-700">Vendor Onboarding</span>
+                      </div>
+                    </Link>
+                    <Link to="/solutions/procurement-automation" className="group flex items-center justify-between px-3 py-2 rounded-xl hover:bg-orange-50 transition">
+                      <div className="flex items-center gap-3">
+                        <Package className="h-4 w-4 text-orange-600" />
+                        <span className="text-xs font-bold text-gray-700 group-hover:text-orange-700">Procurement</span>
+                      </div>
+                    </Link>
+                    <Link to="/solutions/compliance-dashboard" className="group flex items-center justify-between px-3 py-2 rounded-xl hover:bg-emerald-50 transition">
+                      <div className="flex items-center gap-3">
+                        <ClipboardCheck className="h-4 w-4 text-emerald-600" />
+                        <span className="text-xs font-bold text-gray-700 group-hover:text-emerald-700">Compliance Dashboard</span>
+                      </div>
+                    </Link>
+                  </div>
+
+                  <div className="mt-3 mx-2 p-3 bg-indigo-50 rounded-xl border border-indigo-100">
+                    <Link to="/checklist" className="flex items-center justify-between group">
+                      <div className="flex items-center gap-2">
+                        <Sparkles className="h-4 w-4 text-indigo-600" />
+                        <span className="text-xs font-black text-indigo-900 group-hover:text-primary transition uppercase tracking-tight">18-Vertical Audit</span>
+                      </div>
+                      <ArrowRight className="h-3 w-3 text-indigo-400 group-hover:translate-x-1 transition" />
+                    </Link>
+                  </div>
                 </div>
               )}
             </div>

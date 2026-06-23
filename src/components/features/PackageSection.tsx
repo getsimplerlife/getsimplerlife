@@ -9,7 +9,7 @@ const plans = [
   },
   {
     name: 'Growth', setup: '$3,000', monthly: '$300', popular: true,
-    features: ['Up to 8 workflow automations', 'Everything in Starter', 'CRM integration & data sync', 'Client onboarding automation', 'Priority support (12h response)', 'Monthly optimization review'],
+    features: ['Up to 8 workflow automations', 'Everything in Starter', 'CRM integration & data sync', 'Client onboarding automation', 'Priority support (12h response)', 'Monthly optimization audit'],
     paymentLink: 'https://buy.stripe.com/aFacN5cMM3uz5xQfJq08g04',
     discounted: '$2,400'
   },

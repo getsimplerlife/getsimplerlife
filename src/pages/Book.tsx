@@ -152,7 +152,7 @@ User Notes: ${form.message || 'No additional notes.'}`
             </div>
             <h2 className="text-3xl font-bold text-dark mb-3">Booking Confirmed! 🎉</h2>
             <p className="text-gray-600 mb-6 max-w-md mx-auto">
-              Your asynchronous automation audit is confirmed! Our engineering system has queued your diagnostic report, and your tailored playbook will be delivered on your scheduled date.
+              Your asynchronous automation audit is confirmed! Our engineering system has queued your diagnostic report, and your tailored playbook will be delivered to your inbox in under 24 hours.
             </p>
 
             {/* Meeting Summary Details */}

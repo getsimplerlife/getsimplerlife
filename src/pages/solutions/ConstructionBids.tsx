@@ -378,7 +378,7 @@ export default function ConstructionBids() {
                   </button>
                   <Link to="/book" className="inline-flex items-center justify-center px-6 py-3 bg-amber-600 text-white font-semibold rounded-lg hover:bg-amber-700 transition shadow-md">
                     <Calendar className="mr-2 h-4 w-4" />
-                    Schedule Procore Sync Demo
+                    Get Your 24-Hour Audit
                   </Link>
                 </div>
               </div>

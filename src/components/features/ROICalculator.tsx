@@ -119,7 +119,7 @@ export default function ROICalculator() {
             ) : isHigh ? (
               <span className="text-accent-warm font-semibold">
                 🚨 Whoa — {total}h/week on admin? Let's talk ASAP.{' '}
-                <Link to="/book" className="text-primary underline font-semibold">Schedule your audit →</Link>
+                <Link to="/book" className="text-primary underline font-semibold">Get your 24-hour audit →</Link>
               </span>
             ) : (
               <span>

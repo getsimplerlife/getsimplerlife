@@ -310,7 +310,7 @@ export default function VendorOnboarding() {
                 </button>
                 <Link to="/book" className="inline-flex items-center justify-center px-6 py-3 bg-cyan-600 text-white font-semibold rounded-lg hover:bg-cyan-700 transition shadow-md">
                   <Calendar className="mr-2 h-4 w-4" />
-                  Schedule ERP Integration Demo
+                  Get Your 24-Hour Audit
                 </Link>
               </div>
             </div>

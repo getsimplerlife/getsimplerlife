@@ -40,10 +40,10 @@ export default function Home() {
           {/* Section Header with Premium Navigation Arrows */}
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
             <div className="text-left">
-              <span className="text-xs font-bold text-primary uppercase tracking-wider block mb-2">Interactive Demonstrations</span>
+              <span className="text-xs font-bold text-primary uppercase tracking-wider block mb-2">24/7 Asynchronous Demonstrations</span>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-dark tracking-tight">Explore Our Automation Solutions</h2>
               <p className="text-gray-500 max-w-2xl mt-3 text-sm sm:text-base leading-relaxed">
-                Click any solution to launch a fully simulated interactive workflow. Swipe or use the arrow buttons to explore the entire 9-Vertical Automation Suite.
+                Click any solution to launch a fully simulated interactive workflow. Our engineering system provides 24/7 asynchronous delivery for all audit and implementation roadmaps.
               </p>
             </div>
             
@@ -132,7 +132,7 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-8">
             {[
               { title: 'Lead Routing Booster', desc: 'Connect your website contact forms directly to your sales workflows. Scores leads, assigns reps instantly, and sends automated SMS replies in under 30 seconds.', features: ['Custom Webhook integration', 'Speed-to-lead under 30 seconds', 'Rep notifications via Slack/Discord'] },
-              { title: 'Calendar Scheduling Back', desc: 'Streamline client scheduling with automated calendar booking widgets and reminder triggers. Reclaim hours spent coordinating times and drastically reduce no-shows.', features: ['Cal.com / Calendly embeds', '3-tier SMS/Email reminders', 'Automatic pre-meeting documents'] },
+              { title: 'Scheduling Backends', desc: 'Streamline client scheduling with automated calendar booking widgets and reminder triggers. Reclaim hours spent coordinating times and drastically reduce no-shows.', features: ['Cal.com / Calendly embeds', '3-tier SMS/Email reminders', 'Automatic pre-meeting documents'] },
               { title: 'CRM & Database Sync', desc: 'Seamless real-time synchronization between lead capture channels and CRM/Notion databases via n8n or Make. Eliminate double-entry errors for good.', features: ['Multi-directional syncing', 'Custom field matching', 'Operational logging and alerts'] },
             ].map((svc, i) => (
               <div key={i} className="p-8 border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition text-left bg-gray-50">

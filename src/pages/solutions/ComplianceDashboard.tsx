@@ -237,7 +237,7 @@ export default function ComplianceDashboard() {
 
                 <Link to="/book" className="inline-flex items-center justify-center w-full px-6 py-3 bg-emerald-600 text-white font-semibold rounded-lg hover:bg-emerald-700 transition shadow-md">
                   <Calendar className="mr-2 h-4 w-4" />
-                  Schedule Compliance Review
+                  Get Your 24-Hour Audit
                 </Link>
               </>
             ) : (

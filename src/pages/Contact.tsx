@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { CheckCircle2, Phone, Mail, Building, Send } from 'lucide-react'
+import { CheckCircle2, Phone, Mail, Building, Send, Clock, Sparkles } from 'lucide-react'
 import apiService from '../services/api'
 
 export default function Contact() {
@@ -42,10 +42,10 @@ export default function Contact() {
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
           <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-dark mb-4">
-            Request Your Automation Audit
+            24/7 Asynchronous Automation Diagnostic
           </h1>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Tell us a bit about your business, and our team will map out exactly what workflows you can automate to save 10–30 hours each week.
+          <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+            Our expert system is active 24/7/365. Request your custom diagnostic below and receive your tailored Automation Roadmap & ROI Analysis in under 24 hours—no phone calls or scheduling required.
           </p>
         </div>
 
@@ -53,19 +53,42 @@ export default function Contact() {
           {/* Quick Info */}
           <div className="md:col-span-4 space-y-6">
             <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+              <h3 className="font-bold text-dark mb-4 text-lg">Diagnostic Availability</h3>
+              <div className="space-y-4 text-sm text-gray-600">
+                <div className="flex items-center space-x-3">
+                  <Clock className="h-5 w-5 text-primary" />
+                  <span className="font-semibold text-primary">Instant 24/7/365</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <CheckCircle2 className="h-5 w-5 text-secondary" />
+                  <span>No Scheduling Required</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <Sparkles className="h-5 w-5 text-violet-500" />
+                  <span>24-Hour Delivery Promise</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-br from-primary to-indigo-700 p-6 rounded-2xl text-white shadow-lg">
+              <h3 className="font-bold mb-2 text-lg">Skip the Queue</h3>
+              <p className="text-sm text-indigo-100 mb-4">
+                Secure your priority 24-hour Audit Blueprint for just $99.00 (100% credited back to any build).
+              </p>
+              <a 
+                href="/book" 
+                className="block text-center py-2.5 bg-white text-primary font-bold rounded-xl hover:bg-indigo-50 transition shadow-sm"
+              >
+                Secure Priority Audit
+              </a>
+            </div>
+
+            <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
               <h3 className="font-bold text-dark mb-4 text-lg">Contact Us Directly</h3>
               <div className="space-y-4 text-sm text-gray-600">
                 <div className="flex items-center space-x-3">
                   <Mail className="h-5 w-5 text-primary" />
                   <span>support@simplerlife.io</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <Phone className="h-5 w-5 text-primary" />
-                  <span>+1 (555) 303-FLOW</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <Building className="h-5 w-5 text-primary" />
-                  <span>Denver, CO | Remote</span>
                 </div>
               </div>
             </div>
@@ -76,9 +99,9 @@ export default function Contact() {
             {status === 'success' ? (
               <div className="text-center py-8">
                 <CheckCircle2 className="h-16 w-16 text-secondary mx-auto mb-4" />
-                <h3 className="text-2xl font-bold text-dark mb-2">Inquiry Received Successfully!</h3>
+                <h3 className="text-2xl font-bold text-dark mb-2">Request Queued Successfully!</h3>
                 <p className="text-gray-600 mb-6">
-                  Thanks for reaching out! Our automation assistant and scheduling algorithms have processed your entry. We will be in touch within 24 hours to schedule your audit.
+                  Thanks for reaching out! Our AI Expert System has received your operational data. Your customized Automation Roadmap is being compiled asynchronously and will be delivered to your inbox in under 24 hours.
                 </p>
                 <button
                   onClick={() => setStatus('idle')}

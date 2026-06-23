@@ -722,14 +722,13 @@ export default function Dashboard() {
                 </div>
               </div>
             ) : (
-              /* NEW: Solutions Suite 🚀 */
               <div className="bg-white border border-gray-100 rounded-3xl shadow-sm p-8">
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-8">
                   <div className="text-left">
-                    <span className="text-xs font-bold text-primary uppercase tracking-wider block mb-2">9-Vertical Automation Suite</span>
-                    <h2 className="text-2xl font-black text-dark tracking-tight">Active Solution Pathways</h2>
+                    <span className="text-xs font-bold text-primary uppercase tracking-wider block mb-2">24/7 Asynchronous Fulfillment</span>
+                    <h2 className="text-2xl font-black text-dark tracking-tight">Solutions Suite 🚀</h2>
                     <p className="text-gray-500 mt-2 text-xs leading-relaxed max-w-md">
-                      Explore our premium automation blueprints. Each pathway is designed to eliminate specific manual bottlenecks in your industry.
+                      Explore our premium automation blueprints. Each pathway is designed for 100% hands-off asynchronous delivery.
                     </p>
                   </div>
                   

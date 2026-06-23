@@ -316,7 +316,7 @@ export default function ProposalWriting() {
                   </button>
                   <Link to="/book" className="inline-flex items-center justify-center px-6 py-3 bg-violet-600 text-white font-semibold rounded-lg hover:bg-violet-700 transition shadow-md">
                     <Calendar className="mr-2 h-4 w-4" />
-                    Schedule Delivery Review
+                    Get Your 24-Hour Audit
                   </Link>
                 </div>
               </div>

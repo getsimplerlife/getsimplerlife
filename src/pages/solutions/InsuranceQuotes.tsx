@@ -409,7 +409,7 @@ export default function InsuranceQuotes() {
                   className="inline-flex items-center justify-center px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition shadow-md"
                 >
                   <Calendar className="mr-2 h-4 w-4" />
-                  Schedule Policy Review
+                  Get Your 24-Hour Audit
                 </Link>
               </div>
             </div>
