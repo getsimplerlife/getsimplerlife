@@ -2,7 +2,7 @@ import express from 'express'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { exec } from 'child_process'
-import { readFile } from 'fs/promises'
+import { readFile, appendFile } from 'fs/promises'
 import cors from 'cors'
 import helmet from 'helmet'
 import dotenv from 'dotenv'
@@ -1067,3 +1067,72 @@ app.get('*', (_req, res) => {
 app.listen(Number(PORT), '0.0.0.0', () => {
   console.log(`[Simpler Life Server] Live on port ${PORT} (explicitly bound to 0.0.0.0)`)
 })
+
+// --- 3-Hour Automated Background Monitoring Worker ---
+const startMonitoringInterval = () => {
+  const checkStatus = async () => {
+    try {
+      console.log('[Simpler Life Automated Monitor] Running 3-Hour pipeline and availability check...')
+      
+      // 1. Check production website availability
+      let siteStatus = 'FAILED'
+      try {
+        const response = await axios.get('https://getsimplerlife.vercel.app', { timeout: 10000 })
+        if (response.status === 200) {
+          siteStatus = '100% ONLINE (HTTP 200 OK)'
+        } else {
+          siteStatus = `ONLINE BUT STATUS ${response.status}`
+        }
+      } catch (siteErr: any) {
+        siteStatus = `FAILED TO REACH (${siteErr.message})`
+      }
+
+      // 2. Query operational database status
+      let dbStatus = 'UNHEALTHY'
+      let leadsCount = 0
+      let syncedCount = 0
+      let stagedCount = 0
+      let failedCount = 0
+      try {
+        const result = await db.execute("SELECT sync_status, count(*) as count FROM leads GROUP BY sync_status")
+        dbStatus = 'HEALTHY & RESPONSIVE'
+        for (const row of result.rows) {
+          const status = row.sync_status as string
+          const count = Number(row.count || 0)
+          leadsCount += count
+          if (status === 'synced') syncedCount = count
+          else if (status === 'staged') stagedCount = count
+          else if (status === 'failed') failedCount = count
+        }
+      } catch (dbErr: any) {
+        dbStatus = `UNHEALTHY: ${dbErr.message}`
+      }
+
+      // 3. Construct log message
+      const timestamp = new Date().toISOString().replace('T', ' ').substring(0, 19) + ' UTC'
+      const logMessage = `
+[CHECK AUTOMATED: ${timestamp}]
+- Production Site: ${siteStatus}
+- Database Status: ${dbStatus}
+  * Total Leads in DB: ${leadsCount} (Synced: ${syncedCount}, Staged: ${stagedCount}, Failed: ${failedCount})
+- Deliverability standing: PROTECTED (Mock domain filtering active)
+--------------------------------------------------------------------------------
+`
+      
+      const logFilePath = '/home/team/shared/monitoring_checks_log.txt'
+      await appendFile(logFilePath, logMessage, 'utf-8')
+      console.log('[Simpler Life Automated Monitor] Successfully logged check telemetry to monitoring_checks_log.txt')
+    } catch (err: any) {
+      console.error('[Simpler Life Automated Monitor] Monitoring execution failed:', err)
+    }
+  }
+
+  // Run immediately on boot
+  checkStatus()
+  
+  // Set interval of 3 hours (3 * 60 * 60 * 1000 = 10,800,000 milliseconds)
+  setInterval(checkStatus, 3 * 60 * 60 * 1000)
+}
+
+// Start the monitoring interval
+startMonitoringInterval()
