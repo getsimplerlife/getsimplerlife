@@ -52,6 +52,21 @@ const signPayload = (payload: any, secret: string): string => {
   return 'sha256=' + crypto.createHmac('sha256', secret).update(data).digest('hex');
 };
 
+// SES Protection: Mock Domain Filter
+const MOCK_DOMAINS = [
+  'example.com',
+  'servicecompany.com',
+  'dentrix.org',
+  'simplerlife-qa-test.com',
+  'test.com'
+];
+
+const isMockEmail = (email: string): boolean => {
+  if (!email || !email.includes('@')) return false;
+  const domain = email.split('@')[1].toLowerCase();
+  return MOCK_DOMAINS.includes(domain);
+};
+
 // JWT Helper Functions
 export const generateToken = (payload: any): string => {
   const header = { alg: "HS256", typ: "JWT" };
@@ -351,6 +366,14 @@ app.post('/api/leads', async (req, res) => {
     });
   }
 
+  if (isMockEmail(email)) {
+    return res.status(400).json({
+      success: false,
+      error: 'Validation Error',
+      details: ['Mock email domains are not accepted for production ingest.']
+    });
+  }
+
   // Calculate score based on lead details
   let score = 0;
   if (needs && Array.isArray(needs)) {
@@ -487,6 +510,9 @@ app.post('/api/mortgage-qualify', async (req, res) => {
   if (!email || typeof email !== 'string' || !emailRegex.test(email)) {
     return res.status(400).json({ success: false, error: 'Validation Error', details: ['A valid email is required'] });
   }
+  if (isMockEmail(email)) {
+    return res.status(400).json({ success: false, error: 'Validation Error', details: ['Mock email domains are not accepted.'] });
+  }
   if (!property_zip || typeof property_zip !== 'string') {
     return res.status(400).json({ success: false, error: 'Validation Error', details: ['property_zip is required'] });
   }
@@ -539,6 +565,9 @@ app.post('/api/legal-intake', async (req, res) => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!email || typeof email !== 'string' || !emailRegex.test(email)) {
     return res.status(400).json({ success: false, error: 'Validation Error', details: ['A valid email is required'] });
+  }
+  if (isMockEmail(email)) {
+    return res.status(400).json({ success: false, error: 'Validation Error', details: ['Mock email domains are not accepted.'] });
   }
 
   const id = `leg_${crypto.randomUUID()}`;
