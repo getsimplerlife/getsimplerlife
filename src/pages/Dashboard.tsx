@@ -540,7 +540,7 @@ export default function Dashboard() {
                 : 'text-gray-400 hover:text-gray-600'
             }`}
           >
-            18-Vertical Strategic Audit Vault 📋
+            22-Vertical Strategic Audit Vault 📋
           </button>
           <button
             onClick={() => setActiveTab('solutions')}
@@ -670,16 +670,16 @@ export default function Dashboard() {
                 </div>
               </>
             ) : activeTab === 'roadmap' ? (
-              /* UPGRADE 2: Interactive 18-Vertical Roadmap Vault View */
+              /* UPGRADE 2: Interactive 22-Vertical Roadmap Vault View */
               <div className="bg-white border border-gray-100 rounded-3xl shadow-sm p-8 space-y-6">
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     <div>
                       <h3 className="font-extrabold text-dark text-xl tracking-tight">Diagnostic Roadmap Vault</h3>
-                      <p className="text-xs text-gray-500 mt-1">18-Vertical Master Operational &amp; Security Evaluation results.</p>
+                      <p className="text-xs text-gray-500 mt-1">22-Vertical Master Operational &amp; Security Evaluation results.</p>
                     </div>
                     <div className="text-right">
-                      <span className="text-2xl font-black text-indigo-600 block">16 / 18</span>
+                      <span className="text-2xl font-black text-indigo-600 block">20 / 22</span>
                       <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Pillars Verified</span>
                     </div>
                   </div>

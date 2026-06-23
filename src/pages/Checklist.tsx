@@ -372,6 +372,11 @@ export default function Checklist() {
                             Modern Core
                           </span>
                         )}
+                        {vertical.id === 22 && (
+                          <span className="bg-orange-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wide">
+                            Security Focus
+                          </span>
+                        )}
                       </div>
                       <h3 className="text-lg font-bold text-gray-900 leading-tight mt-0.5">
                         {vertical.title}
@@ -429,7 +434,7 @@ export default function Checklist() {
               Inspect your business using this 22-Vertical Audit framework
             </h2>
             <p className="text-indigo-100 mb-6 leading-relaxed">
-              Book our <strong>Asynchronous Automation Audit Blueprint</strong>. For just $99.00, our senior integration architects analyze your entire operational footprint against all 22 verticals and compile a comprehensive 20-page strategic roadmap. 
+              Book our <strong>Asynchronous Automation Audit Blueprint</strong>. For just $99.00, our senior integration architects analyze your entire operational footprint against all 22 verticals and compile a comprehensive 22-page strategic roadmap. 
             </p>
             <div className="bg-indigo-950/40 p-4 rounded-xl border border-indigo-700/50 mb-6 flex items-start gap-3">
               <BadgeCheck className="h-6 w-6 text-emerald-400 shrink-0 mt-0.5" />

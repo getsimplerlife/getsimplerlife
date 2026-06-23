@@ -1,0 +1,22 @@
+
+> simpler-life-agency@1.0.0 build
+> npm run build:frontend
+
+
+> simpler-life-agency@1.0.0 build:frontend
+> tsc && vite build
+
+vite v5.4.21 building for production...
+transforming...
+✓ 1590 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.89 kB │ gzip:   0.51 kB
+dist/assets/index-DjxZCWLW.css   59.46 kB │ gzip:   9.67 kB
+dist/assets/index-Cmxt1TWp.js   560.08 kB │ gzip: 152.03 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 5.59s
