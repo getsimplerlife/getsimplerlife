@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ChevronDown, ChevronUp, CheckCircle, AlertTriangle, Play, FileText, ArrowRight, Activity, ShieldAlert, BadgeCheck } from 'lucide-react'
 
-// Define the 18 verticals and their checkpoints
+// Define the 21 verticals and their checkpoints
 const VERTICALS = [
   {
     id: 1,
@@ -258,7 +258,27 @@ const VERTICALS = [
       "Unified campaign reporting dashboards and real-time spend tracking.",
       "UTM governance and naming convention enforcement for clean data.",
       "Ad spend leakage detection and low-performing placement pruning.",
-      "Disconnected form detection and webhook delivery verification."
+      "Disconnected form detection and webhook delivery verification.",
+      "Email deliverability and DNS authentication (SPF, DKIM, DMARC) for sending reputation.",
+      "Audience list hygiene, bounce scrubbing, and automated ad platform custom audience refresh.",
+      "Marketing automation trigger reliability monitoring for behavioral follow-up sequences."
+    ]
+  },
+  {
+    id: 21,
+    title: "Finance Operations Audit",
+    icon: "💳",
+    color: "bg-amber-50 text-amber-700 border-amber-100",
+    description: "Audits cash reporting, AP/AR synchronization, and spend control to identify duplicate payments, subscription creep, and revenue recognition gaps.",
+    points: [
+      "Automated daily cash position reporting across all bank accounts and gateways.",
+      "Real-time synchronization between AP/AR ledgers and project management milestones.",
+      "Automated revenue recognition rules based on multi-stage fulfillment data.",
+      "Forecasting integrity checks using historical run-rate and active pipeline telemetry.",
+      "Digital procurement approval workflows with automated multi-tier limit triggers.",
+      "Automated spend control monitoring for real-time shadow SaaS detection.",
+      "Duplicate payment detection algorithms scanning multi-vendor invoice history.",
+      "Subscription creep audits flagging inactive software seats and auto-renewals."
     ]
   }
 ]
@@ -288,10 +308,10 @@ export default function Checklist() {
             Our Diagnostic Standard
           </span>
           <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight sm:text-4xl">
-            The 20-Vertical Master Operational &amp; Automation Framework
+            The 21-Vertical Master Operational &amp; Automation Framework
           </h1>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-500">
-            We evaluate client operations across 20 specialized pillars. Expand any category below to inspect our rigid, high-standard technical checklists.
+            We evaluate client operations across 21 specialized pillars. Expand any category below to inspect our rigid, high-standard technical checklists.
           </p>
           
           <div className="mt-6 flex justify-center gap-4">
@@ -389,10 +409,10 @@ export default function Checklist() {
               24/7 Instant Intake Active
             </span>
             <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight mb-4">
-              Inspect your business using this 20-Vertical Audit framework
+              Inspect your business using this 21-Vertical Audit framework
             </h2>
             <p className="text-indigo-100 mb-6 leading-relaxed">
-              Book our <strong>Asynchronous Automation Audit Blueprint</strong>. For just $99.00, our senior integration architects analyze your entire operational footprint against all 20 verticals and compile a comprehensive 20-page strategic roadmap. 
+              Book our <strong>Asynchronous Automation Audit Blueprint</strong>. For just $99.00, our senior integration architects analyze your entire operational footprint against all 21 verticals and compile a comprehensive 20-page strategic roadmap. 
             </p>
             <div className="bg-indigo-950/40 p-4 rounded-xl border border-indigo-700/50 mb-6 flex items-start gap-3">
               <BadgeCheck className="h-6 w-6 text-emerald-400 shrink-0 mt-0.5" />
