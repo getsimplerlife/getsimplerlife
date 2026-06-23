@@ -540,7 +540,7 @@ export default function Dashboard() {
                 : 'text-gray-400 hover:text-gray-600'
             }`}
           >
-            22-Vertical Strategic Audit Vault 📋
+            23-Vertical Strategic Audit Vault 📋
           </button>
           <button
             onClick={() => setActiveTab('solutions')}
@@ -670,16 +670,16 @@ export default function Dashboard() {
                 </div>
               </>
             ) : activeTab === 'roadmap' ? (
-              /* UPGRADE 2: Interactive 22-Vertical Roadmap Vault View */
+              /* UPGRADE 2: Interactive 23-Vertical Roadmap Vault View */
               <div className="bg-white border border-gray-100 rounded-3xl shadow-sm p-8 space-y-6">
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     <div>
                       <h3 className="font-extrabold text-dark text-xl tracking-tight">Diagnostic Roadmap Vault</h3>
-                      <p className="text-xs text-gray-500 mt-1">22-Vertical Master Operational &amp; Security Evaluation results.</p>
+                      <p className="text-xs text-gray-500 mt-1">23-Vertical Master Operational &amp; Security Evaluation results.</p>
                     </div>
                     <div className="text-right">
-                      <span className="text-2xl font-black text-indigo-600 block">20 / 22</span>
+                      <span className="text-2xl font-black text-indigo-600 block">23 / 23</span>
                       <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Pillars Verified</span>
                     </div>
                   </div>
@@ -698,12 +698,20 @@ export default function Dashboard() {
 
                 <div className="grid gap-4">
                   {[
-                    { nr: 1, name: "Human Resources (HR)", spec: "Automated onboarding pipeline & shade IT tracking", score: "95%", desc: "Automate user setup across all company SaaS applications, immediately revoke access logs on user offboarding to detect shadow IT." },
+                    { nr: 1, name: "Human Resources (HR)", spec: "Automated onboarding pipeline & shadow IT tracking", score: "95%", desc: "Automate user setup across all company SaaS applications, immediately revoke access logs on user offboarding to detect shadow IT." },
                     { nr: 2, name: "Technical Support Dispatch", spec: "Urgent dispatch SLA alerts & API secret rotation", score: "92%", desc: "Ditch manual text dispatching. Ingest tickets from ServiceTitan and ping tech mobile phones with route files on a 4-hour SLA alert." },
                     { nr: 3, name: "Customer Service Hub", spec: "PII scrubbing, automated follow-ups & AI guardrails", score: "94%", desc: "Scrub patient/client PII securely, auto-dispatch customer feedback dispatches via Stripe, and run AI guardrails on outgoing texts." },
+                    { nr: 5, name: "Program Management", spec: "KPI auto-compilation & burn-rate tracking", score: "88%", desc: "Directly compile program-level KPI dashboards across team boards and update budget burn-rate calculators in real-time." },
                     { nr: 6, name: "Administrative Assistance", spec: "Calendar overlapping block & OCR invoice parsing", score: "90%", desc: "Synchronize multiple booking calendars, inject custom buffer periods, and use AI OCR to parse business receipts instantly." },
+                    { nr: 10, name: "Data Entry & Enrichment", spec: "Input validation regex & lead auto-enrichment", score: "91%", desc: "Enforce strict validation regex on all input fields and automatically enrich lead profiles using LinkedIn and Crunchbase APIs." },
                     { nr: 13, name: "Invoice Ledger Integration", spec: "Three-way ledger matching & fraud detection", score: "98%", desc: "Perform instant matches between POs, physical receipts, and banking ledgers, and secure logs with custom cryptographic signatures." },
-                    { nr: 18, name: "AI Infrastructure & Auditing", spec: "HMAC cryptographically sealed logs", score: "99%", desc: "Log every single webhook and database trigger securely, and protect all communication lines with HMAC-sealed cryptographic audit ledgers." }
+                    { nr: 15, name: "Appointment Scheduling", spec: "DST offset correction & focal buffer blocks", score: "89%", desc: "Automatically adjust for Daylight Savings transitions and inject focus hours between adjacent bookings to prevent scheduling drift." },
+                    { nr: 18, name: "AI Infrastructure & Auditing", spec: "HMAC cryptographically sealed logs", score: "99%", desc: "Log every single webhook and database trigger securely, and protect all communication lines with HMAC-sealed cryptographic audit ledgers." },
+                    { nr: 19, name: "Sales Operations Audit", spec: "CRM hygiene, lead routing & SDR activity logs", score: "96%", desc: "Automate lead scoring and routing, detect duplicate CRM records, and log all outbound SDR activity automatically." },
+                    { nr: 20, name: "Marketing Systems Audit", spec: "Pixel health, UTM governance & CAPI sync", score: "94%", desc: "Monitor tracking pixel health, enforce UTM naming conventions, and implement server-side CAPI to bypass ad-blockers." },
+                    { nr: 21, name: "Finance Operations Audit", spec: "Cash reporting, AP/AR sync & revenue recognition", score: "97%", desc: "Automate daily cash position reports, reconcile payables and receivables automatically, and ensure ASC 606 revenue recognition compliance." },
+                    { nr: 22, name: "Cybersecurity & Access Audit", spec: "MFA, credential monitoring & access governance", score: "93%", desc: "Enforce MFA across critical platforms, scan for leaked credentials on the dark web, and automate the purging of dormant user accounts." },
+                    { nr: 23, name: "AI Governance Audit", spec: "Prompt ownership, shadow AI usage & IP protection", score: "91%", desc: "Inventory AI tools to prevent shadow leaks, establish prompt ownership policies, and implement automated PII filters for model inputs." }
                   ].map((vert) => (
                     <div key={vert.nr} className="p-5 bg-gray-50 border border-gray-100 rounded-2xl hover:border-indigo-100 hover:bg-indigo-50/10 transition">
                       <div className="flex items-center justify-between mb-2">

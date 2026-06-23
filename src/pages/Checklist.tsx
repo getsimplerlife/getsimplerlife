@@ -297,6 +297,23 @@ const VERTICALS = [
       "Endpoint compliance monitoring for device health, encryption, and patch status.",
       "Tamper-proof audit logging of all access requests and permission changes."
     ]
+  },
+  {
+    id: 23,
+    title: "AI Governance Audit",
+    icon: "🤖",
+    color: "bg-indigo-50 text-indigo-700 border-indigo-100",
+    description: "Evaluates AI shadow usage, prompt ownership, model access controls, hallucination risk, and sensitive data exposure prevention.",
+    points: [
+      "AI tool inventory and approval workflows to prevent shadow AI data leaks.",
+      "Enterprise AI model access management with strict permission levels.",
+      "Centralized repository and ownership policies for high-value internal prompts.",
+      "Automated PII and proprietary code filters for AI model inputs.",
+      "Mandatory human-in-the-loop verification for high-stakes AI outputs.",
+      "Vetting of third-party vendor AI data training and privacy policies.",
+      "Formal approval workflows for AI-generated client-facing content.",
+      "Tamper-proof logging of all AI model interactions and prompt history."
+    ]
   }
 ]
 
@@ -325,10 +342,10 @@ export default function Checklist() {
             Our Diagnostic Standard
           </span>
           <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight sm:text-4xl">
-            The 22-Vertical Master Operational &amp; Automation Framework
+            The 23-Vertical Master Operational &amp; Automation Framework
           </h1>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-500">
-            We evaluate client operations across 22 specialized pillars. Expand any category below to inspect our rigid, high-standard technical checklists.
+            We evaluate client operations across 23 specialized pillars. Expand any category below to inspect our rigid, high-standard technical checklists.
           </p>
           
           <div className="mt-6 flex justify-center gap-4">
@@ -431,10 +448,10 @@ export default function Checklist() {
               24/7 Instant Intake Active
             </span>
             <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight mb-4">
-              Inspect your business using this 22-Vertical Audit framework
+              Inspect your business using this 23-Vertical Audit framework
             </h2>
             <p className="text-indigo-100 mb-6 leading-relaxed">
-              Book our <strong>Asynchronous Automation Audit Blueprint</strong>. For just $99.00, our senior integration architects analyze your entire operational footprint against all 22 verticals and compile a comprehensive 22-page strategic roadmap. 
+              Book our <strong>Asynchronous Automation Audit Blueprint</strong>. For just $99.00, our senior integration architects analyze your entire operational footprint against all 23 verticals and compile a comprehensive 23-page strategic roadmap. 
             </p>
             <div className="bg-indigo-950/40 p-4 rounded-xl border border-indigo-700/50 mb-6 flex items-start gap-3">
               <BadgeCheck className="h-6 w-6 text-emerald-400 shrink-0 mt-0.5" />
