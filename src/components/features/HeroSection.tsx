@@ -8,24 +8,27 @@ export default function HeroSection() {
         <div className="lg:grid lg:grid-cols-12 lg:gap-8 items-center">
           <div className="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left">
             <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-indigo-50 text-primary mb-6">
-              ⚡ 50+ Registered Clients | Cumulative 57.0 hrs/wk saved | 92.5% Response Speedup
+              🔍 We find operational risk, waste, and automation opportunities — within 24 hours
             </span>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-dark mb-6 leading-tight">
-              Tired of Wasting Hours on Tasks AI Could Do in Seconds?
+              Find Risk and Waste Before They Cost You —{' '}
+              <span className="text-primary">Within 24 Hours</span>
             </h1>
             <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-              Stop manually entering data, following up on leads, and juggling spreadsheets. Simpler Life builds custom automation workflows so your small business runs itself — while you focus on growth.
+              We scan your operations across all 23 verticals — HR, finance, sales, legal, marketing, cybersecurity, 
+              and AI governance — and deliver a complete diagnostic roadmap within 24 hours. Stop leaking revenue 
+              to manual processes, compliance gaps, and automation opportunities you haven't found yet.
             </p>
             <div className="flex flex-col sm:flex-row sm:justify-center lg:justify-start gap-4">
               <Link to="/book" className="inline-flex items-center justify-center px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition shadow-md">
-                Get Your Automation Audit
+                Find My Risk & Waste
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
-              <Link to="/solutions/configurator" className="inline-flex items-center justify-center px-6 py-3 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-100 transition bg-white">
-                Build Your Workflow
+              <Link to="/checklist" className="inline-flex items-center justify-center px-6 py-3 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-100 transition bg-white">
+                View the 23-Vertical Checklist
               </Link>
             </div>
-            <p className="mt-4 text-xs text-gray-400">No commitment. Asynchronous delivery. See exactly what you can automate.</p>
+            <p className="mt-4 text-xs text-gray-400">No commitment. 24-hour delivery. You'll receive a full Automation Roadmap & ROI Analysis Report.</p>
             <div className="mt-4 flex flex-wrap gap-3 text-xs">
               <Link to="/scanner" className="inline-flex items-center gap-1.5 text-gray-500 hover:text-primary transition font-medium">🔍 Scanner</Link>
               <Link to="/sandbox" className="inline-flex items-center gap-1.5 text-gray-500 hover:text-primary transition font-medium">⚡ API Sandbox</Link>

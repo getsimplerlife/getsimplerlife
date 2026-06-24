@@ -180,7 +180,7 @@ export default function LeakedLeadROI() {
 
               <Link to="/book"
                 className="block w-full text-center py-4 bg-white text-red-600 font-bold rounded-xl hover:bg-red-50 transition shadow-lg text-lg">
-                Stop the Leak — Get Your $99 Audit
+                Stop the Leak — Get Your $997 QuickScan™
                 <ArrowUpRight className="inline h-5 w-5 ml-1" />
               </Link>
               <p className="text-xs text-red-200 text-center mt-3">
@@ -215,7 +215,7 @@ export default function LeakedLeadROI() {
           </p>
           <Link to="/book"
             className="inline-flex items-center gap-2 px-8 py-3 bg-white text-primary font-bold rounded-lg hover:bg-indigo-50 transition shadow-lg">
-            Get Your $99 Asynchronous Audit Blueprint <ArrowRight size={20} />
+            Get Your $997 QuickScan™ <ArrowRight size={20} />
           </Link>
         </div>
       </div>

@@ -1,67 +1,144 @@
-import { Check, Star } from 'lucide-react'
+import { Check, Zap, Search, Rocket, Activity, Star } from 'lucide-react'
 
-const plans = [
+const tiers = [
   {
-    name: 'Starter', setup: '$1,500', monthly: '$150', popular: false,
-    features: ['Up to 3 workflow automations', 'Lead capture + response automation', 'Calendar sync', 'Email support (48h response)'],
-    paymentLink: 'https://buy.stripe.com/dRm3cveUU0in8K21SA08g03',
-    discounted: '$1,200'
+    name: 'QuickScan™',
+    id: 'price_1TlcttD8uiOZ0HlMUoZJD6Jk',
+    price: '$997',
+    subtitle: 'One-time diagnostic',
+    description: 'Rapid 24-hour assessment of your highest-impact automation opportunities.',
+    popular: false,
+    highlight: '24-Hour Turnaround',
+    features: [
+      '1 industry package diagnostic',
+      '24-hour turnaround from submission',
+      'Executive summary with key findings',
+      'Risk score & compliance rating',
+      'Top 5 automation opportunities identified',
+    ],
+    cta: 'Start Your QuickScan',
+    link: 'https://buy.stripe.com/14A8wP1448OT1hAfJq08g08',
   },
   {
-    name: 'Growth', setup: '$3,000', monthly: '$300', popular: true,
-    features: ['Up to 8 workflow automations', 'Everything in Starter', 'CRM integration & data sync', 'Client onboarding automation', 'Priority support (12h response)', 'Monthly optimization audit'],
-    paymentLink: 'https://buy.stripe.com/aFacN5cMM3uz5xQfJq08g04',
-    discounted: '$2,400'
+    name: 'Deep Audit™',
+    id: 'price_1TlcuMD8uiOZ0HlMaNBLZPRY',
+    price: '$4,997',
+    subtitle: 'Comprehensive analysis',
+    description: 'Full-depth diagnostic across your chosen industry vertical with detailed cost savings analysis.',
+    popular: true,
+    highlight: 'Full Roadmap Included',
+    features: [
+      'Full industry package diagnostic',
+      'Detailed cost savings analysis with ROI projections',
+      'Custom Automation Roadmap & Implementation Plan',
+      'Comprehensive compliance & risk review',
+      '23-vertical cross-reference analysis',
+      'Executive presentation with stakeholder summaries',
+    ],
+    cta: 'Schedule Your Deep Audit',
+    link: '/contact',
   },
   {
-    name: 'Scale', setup: '$5,000', monthly: '$500', popular: false,
-    features: ['Unlimited workflows', 'Everything in Growth', 'Multi-app integration (Slack, HubSpot, QuickBooks)', 'Custom AI agent training', 'Dedicated support (4h response)', 'Weekly performance reports'],
-    paymentLink: 'https://buy.stripe.com/28E14neUUaX17FYcxe08g05',
-    discounted: '$4,000'
+    name: 'Implementation Sprint™',
+    id: 'price_1TlcuMD8uiOZ0HlMuaI0mmRd',
+    price: '$5,000 – $50,000+',
+    subtitle: 'Build & deploy',
+    description: 'Professional build-out of all recommended automations with full system integration.',
+    popular: false,
+    highlight: 'Custom Scope',
+    features: [
+      'Full build-out of all recommended automations',
+      'Workflow repair and optimization',
+      'System integration (CRM, ERP, LOS, etc.)',
+      'Deployment of real-time monitoring dashboards',
+      'Team training and knowledge transfer',
+      '30-day post-deployment support',
+    ],
+    cta: 'Discuss Your Sprint',
+    link: '/contact',
+  },
+  {
+    name: 'Managed Automation™',
+    id: 'price_1TlcuMD8uiOZ0HlMInOJpSoo',
+    price: '$997 – $4,997/mo',
+    subtitle: 'Ongoing partnership',
+    description: 'Continuous monitoring, maintenance, and optimization — your automation stack, our expertise.',
+    popular: false,
+    highlight: 'Ongoing Governance',
+    features: [
+      'Continuous workflow monitoring & maintenance',
+      'Monthly performance reporting with KPIs',
+      'Ongoing AI governance & optimization',
+      'Priority support with 2-hour response',
+      'Quarterly business review & roadmap updates',
+      'Dedicated automation success manager',
+    ],
+    cta: 'Get Managed Today',
+    link: '/contact',
   },
 ]
 
 export default function PackageSection() {
   return (
     <section className="py-20 bg-white" id="packages">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-14">
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4">
+            <Zap size={16} /> Our 4-Tier Product Ladder
+          </span>
           <h2 className="text-3xl sm:text-4xl font-bold text-dark mb-4">
-            Pick the Plan That <span className="text-primary">Fits Your Business</span>
+            From Rapid Discovery to{' '}
+            <span className="text-primary">Full-Scale Automation</span>
           </h2>
-          <p className="text-gray-500 max-w-lg mx-auto">One-time setup + monthly support. No hidden fees. No long-term contracts.</p>
+          <p className="text-gray-500 max-w-2xl mx-auto">
+            Start with a 24-hour QuickScan and scale up to enterprise-grade managed automation. 
+            Every tier includes our 23-vertical diagnostic methodology.
+          </p>
         </div>
-        <div className="grid md:grid-cols-3 gap-6">
-          {plans.map(plan => (
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+          {tiers.map((tier) => (
             <div
-              key={plan.name}
-              className={`relative rounded-2xl p-8 border transition-all hover:-translate-y-1 hover:shadow-lg ${
-                plan.popular ? 'border-primary bg-gradient-to-br from-indigo-50 to-white shadow-lg' : 'border-gray-200 bg-white shadow-sm'
+              key={tier.name}
+              className={`relative rounded-2xl p-6 border transition-all hover:-translate-y-1 hover:shadow-lg flex flex-col ${
+                tier.popular ? 'border-primary bg-gradient-to-br from-indigo-50 to-white shadow-lg ring-2 ring-primary/20' : 'border-gray-200 bg-white shadow-sm'
               }`}
             >
-              {plan.popular && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-semibold px-4 py-1 rounded-full flex items-center gap-1">
-                  <Star size={14} /> Most Popular
+              {tier.popular && (
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-semibold px-3 py-1 rounded-full flex items-center gap-1 whitespace-nowrap">
+                  <Star size={12} /> Most Popular
                 </div>
               )}
-              <h3 className="text-xl font-bold text-dark mb-2">{plan.name}</h3>
-              <div className="mb-3">
-                <span className="text-sm text-gray-400">Setup </span>
-                <span className="text-2xl font-bold text-dark line-through opacity-40">{plan.setup}</span>
-                <span className="text-2xl font-bold text-secondary ml-2">{plan.discounted}</span>
-                <span className="ml-2 bg-secondary/10 text-secondary text-[10px] px-1.5 py-0.5 rounded font-bold uppercase">Launch 20% Off</span>
+              
+              <div className="mb-4">
+                <h3 className="text-lg font-bold text-dark">{tier.name}</h3>
+                <p className="text-xs text-gray-400 mt-0.5">{tier.subtitle}</p>
               </div>
-              <div className="mb-6"><span className="text-sm text-gray-400">then </span><span className="text-lg font-semibold text-primary">{plan.monthly}</span><span className="text-sm text-gray-400">/mo</span></div>
-              <div className="space-y-3 mb-8">
-                {plan.features.map(f => (
-                  <div key={f} className="flex gap-2.5 items-start">
-                    <Check size={18} className="text-secondary flex-shrink-0 mt-0.5" />
-                    <span className="text-sm text-gray-600">{f}</span>
+
+              <div className="mb-3">
+                <span className="text-2xl font-bold text-dark">{tier.price}</span>
+              </div>
+
+              <p className="text-sm text-gray-500 mb-4 leading-relaxed">{tier.description}</p>
+
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-50 text-amber-700 text-[10px] font-semibold mb-5 self-start">
+                <Zap size={12} /> {tier.highlight}
+              </div>
+
+              <div className="space-y-2.5 mb-6 flex-1">
+                {tier.features.map(f => (
+                  <div key={f} className="flex gap-2 items-start">
+                    <Check size={15} className="text-secondary flex-shrink-0 mt-0.5" />
+                    <span className="text-xs text-gray-600 leading-relaxed">{f}</span>
                   </div>
                 ))}
               </div>
-              <a href={plan.paymentLink} target="_blank" rel="noopener noreferrer" className="block text-center w-full py-2.5 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition">
-                Get Started
+
+              <a href={tier.link}
+                className={`block text-center w-full py-2.5 rounded-lg font-semibold transition text-sm ${
+                  tier.popular ? 'bg-primary text-white hover:bg-primary-dark shadow-md' : 'border-2 border-primary text-primary hover:bg-indigo-50'
+                }`}>
+                {tier.cta}
               </a>
             </div>
           ))}

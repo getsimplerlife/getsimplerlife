@@ -1,5 +1,5 @@
 import { Outlet, Link } from 'react-router-dom'
-import { Activity, ChevronDown, Shield, HardHat, FileText, UserPlus, Package, ClipboardCheck, Bot, Home as HomeIcon, Scale, FileSearch, Sparkles, Zap, Globe, Server, ArrowRight } from 'lucide-react'
+import { Activity, ChevronDown, Shield, HardHat, FileText, UserPlus, Package, ClipboardCheck, Bot, Home as HomeIcon, Scale, FileSearch, Sparkles, Zap, Globe, Server, ArrowRight, ShoppingCart, Cloud, Landmark, Megaphone } from 'lucide-react'
 import { useState, useEffect, useRef } from 'react'
 import PromoBanner from './PromoBanner'
 
@@ -29,7 +29,10 @@ export default function Layout() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <Link to="/" className="flex items-center space-x-2 text-primary font-bold text-xl">
             <Activity className="h-6 w-6 text-primary" />
-            <span>Simpler Life</span>
+            <div className="flex flex-col">
+              <span>Simpler Life</span>
+              <span className="text-[10px] font-normal text-gray-400 leading-tight -mt-0.5">Find risk. Cut waste. 24-hour diagnostic.</span>
+            </div>
           </Link>
           <nav className="hidden md:flex items-center space-x-6">
             <Link to="/" className="text-gray-600 hover:text-primary transition font-medium">Home</Link>
@@ -53,67 +56,37 @@ export default function Layout() {
                   </div>
                   
                   <div className="px-2 space-y-1">
-                    <div className="px-3 py-1.5 text-[10px] font-bold text-gray-400 uppercase tracking-widest">Sales &amp; Marketing</div>
-                    <Link to="/solutions/insurance-quotes" className="group flex items-center justify-between px-3 py-2 rounded-xl hover:bg-indigo-50 transition">
-                      <div className="flex items-center gap-3">
-                        <Shield className="h-4 w-4 text-primary" />
-                        <span className="text-xs font-bold text-gray-700 group-hover:text-primary">Insurance Quote Engine</span>
-                      </div>
-                      <span className="text-[9px] font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-md">LIVE</span>
-                    </Link>
+                    <div className="px-3 py-1.5 text-[10px] font-bold text-gray-400 uppercase tracking-widest">Industry Packages</div>
+                    <div className="grid grid-cols-2 gap-1">
+                      {[
+                        { name: 'Healthcare', path: '/book?vertical=Healthcare', icon: Shield },
+                        { name: 'Legal', path: '/book?vertical=Legal', icon: Scale },
+                        { name: 'Real Estate', path: '/book?vertical=Real Estate', icon: HomeIcon },
+                        { name: 'E-Commerce', path: '/book?vertical=E-Commerce', icon: ShoppingCart },
+                        { name: 'SaaS', path: '/book?vertical=SaaS', icon: Cloud },
+                        { name: 'Construction', path: '/book?vertical=Construction', icon: HardHat },
+                        { name: 'Financial', path: '/book?vertical=Financial', icon: Landmark },
+                        { name: 'Agency', path: '/book?vertical=Agency', icon: Megaphone },
+                      ].map((ind) => (
+                        <Link key={ind.name} to={ind.path} className="group flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-indigo-50 transition">
+                          <ind.icon className="h-3.5 w-3.5 text-primary/70" />
+                          <span className="text-[11px] font-bold text-gray-700 group-hover:text-primary">{ind.name}</span>
+                        </Link>
+                      ))}
+                    </div>
                     
-                    <div className="px-3 py-1.5 text-[10px] font-bold text-gray-400 uppercase tracking-widest pt-2">Financial</div>
-                    <Link to="/solutions/mortgage-leads" className="group flex items-center justify-between px-3 py-2 rounded-xl hover:bg-emerald-50 transition">
+                    <div className="px-3 py-1.5 text-[10px] font-bold text-gray-400 uppercase tracking-widest pt-2">Expert Tools</div>
+                    <Link to="/scanner" className="group flex items-center justify-between px-3 py-2 rounded-xl hover:bg-indigo-50 transition">
                       <div className="flex items-center gap-3">
-                        <HomeIcon className="h-4 w-4 text-emerald-600" />
-                        <span className="text-xs font-bold text-gray-700 group-hover:text-emerald-700">Mortgage Qualification</span>
+                        <FileSearch className="h-4 w-4 text-primary" />
+                        <span className="text-xs font-bold text-gray-700 group-hover:text-primary">Website Scanner</span>
                       </div>
-                      <span className="text-[9px] font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-md">24/7</span>
+                      <span className="text-[9px] font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-md">FREE</span>
                     </Link>
-                    <Link to="/solutions/construction-bids" className="group flex items-center justify-between px-3 py-2 rounded-xl hover:bg-amber-50 transition">
+                    <Link to="/solutions/configurator" className="group flex items-center justify-between px-3 py-2 rounded-xl hover:bg-indigo-50 transition">
                       <div className="flex items-center gap-3">
-                        <HardHat className="h-4 w-4 text-amber-600" />
-                        <span className="text-xs font-bold text-gray-700 group-hover:text-amber-700">Construction Bids</span>
-                      </div>
-                    </Link>
-                    
-                    <div className="px-3 py-1.5 text-[10px] font-bold text-gray-400 uppercase tracking-widest pt-2">Legal</div>
-                    <Link to="/solutions/legal-intake" className="group flex items-center justify-between px-3 py-2 rounded-xl hover:bg-violet-50 transition">
-                      <div className="flex items-center gap-3">
-                        <Scale className="h-4 w-4 text-violet-600" />
-                        <span className="text-xs font-bold text-gray-700 group-hover:text-violet-700">Legal Intake</span>
-                      </div>
-                    </Link>
-                    <Link to="/solutions/contract-review" className="group flex items-center justify-between px-3 py-2 rounded-xl hover:bg-amber-50 transition">
-                      <div className="flex items-center gap-3">
-                        <FileSearch className="h-4 w-4 text-amber-600" />
-                        <span className="text-xs font-bold text-gray-700 group-hover:text-amber-700">Contract Review</span>
-                      </div>
-                    </Link>
-                    
-                    <div className="px-3 py-1.5 text-[10px] font-bold text-gray-400 uppercase tracking-widest pt-2">Operations</div>
-                    <Link to="/solutions/proposal-writing" className="group flex items-center justify-between px-3 py-2 rounded-xl hover:bg-violet-50 transition">
-                      <div className="flex items-center gap-3">
-                        <FileText className="h-4 w-4 text-violet-600" />
-                        <span className="text-xs font-bold text-gray-700 group-hover:text-violet-700">Proposal Writing</span>
-                      </div>
-                    </Link>
-                    <Link to="/solutions/vendor-onboarding" className="group flex items-center justify-between px-3 py-2 rounded-xl hover:bg-cyan-50 transition">
-                      <div className="flex items-center gap-3">
-                        <UserPlus className="h-4 w-4 text-cyan-600" />
-                        <span className="text-xs font-bold text-gray-700 group-hover:text-cyan-700">Vendor Onboarding</span>
-                      </div>
-                    </Link>
-                    <Link to="/solutions/procurement-automation" className="group flex items-center justify-between px-3 py-2 rounded-xl hover:bg-orange-50 transition">
-                      <div className="flex items-center gap-3">
-                        <Package className="h-4 w-4 text-orange-600" />
-                        <span className="text-xs font-bold text-gray-700 group-hover:text-orange-700">Procurement</span>
-                      </div>
-                    </Link>
-                    <Link to="/solutions/compliance-dashboard" className="group flex items-center justify-between px-3 py-2 rounded-xl hover:bg-emerald-50 transition">
-                      <div className="flex items-center gap-3">
-                        <ClipboardCheck className="h-4 w-4 text-emerald-600" />
-                        <span className="text-xs font-bold text-gray-700 group-hover:text-emerald-700">Compliance Dashboard</span>
+                        <Bot className="h-4 w-4 text-primary" />
+                        <span className="text-xs font-bold text-gray-700 group-hover:text-primary">Workflow Configurator</span>
                       </div>
                     </Link>
                   </div>
@@ -161,9 +134,12 @@ export default function Layout() {
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-8 border-t border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:flex sm:items-center sm:justify-between">
-          <div className="flex items-center justify-center sm:justify-start space-x-2 text-white font-bold text-lg mb-4 sm:mb-0">
-            <Activity className="h-5 w-5 text-secondary" />
-            <span>Simpler Life</span>
+          <div>
+            <div className="flex items-center justify-center sm:justify-start space-x-2 text-white font-bold text-lg mb-1 sm:mb-0">
+              <Activity className="h-5 w-5 text-secondary" />
+              <span>Simpler Life</span>
+            </div>
+            <p className="text-gray-500 text-xs mt-1">Find operational risk, waste, and automation opportunities — within 24 hours.</p>
           </div>
           <p className="text-gray-400 text-sm">
             &copy; {new Date().getFullYear()} Simpler Life. All rights reserved.

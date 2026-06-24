@@ -67,9 +67,9 @@ export default function Book() {
   const bookingOptions = [
     {
       id: 'strategy',
-      title: 'Asynchronous Strategy Audit',
+      title: 'Asynchronous Risk Audit',
       duration: 'Delivered in 24 Hours',
-      description: 'A custom strategy audit mapping out your manual workflows to identify your biggest automation wins, compiled asynchronously.',
+      description: 'A custom risk assessment mapping out your manual workflows to identify hidden waste and automation wins, compiled asynchronously.',
       needs: ['Lead Routing'],
       icon: <Clock className="h-5 w-5 text-indigo-600" />
     },
@@ -125,8 +125,8 @@ User Notes: ${form.message || 'No additional notes.'}`
       // First, log the lead in SQLite operational database (capture lead state)
       await apiService.submitLead(payload)
       
-      // Redirect to Stripe Secure Checkout ($99.00 Audit Blueprint)
-      window.location.href = "https://buy.stripe.com/dRm7sL4gg4yDgcu7cU08g07"
+      // Redirect to Stripe Secure Checkout ($997.00 QuickScan™)
+      window.location.href = "https://buy.stripe.com/14A8wP1448OT1hAfJq08g08"
     } catch (err: any) {
       console.error(err)
       setErrorMsg(err.response?.data?.error || 'An error occurred while scheduling your booking.')
@@ -208,10 +208,10 @@ User Notes: ${form.message || 'No additional notes.'}`
                 <Calendar className="h-6 w-6" />
               </span>
               <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-dark mb-2">
-                Instant 24/7 Automation Diagnostic Blueprint
+                Instant 24/7 Operational Risk & Waste Audit
               </h1>
               <p className="text-gray-600 max-w-2xl mx-auto">
-                Select a custom diagnostic session below, fill out your details, and our AI Expert System will build and deliver a comprehensive automation roadmap for your business asynchronously in under 24 hours. No call required, active 24/7.
+                Select a custom diagnostic session below, fill out your details, and our AI Expert System will build and deliver a comprehensive Operational Rescue Roadmap for your business asynchronously in under 24 hours. No call required, active 24/7.
               </p>
             </div>
 
@@ -370,12 +370,12 @@ User Notes: ${form.message || 'No additional notes.'}`
                     ) : (
                       <>
                         <Sparkles className="h-5 w-5 mr-2 animate-pulse" />
-                        Proceed to Secure Payment — $99.00
+                        Proceed to Secure Payment — $997.00
                       </>
                     )}
                   </button>
                   <p className="text-center text-[10px] text-gray-400 mt-3 leading-relaxed max-w-md mx-auto">
-                    🔒 <strong>Secure Payment Powered by Stripe</strong>. Credit card &amp; Apple Pay accepted. The $99 diagnostic fee is <strong>100% credited back</strong> toward any implementation package if you choose to build your custom roadmap with us.
+                    🔒 <strong>Secure Payment Powered by Stripe</strong>. Credit card &amp; Apple Pay accepted. The $997 diagnostic fee is <strong>100% credited back</strong> toward any implementation package if you choose to build your custom roadmap with us.
                   </p>
                 </div>
               </div>

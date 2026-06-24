@@ -73,7 +73,7 @@ export default function Contact() {
             <div className="bg-gradient-to-br from-primary to-indigo-700 p-6 rounded-2xl text-white shadow-lg">
               <h3 className="font-bold mb-2 text-lg">Skip the Queue</h3>
               <p className="text-sm text-indigo-100 mb-4">
-                Secure your priority 24-hour Audit Blueprint for just $99.00 (100% credited back to any build).
+                Secure your priority 24-hour QuickScan™ for just $997.00 (100% credited back to any build).
               </p>
               <a 
                 href="/book" 

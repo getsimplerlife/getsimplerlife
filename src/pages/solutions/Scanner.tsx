@@ -220,7 +220,7 @@ export default function Scanner() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link to="/book"
                   className="inline-flex items-center gap-2 px-8 py-3 bg-white text-primary font-bold rounded-lg hover:bg-indigo-50 transition shadow-lg">
-                  Get Your $99 Automation Audit <ArrowRight size={20} />
+                  Get Your $997 QuickScan™ <ArrowRight size={20} />
                 </Link>
                 <button onClick={() => { setScanned(false); setResult(null); setUrl('') }}
                   className="inline-flex items-center gap-2 px-8 py-3 border border-white/30 text-white font-semibold rounded-lg hover:bg-white/10 transition">

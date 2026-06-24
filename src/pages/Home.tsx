@@ -5,6 +5,7 @@ import ProblemSection from '../components/features/ProblemSection'
 import SolutionSection from '../components/features/SolutionSection'
 import ROICalculator from '../components/features/ROICalculator'
 import PackageSection from '../components/features/PackageSection'
+import IndustryPackages from '../components/features/IndustryPackages'
 import TestimonialSection from '../components/features/TestimonialSection'
 import ContactSection from '../components/features/ContactSection'
 
@@ -40,10 +41,11 @@ export default function Home() {
           {/* Section Header with Premium Navigation Arrows */}
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
             <div className="text-left">
-              <span className="text-xs font-bold text-primary uppercase tracking-wider block mb-2">24/7 Asynchronous Demonstrations</span>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-dark tracking-tight">Explore Our Automation Solutions</h2>
+              <span className="text-xs font-bold text-primary uppercase tracking-wider block mb-2">8 Industry-Specific Packages</span>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-dark tracking-tight">Find Risk & Waste in Your Industry</h2>
               <p className="text-gray-500 max-w-2xl mt-3 text-sm sm:text-base leading-relaxed">
-                Click any solution to launch a fully simulated interactive workflow. Our engineering system provides 24/7 asynchronous delivery for all audit and implementation roadmaps.
+                Each industry package applies our 23-vertical diagnostic engine with sector-specific compliance checks 
+                and automation opportunities. Available via QuickScan™ (24hr) or Deep Audit™.
               </p>
             </div>
             
@@ -75,16 +77,16 @@ export default function Home() {
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             {[
-              { title: 'Insurance Quote Engine', desc: 'Multi-carrier quote generation in under 60 seconds with interactive risk profiling.', icon: '🛡️', path: '/solutions/insurance-quotes', color: 'indigo' },
-              { title: 'Construction Bid Generator', desc: 'Flawless line-item estimates with material costs, labor breakdowns, and Procore sync.', icon: '🏗️', path: '/solutions/construction-bids', color: 'amber' },
-              { title: 'B2B Proposal Writing', desc: 'Auto-generate beautiful, CRM-hydrated proposals with AI-powered executive summaries.', icon: '📄', path: '/solutions/proposal-writing', color: 'violet' },
-              { title: 'Vendor Onboarding Portal', desc: 'Auto-verify tax IDs, scan COIs, validate bank accounts, and provision to ERP in 5 minutes.', icon: '🤝', path: '/solutions/vendor-onboarding', color: 'cyan' },
-              { title: 'Procurement Automation', desc: 'Auto-generate POs from inventory thresholds, approve via Slack, dispatch to suppliers.', icon: '📦', path: '/solutions/procurement-automation', color: 'orange' },
-              { title: 'Compliance Dashboard', desc: 'Tamper-proof audit logs, daily checklists, HMAC-signed evidence, and auto-generated PDF reports.', icon: '✅', path: '/solutions/compliance-dashboard', color: 'emerald' },
-              { title: 'Workflow Configurator', desc: 'Design your own custom AI automation pipeline and see instant ROI projections for your specific industry.', icon: '⚡', path: '/solutions/configurator', color: 'primary' },
-              { title: 'Website Scanner', desc: 'Enter your URL and get an instant audit score with remediation recommendations — free.', icon: '🔍', path: '/scanner', color: 'sky' },
-              { title: 'API Webhook Sandbox', desc: 'Simulate ServiceTitan, Stripe, QuickBooks, and Cal.com events in a live pipeline visualizer.', icon: '⚙️', path: '/sandbox', color: 'purple' },
-              { title: 'Leaked Lead ROI Calc', desc: 'See exactly how much revenue you lose from missed leads — interactive calculator with live animations.', icon: '📊', path: '/roi', color: 'red' },
+              { title: 'Healthcare', desc: 'HIPAA/PHI compliance audits, patient intake automation, and telehealth integration.', icon: '🩺', path: '/book?vertical=healthcare', color: 'rose', badge: null, cta: 'Book Audit' },
+              { title: 'Legal', desc: 'Matter management, document automation, billable hour recovery, and conflict checks.', icon: '⚖️', path: '/book?vertical=legal', color: 'violet', badge: null, cta: 'Book Audit' },
+              { title: 'Real Estate', desc: 'Lead response optimization, showing coordination, and contract-to-close workflows.', icon: '🏢', path: '/book?vertical=realestate', color: 'cyan', badge: null, cta: 'Book Audit' },
+              { title: 'E-Commerce', desc: 'Revenue leakage detection, checkout flow optimization, and returns automation.', icon: '🛒', path: '/book?vertical=ecommerce', color: 'orange', badge: null, cta: 'Book Audit' },
+              { title: 'SaaS', desc: 'Trial conversion funnels, user onboarding, churn reduction, and AI risk assessment.', icon: '☁️', path: '/book?vertical=saas', color: 'sky', badge: null, cta: 'Book Audit' },
+              { title: 'Construction', desc: 'Field reporting, change order workflows, budget tracking, and subcontractor compliance.', icon: '🏗️', path: '/book?vertical=construction', color: 'amber', badge: null, cta: 'Book Audit' },
+              { title: 'Financial', desc: 'Regulatory control audits, audit trail automation, and KYC/AML compliance.', icon: '🏛️', path: '/book?vertical=financial', color: 'emerald', badge: null, cta: 'Book Audit' },
+              { title: 'Agency', desc: 'Client delivery audits, utilization analysis, and scope creep detection.', icon: '📣', path: '/book?vertical=agency', color: 'pink', badge: null, cta: 'Book Audit' },
+              { title: 'Website Scanner', desc: 'Enter any URL to find instant automation gaps, SEO leaks, and mobile risks.', icon: '🔍', path: '/scanner', color: 'indigo', badge: 'Free Tool', cta: 'Run Scan' },
+              { title: 'Configurator', desc: 'Tell us your stack and we will map out your exact automation ROI in 60 seconds.', icon: '⚡', path: '/solutions/configurator', color: 'primary', badge: 'Interactive', cta: 'Launch Tool' },
             ].map((sol, i) => {
               const colorMap: Record<string, { bg: string, text: string, hover: string, border: string }> = {
                 indigo: { bg: 'bg-indigo-50', text: 'text-primary', hover: 'hover:border-primary', border: 'border-indigo-100' },
@@ -94,14 +96,13 @@ export default function Home() {
                 orange: { bg: 'bg-orange-50', text: 'text-orange-600', hover: 'hover:border-orange-400', border: 'border-orange-100' },
                 emerald: { bg: 'bg-emerald-50', text: 'text-emerald-600', hover: 'hover:border-emerald-400', border: 'border-emerald-100' },
                 primary: { bg: 'bg-indigo-50', text: 'text-primary', hover: 'hover:border-primary', border: 'border-indigo-100' },
-                sky: { bg: 'bg-sky-50', text: 'text-sky-600', hover: 'hover:border-sky-400', border: 'border-sky-100' },
-                purple: { bg: 'bg-purple-50', text: 'text-purple-600', hover: 'hover:border-purple-400', border: 'border-purple-100' },
-                red: { bg: 'bg-red-50', text: 'text-red-600', hover: 'hover:border-red-400', border: 'border-red-100' },
+                rose: { bg: 'bg-rose-50', text: 'text-rose-600', hover: 'hover:border-rose-400', border: 'border-rose-100' },
+                pink: { bg: 'bg-pink-50', text: 'text-pink-600', hover: 'hover:border-pink-400', border: 'border-pink-100' },
               };
               const c = colorMap[sol.color];
               return (
-                <a 
-                  key={i} 
+                <a
+                  key={i}
                   href={sol.path}
                   className={`p-6 border-2 ${c.border} rounded-2xl shadow-sm ${c.hover} transition text-left bg-white group min-w-[280px] sm:min-w-[340px] flex-shrink-0 snap-start flex flex-col justify-between`}
                 >
@@ -113,7 +114,7 @@ export default function Home() {
                     <p className="text-sm text-gray-500 leading-relaxed mb-4">{sol.desc}</p>
                   </div>
                   <span className={`text-sm font-semibold ${c.text} inline-flex items-center gap-1 mt-auto`}>
-                    Try Demo → <span className="text-[10px] uppercase font-bold tracking-wider bg-emerald-50 text-emerald-600 px-1.5 py-0.5 rounded-full animate-pulse">Live</span>
+                    {sol.cta} → {sol.badge && <span className="text-[10px] uppercase font-bold tracking-wider bg-emerald-50 text-emerald-600 px-1.5 py-0.5 rounded-full animate-pulse ml-2">{sol.badge}</span>}
                   </span>
                 </a>
               );
@@ -125,9 +126,10 @@ export default function Home() {
       {/* Services / Automation Offerings */}
       <section className="py-20 bg-white" id="services">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-dark mb-4">Core Automation Offerings</h2>
+          <h2 className="text-3xl font-bold text-dark mb-4">23-Vertical Diagnostic — Core Findings</h2>
           <p className="text-gray-600 max-w-2xl mx-auto mb-16">
-            We target the highest-demand, most repetitive bottlenecks to deliver immediate ROI.
+            These are the highest-leverage opportunities we uncover most frequently. Each represents 
+            operational risk, revenue waste, or automation potential — identified within 24 hours.
           </p>
           <div className="grid md:grid-cols-3 gap-8">
             {[
@@ -154,11 +156,11 @@ export default function Home() {
       <section className="py-16 bg-gray-50 border-t border-b border-gray-100">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="inline-flex p-3 bg-indigo-50 text-primary rounded-full mb-4"><ShieldCheck className="h-8 w-8" /></div>
-          <h2 className="text-2xl font-bold text-dark mb-4">The Simpler Life Guarantee</h2>
+          <h2 className="text-2xl font-bold text-dark mb-4">The 24-Hour Simpler Life Guarantee</h2>
           <p className="text-gray-600 leading-relaxed mb-6">
-            We are dedicated to SMB success. If we don't save you at least 10 hours a week on admin
-            within the first 30 days of implementation, we&apos;ll refund your setup fee completely.
-            No questions asked.
+            We will find operational risk, waste, and automation opportunities in your business — and deliver 
+            a complete Automation Roadmap &amp; ROI Analysis Report within 24 hours. If we don't identify 
+            at least 10 hours/week in potential savings, your diagnostic is completely free.
           </p>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-xl mx-auto text-sm text-gray-500">
             <div className="flex items-center justify-center space-x-1.5"><Clock className="h-4 w-4 text-primary" /><span>99.9% Uptime SLA</span></div>
@@ -177,8 +179,11 @@ export default function Home() {
       {/* ROI Calculator — Interactive Tool */}
       <ROICalculator />
 
-      {/* Packages — Pricing Tiers */}
+      {/* Packages — 4-Tier Product Ladder */}
       <PackageSection />
+
+      {/* Industry Packages — 8 Industry-Specific Diagnostics */}
+      <IndustryPackages />
 
       {/* Testimonials — Social Proof */}
       <TestimonialSection />

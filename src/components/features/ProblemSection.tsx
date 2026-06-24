@@ -13,12 +13,13 @@ export default function ProblemSection() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold text-dark mb-4">
-            You Started a Business to Build Something —{' '}
-            <span className="text-primary">Not to Do Data Entry</span>
+            Every Day You Wait, Revenue Leaks —{' '}
+            <span className="text-primary">We Find It Within 24 Hours</span>
           </h2>
           <p className="text-gray-500 max-w-2xl mx-auto text-lg">
-            Every hour you spend manually responding to inquiries, updating your calendar, or copying
-            data between apps is an hour stolen from your clients, your family, and your growth.
+            Operational risk and waste are hiding in every corner of your business — from dead leads and 
+            manual data entry to compliance blind spots and AI governance gaps. Most owners never see them. 
+            Our 23-vertical diagnostic finds them all in under a day.
           </p>
         </div>
 

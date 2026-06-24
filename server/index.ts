@@ -1136,3 +1136,4 @@ const startMonitoringInterval = () => {
 
 // Start the monitoring interval
 startMonitoringInterval()
+export default app;

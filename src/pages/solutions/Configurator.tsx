@@ -20,7 +20,7 @@ import {
 } from 'lucide-react'
 
 // Define Types
-type Industry = 'Trade Services' | 'Medical/Dental' | 'Agency/Consulting' | 'Real Estate' | 'E-commerce'
+type Industry = 'Healthcare' | 'Legal' | 'Real Estate' | 'E-Commerce' | 'SaaS' | 'Construction' | 'Financial' | 'Agency'
 
 interface TechApp {
   id: string
@@ -38,8 +38,8 @@ const APPS: TechApp[] = [
   { id: 'make', name: 'Make.com', icon: '🟣', category: 'Operations' },
   { id: 'quickbooks', name: 'QuickBooks', icon: '💸', category: 'Finance' },
   { id: 'calendly', name: 'Calendly', icon: '📅', category: 'Operations' },
-  { id: 'pipedrive', name: 'Pipedrive', icon: '🦊', category: 'CRM' },
-  { id: 'gohighlevel', name: 'GoHighLevel', icon: '🚀', category: 'CRM' },
+  { id: 'clio', name: 'Clio', icon: '⚖️', category: 'Operations' },
+  { id: 'shopify', name: 'Shopify', icon: '🛍️', category: 'Operations' },
 ]
 
 const BOTTLENECKS = [
@@ -120,7 +120,7 @@ export default function Configurator() {
                   <Layout className="text-primary" /> What's your primary industry?
                 </h2>
                 <div className="grid sm:grid-cols-2 gap-4">
-                  {(['Trade Services', 'Medical/Dental', 'Agency/Consulting', 'Real Estate', 'E-commerce'] as Industry[]).map((ind) => (
+                  {(['Healthcare', 'Legal', 'Real Estate', 'E-Commerce', 'SaaS', 'Construction', 'Financial', 'Agency'] as Industry[]).map((ind) => (
                     <button
                       key={ind}
                       onClick={() => { setIndustry(ind); setStep(2); }}
@@ -270,16 +270,16 @@ export default function Configurator() {
                     <div className="bg-dark p-8 rounded-3xl text-white shadow-2xl relative overflow-hidden group">
                       <div className="absolute -top-10 -right-10 w-40 h-40 bg-primary/20 rounded-full blur-3xl group-hover:bg-primary/30 transition-all" />
                       <h4 className="text-xl font-bold mb-4 flex items-center gap-2">
-                        <Calculator size={24} className="text-primary" /> Automation Audit Blueprint
+                        <Calculator size={24} className="text-primary" /> QuickScan™ Diagnostic
                       </h4>
                       <p className="text-gray-400 text-sm mb-6 leading-relaxed">
-                        Get our $99 professional diagnostic report. We'll map your entire {industry} operation 
+                        Get our $997 professional diagnostic report. We'll map your entire {industry} operation 
                         and build your exact ROI implementation roadmap.
                       </p>
                       <div className="flex items-center gap-4">
-                        <div className="text-2xl font-black text-white">$99<span className="text-sm font-normal text-gray-500 line-through ml-2">$499</span></div>
+                        <div className="text-2xl font-black text-white">$997<span className="text-sm font-normal text-gray-500 line-through ml-2">$1,497</span></div>
                         <a 
-                          href="https://buy.stripe.com/test_592f3d08-2abd-4e24-858a-340db145ce9b" // Placeholder
+                          href="https://buy.stripe.com/14A8wP1448OT1hAfJq08g08"
                           target="_blank"
                           rel="noopener noreferrer"
                           className="flex-grow py-3 bg-primary text-center font-bold rounded-xl hover:bg-primary-dark transition shadow-lg flex items-center justify-center gap-2"

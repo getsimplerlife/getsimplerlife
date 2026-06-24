@@ -451,12 +451,12 @@ export default function Checklist() {
               Inspect your business using this 23-Vertical Audit framework
             </h2>
             <p className="text-indigo-100 mb-6 leading-relaxed">
-              Book our <strong>Asynchronous Automation Audit Blueprint</strong>. For just $99.00, our senior integration architects analyze your entire operational footprint against all 23 verticals and compile a comprehensive 23-page strategic roadmap. 
+              Book our <strong>QuickScan™ Diagnostic</strong>. For just $997.00, our senior integration architects analyze your entire operational footprint against all 23 verticals and compile a comprehensive 23-page strategic roadmap. 
             </p>
             <div className="bg-indigo-950/40 p-4 rounded-xl border border-indigo-700/50 mb-6 flex items-start gap-3">
               <BadgeCheck className="h-6 w-6 text-emerald-400 shrink-0 mt-0.5" />
               <p className="text-sm text-indigo-100">
-                <strong>100% Risk-Free:</strong> The $99 audit fee is credited back entirely toward any implementation package if you decide to build with us.
+                <strong>100% Risk-Free:</strong> The $997 audit fee is credited back entirely toward any implementation package if you decide to build with us.
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4">

@@ -1,10 +1,10 @@
 import { Search, PenTool, Rocket, Activity } from 'lucide-react'
 
 const steps = [
-  { icon: Search, title: '1. Audit', desc: 'We map your current workflow via our asynchronous diagnostic engine to identify every automation opportunity.' },
-  { icon: PenTool, title: '2. Design', desc: 'We build a custom automation flow using AI + no-code tools tailored exactly to your business processes.' },
-  { icon: Rocket, title: '3. Deploy', desc: 'Your workflows go live within days, not months. We handle all the setup and testing.' },
-  { icon: Activity, title: '4. Monitor', desc: 'We maintain, optimize, and scale everything for you — so you never have to think about it.' },
+  { icon: Search, title: '1. Diagnose', desc: 'We scan your operations across 23 verticals using our asynchronous diagnostic engine — identifying every risk, waste leak, and automation opportunity.' },
+  { icon: PenTool, title: '2. Roadmap', desc: 'You receive a complete Automation Roadmap & ROI Analysis Report within 24 hours, prioritized by impact.' },
+  { icon: Rocket, title: '3. Deploy', desc: 'Approved automations go live within days. We handle all setup, testing, and integration for you.' },
+  { icon: Activity, title: '4. Monitor', desc: 'We maintain, optimize, and scale everything — with real-time dashboards showing hours saved and risk eliminated.' },
 ]
 
 export default function SolutionSection() {
@@ -13,11 +13,12 @@ export default function SolutionSection() {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-14">
           <h2 className="text-3xl sm:text-4xl font-bold text-dark mb-4">
-            We Automate the Work <span className="text-primary">You Shouldn&apos;t Have to Think About</span>
+            Find Risk &amp; Waste Across{' '}
+            <span className="text-primary">All 23 Operational Verticals</span>
           </h2>
           <p className="text-gray-500 max-w-2xl mx-auto">
-            From first contact to final follow-up — we design, deploy, and maintain custom automation
-            workflows that save you dozens of hours every week.
+            From HR onboarding gaps to AI governance blind spots — our 23-vertical diagnostic scans every 
+            corner of your operations and delivers a prioritized roadmap within 24 hours.
           </p>
         </div>
 

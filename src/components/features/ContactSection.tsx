@@ -119,11 +119,11 @@ export default function ContactSection() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">What do you want to automate?</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Select Your Industry Package</label>
               <div className="grid grid-cols-2 gap-2">
-                {['Lead Routing', 'Calendar Scheduling', 'CRM Database Sync', 'AI Email Responses'].map(need => (
+                {['Healthcare', 'Legal', 'Real Estate', 'E-Commerce', 'SaaS', 'Construction', 'Financial', 'Agency'].map(need => (
                   <button key={need} type="button" onClick={() => toggleNeed(need)}
-                    className={`p-2.5 border rounded-lg text-sm text-center transition ${
+                    className={`p-2.5 border rounded-lg text-[10px] sm:text-xs text-center transition ${
                       form.needs.includes(need) ? 'bg-primary text-white border-primary shadow-sm font-medium' : 'bg-gray-50 text-gray-700 border-gray-200 hover:bg-gray-100'
                     }`}
                   >{need}</button>

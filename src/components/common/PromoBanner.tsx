@@ -15,7 +15,7 @@ export default function PromoBanner() {
           </span>
           <p className="text-sm font-bold tracking-wide flex items-center gap-2">
             <span className="bg-white text-primary px-2 py-0.5 rounded text-[10px] uppercase tracking-tighter">Grand Launch</span>
-            <span>🚀 GRAND LAUNCH: Get an Asynchronous Automation Audit & save 20% on any custom workflow build!</span>
+            <span>🚀 THE 24-HOUR RESCUE: Find operational risk & waste with our $997 QuickScan™. 100% credited back!</span>
           </p>
           <a 
             href="/book" 
