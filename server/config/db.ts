@@ -9,7 +9,8 @@ const __dirname = path.dirname(__filename);
 const dbPath = path.resolve(__dirname, "../../operational.db");
 
 export const db = createClient({
-  url: `file:${dbPath}`
+  url: process.env.DATABASE_URL || `file:${dbPath}`,
+  authToken: process.env.DATABASE_AUTH_TOKEN
 });
 
 export const initDb = async () => {

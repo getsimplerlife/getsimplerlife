@@ -23,12 +23,16 @@ const app = express()
 const PORT = process.env.PORT || 3000
 const JWT_SECRET = process.env.JWT_SECRET || 'simpler_life_super_secret_key_987'
 
-// Initialize Operational Database
-initDb().then(() => {
-  console.log('[Simpler Life Server] Database initialization complete.')
-}).catch(err => {
-  console.error('[Simpler Life Server] Database initialization failed:', err)
-})
+// Initialize Operational Database (conditional based on environment or URL presence)
+if (process.env.VERCEL !== '1' || process.env.DATABASE_URL) {
+  initDb().then(() => {
+    console.log('[Simpler Life Server] Database initialization complete.')
+  }).catch(err => {
+    console.error('[Simpler Life Server] Database initialization failed:', err)
+  })
+} else {
+  console.log('[Simpler Life Server] Skipping DB initialization on Vercel (no DATABASE_URL provided).')
+}
 
 // Security & Request Parsing Middleware
 app.use(helmet({
@@ -1063,10 +1067,12 @@ app.get('*', (_req, res) => {
   res.sendFile(path.join(distPath, 'index.html'))
 })
 
-// Bind to 0.0.0.0 on port 3000
-app.listen(Number(PORT), '0.0.0.0', () => {
-  console.log(`[Simpler Life Server] Live on port ${PORT} (explicitly bound to 0.0.0.0)`)
-})
+// Bind to 0.0.0.0 on port 3000 only if not in a serverless environment
+if (process.env.VERCEL !== '1') {
+  app.listen(Number(PORT), '0.0.0.0', () => {
+    console.log(`[Simpler Life Server] Live on port ${PORT} (explicitly bound to 0.0.0.0)`)
+  })
+}
 
 // --- 3-Hour Automated Background Monitoring Worker ---
 const startMonitoringInterval = () => {
@@ -1134,6 +1140,8 @@ const startMonitoringInterval = () => {
   setInterval(checkStatus, 3 * 60 * 60 * 1000)
 }
 
-// Start the monitoring interval
-startMonitoringInterval()
+// Start the monitoring interval only if not in a serverless environment
+if (process.env.VERCEL !== '1') {
+  startMonitoringInterval()
+}
 export default app;
