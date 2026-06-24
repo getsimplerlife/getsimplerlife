@@ -31,7 +31,7 @@ export default function Layout() {
             <Activity className="h-6 w-6 text-primary" />
             <div className="flex flex-col">
               <span>Simpler Life</span>
-              <span className="text-[10px] font-normal text-gray-400 leading-tight -mt-0.5">Find risk. Cut waste. 24-hour diagnostic.</span>
+              <span className="text-[10px] font-normal text-gray-400 leading-tight -mt-0.5">24-Hour Operational Rescue — Find risk, waste & automation opportunities</span>
             </div>
           </Link>
           <nav className="hidden md:flex items-center space-x-6">
@@ -139,7 +139,7 @@ export default function Layout() {
               <Activity className="h-5 w-5 text-secondary" />
               <span>Simpler Life</span>
             </div>
-            <p className="text-gray-500 text-xs mt-1">Find operational risk, waste, and automation opportunities — within 24 hours.</p>
+            <p className="text-gray-500 text-xs mt-1">24-Hour Operational Rescue — Find risk, waste & automation opportunities across 23 verticals.</p>
           </div>
           <p className="text-gray-400 text-sm">
             &copy; {new Date().getFullYear()} Simpler Life. All rights reserved.

@@ -1,4 +1,5 @@
-import { Check, Zap, Search, Rocket, Activity, Star } from 'lucide-react'
+import { Check, Zap, Search, Rocket, Activity, Star, Clock } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 const tiers = [
   {
@@ -17,7 +18,7 @@ const tiers = [
       'Top 5 automation opportunities identified',
     ],
     cta: 'Start Your QuickScan',
-    link: 'https://buy.stripe.com/14A8wP1448OT1hAfJq08g08',
+    link: '/book',
   },
   {
     name: 'Deep Audit™',
@@ -83,16 +84,17 @@ export default function PackageSection() {
     <section className="py-20 bg-white" id="packages">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-14">
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4">
-            <Zap size={16} /> Our 4-Tier Product Ladder
-          </span>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-50 border border-amber-200 text-amber-700 text-xs font-bold uppercase tracking-wider mb-4">
+            <Clock size={14} /> 24-Hour Rescue Starts Here
+          </div>
           <h2 className="text-3xl sm:text-4xl font-bold text-dark mb-4">
             From Rapid Discovery to{' '}
             <span className="text-primary">Full-Scale Automation</span>
           </h2>
           <p className="text-gray-500 max-w-2xl mx-auto">
-            Start with a 24-hour QuickScan and scale up to enterprise-grade managed automation. 
-            Every tier includes our 23-vertical diagnostic methodology.
+            Start with a <strong>24-hour QuickScan™</strong> — we diagnose every risk, leak, and automation 
+            opportunity across your business. Then scale up to enterprise-grade managed automation 
+            with our full 4-tier product ladder.
           </p>
         </div>
 

@@ -97,6 +97,7 @@ export default function Home() {
                 emerald: { bg: 'bg-emerald-50', text: 'text-emerald-600', hover: 'hover:border-emerald-400', border: 'border-emerald-100' },
                 primary: { bg: 'bg-indigo-50', text: 'text-primary', hover: 'hover:border-primary', border: 'border-indigo-100' },
                 rose: { bg: 'bg-rose-50', text: 'text-rose-600', hover: 'hover:border-rose-400', border: 'border-rose-100' },
+                sky: { bg: 'bg-sky-50', text: 'text-sky-600', hover: 'hover:border-sky-400', border: 'border-sky-100' },
                 pink: { bg: 'bg-pink-50', text: 'text-pink-600', hover: 'hover:border-pink-400', border: 'border-pink-100' },
               };
               const c = colorMap[sol.color];
