@@ -1,4 +1,3 @@
-import { createClient } from "@libsql/client";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -8,13 +7,87 @@ const __dirname = path.dirname(__filename);
 // Database path in the project root
 const dbPath = path.resolve(__dirname, "../../operational.db");
 
-export const db = createClient({
-  url: process.env.DATABASE_URL || `file:${dbPath}`,
-  authToken: process.env.DATABASE_AUTH_TOKEN
+let internalClient: any = null;
+
+async function getClient() {
+  if (internalClient) return internalClient;
+
+  const url = process.env.DATABASE_URL || `file:${dbPath}`;
+  const authToken = process.env.DATABASE_AUTH_TOKEN;
+  const isVercel = process.env.VERCEL === '1';
+
+  // If on Vercel and no remote DATABASE_URL, use a mock client to avoid native binding crashes
+  if (isVercel && !process.env.DATABASE_URL) {
+    console.log("[Database] Using Memory/Mock client for Vercel environment (no DATABASE_URL provided).");
+    internalClient = {
+      execute: async (stmt: any) => {
+        console.warn(`[Database Mock] Intercepted execution: ${typeof stmt === 'string' ? stmt : stmt.sql}`);
+        return { rows: [], columns: [], rowsAffected: 0, lastInsertRowid: undefined };
+      },
+      batch: async () => [],
+      transaction: async () => ({
+        execute: async () => ({ rows: [], columns: [], rowsAffected: 0, lastInsertRowid: undefined }),
+        batch: async () => [],
+        commit: async () => {},
+        rollback: async () => {}
+      }),
+      close: () => {}
+    };
+    return internalClient;
+  }
+
+  try {
+    if (isVercel && url.startsWith('http')) {
+      console.log("[Database] Using @libsql/client/web for Vercel remote connection.");
+      const { createClient } = await import("@libsql/client/web");
+      internalClient = createClient({ url, authToken });
+    } else {
+      console.log(`[Database] Using @libsql/client (node) for ${url.startsWith('file:') ? 'local file' : 'remote connection'}.`);
+      const { createClient } = await import("@libsql/client");
+      internalClient = createClient({ url, authToken });
+    }
+  } catch (err: any) {
+    console.error("[Database] Failed to initialize LibSQL client:", err);
+    // Return a mock that throws descriptive errors instead of crashing the process
+    internalClient = {
+      execute: async () => { 
+        throw new Error(`Database client failed to initialize: ${err.message}. Ensure DATABASE_URL is set correctly for Vercel.`); 
+      },
+      batch: async () => { 
+        throw new Error(`Database client failed to initialize: ${err.message}.`); 
+      },
+      transaction: async () => { 
+        throw new Error(`Database client failed to initialize: ${err.message}.`); 
+      }
+    };
+  }
+  return internalClient;
+}
+
+// Export a proxy object that lazy-loads the actual client. 
+// This prevents top-level crashes during module evaluation on Vercel if native bindings are missing.
+export const db = new Proxy({} as any, {
+  get: (target, prop) => {
+    return async (...args: any[]) => {
+      const client = await getClient();
+      if (typeof client[prop] === 'function') {
+        return client[prop](...args);
+      }
+      return client[prop];
+    };
+  }
 });
 
 export const initDb = async () => {
-  console.log(`[Database] Initializing operational database at file:${dbPath}...`);
+  const url = process.env.DATABASE_URL || `file:${dbPath}`;
+  const isVercel = process.env.VERCEL === '1';
+
+  if (isVercel && !process.env.DATABASE_URL) {
+    console.warn("[Database] Skipping schema initialization on Vercel because no DATABASE_URL is provided (local file is read-only).");
+    return;
+  }
+
+  console.log(`[Database] Initializing operational database schema at ${url}...`);
   try {
     // 1. Table for logging and tracking leads
     await db.execute(`
