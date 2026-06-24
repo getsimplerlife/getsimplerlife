@@ -59,14 +59,14 @@ export default function Layout() {
                     <div className="px-3 py-1.5 text-[10px] font-bold text-gray-400 uppercase tracking-widest">Industry Packages</div>
                     <div className="grid grid-cols-2 gap-1">
                       {[
-                        { name: 'Healthcare', path: '/book?vertical=Healthcare', icon: Shield },
-                        { name: 'Legal', path: '/book?vertical=Legal', icon: Scale },
-                        { name: 'Real Estate', path: '/book?vertical=Real Estate', icon: HomeIcon },
-                        { name: 'E-Commerce', path: '/book?vertical=E-Commerce', icon: ShoppingCart },
-                        { name: 'SaaS', path: '/book?vertical=SaaS', icon: Cloud },
-                        { name: 'Construction', path: '/book?vertical=Construction', icon: HardHat },
-                        { name: 'Financial', path: '/book?vertical=Financial', icon: Landmark },
-                        { name: 'Agency', path: '/book?vertical=Agency', icon: Megaphone },
+                        { name: 'Healthcare', path: '/industries/healthcare', icon: Shield },
+                        { name: 'Legal', path: '/industries/legal', icon: Scale },
+                        { name: 'Real Estate', path: '/industries/real-estate', icon: HomeIcon },
+                        { name: 'E-Commerce', path: '/industries/ecommerce', icon: ShoppingCart },
+                        { name: 'SaaS', path: '/industries/saas', icon: Cloud },
+                        { name: 'Construction', path: '/industries/construction', icon: HardHat },
+                        { name: 'Financial', path: '/industries/financial-services', icon: Landmark },
+                        { name: 'Agency', path: '/industries/agency', icon: Megaphone },
                       ].map((ind) => (
                         <Link key={ind.name} to={ind.path} className="group flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-indigo-50 transition">
                           <ind.icon className="h-3.5 w-3.5 text-primary/70" />

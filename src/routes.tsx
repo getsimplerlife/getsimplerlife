@@ -24,6 +24,16 @@ import Scanner from './pages/solutions/Scanner'
 import Checklist from './pages/Checklist'
 import Sandbox from './pages/solutions/Sandbox'
 
+// Industry Pages
+import Healthcare from './pages/industries/Healthcare'
+import Construction from './pages/industries/Construction'
+import Agency from './pages/industries/Agency'
+import ECommerce from './pages/industries/ECommerce'
+import RealEstate from './pages/industries/RealEstate'
+import Legal from './pages/industries/Legal'
+import FinancialServices from './pages/industries/FinancialServices'
+import SaaS from './pages/industries/SaaS'
+
 // Mock Authentication Guard for the Client Portal
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   // Let's bypass or allow easy entry for demonstration/agency purposes
@@ -58,6 +68,15 @@ export const router = createBrowserRouter([
       { path: 'scanner', element: <Scanner /> },
       { path: 'checklist', element: <Checklist /> },
       { path: 'sandbox', element: <Sandbox /> },
+      // Industry Pages
+      { path: 'industries/healthcare', element: <Healthcare /> },
+      { path: 'industries/construction', element: <Construction /> },
+      { path: 'industries/agency', element: <Agency /> },
+      { path: 'industries/ecommerce', element: <ECommerce /> },
+      { path: 'industries/real-estate', element: <RealEstate /> },
+      { path: 'industries/legal', element: <Legal /> },
+      { path: 'industries/financial-services', element: <FinancialServices /> },
+      { path: 'industries/saas', element: <SaaS /> },
       {
         path: 'dashboard',
         element: (

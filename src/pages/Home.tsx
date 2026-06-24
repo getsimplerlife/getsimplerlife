@@ -77,14 +77,14 @@ export default function Home() {
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             {[
-              { title: 'Healthcare', desc: 'HIPAA/PHI compliance audits, patient intake automation, and telehealth integration.', icon: '🩺', path: '/book?vertical=healthcare', color: 'rose', badge: null, cta: 'Book Audit' },
-              { title: 'Legal', desc: 'Matter management, document automation, billable hour recovery, and conflict checks.', icon: '⚖️', path: '/book?vertical=legal', color: 'violet', badge: null, cta: 'Book Audit' },
-              { title: 'Real Estate', desc: 'Lead response optimization, showing coordination, and contract-to-close workflows.', icon: '🏢', path: '/book?vertical=realestate', color: 'cyan', badge: null, cta: 'Book Audit' },
-              { title: 'E-Commerce', desc: 'Revenue leakage detection, checkout flow optimization, and returns automation.', icon: '🛒', path: '/book?vertical=ecommerce', color: 'orange', badge: null, cta: 'Book Audit' },
-              { title: 'SaaS', desc: 'Trial conversion funnels, user onboarding, churn reduction, and AI risk assessment.', icon: '☁️', path: '/book?vertical=saas', color: 'sky', badge: null, cta: 'Book Audit' },
-              { title: 'Construction', desc: 'Field reporting, change order workflows, budget tracking, and subcontractor compliance.', icon: '🏗️', path: '/book?vertical=construction', color: 'amber', badge: null, cta: 'Book Audit' },
-              { title: 'Financial', desc: 'Regulatory control audits, audit trail automation, and KYC/AML compliance.', icon: '🏛️', path: '/book?vertical=financial', color: 'emerald', badge: null, cta: 'Book Audit' },
-              { title: 'Agency', desc: 'Client delivery audits, utilization analysis, and scope creep detection.', icon: '📣', path: '/book?vertical=agency', color: 'pink', badge: null, cta: 'Book Audit' },
+              { title: 'Healthcare', desc: 'HIPAA/PHI compliance audits, patient intake automation, and telehealth integration.', icon: '🩺', path: '/industries/healthcare', color: 'rose', badge: null, cta: 'View Package' },
+              { title: 'Legal', desc: 'Matter management, document automation, billable hour recovery, and conflict checks.', icon: '⚖️', path: '/industries/legal', color: 'violet', badge: null, cta: 'View Package' },
+              { title: 'Real Estate', desc: 'Lead response optimization, showing coordination, and contract-to-close workflows.', icon: '🏢', path: '/industries/real-estate', color: 'cyan', badge: null, cta: 'View Package' },
+              { title: 'E-Commerce', desc: 'Revenue leakage detection, checkout flow optimization, and returns automation.', icon: '🛒', path: '/industries/ecommerce', color: 'orange', badge: null, cta: 'View Package' },
+              { title: 'SaaS', desc: 'Trial conversion funnels, user onboarding, churn reduction, and AI risk assessment.', icon: '☁️', path: '/industries/saas', color: 'sky', badge: null, cta: 'View Package' },
+              { title: 'Construction', desc: 'Field reporting, change order workflows, budget tracking, and subcontractor compliance.', icon: '🏗️', path: '/industries/construction', color: 'amber', badge: null, cta: 'View Package' },
+              { title: 'Financial', desc: 'Regulatory control audits, audit trail automation, and KYC/AML compliance.', icon: '🏛️', path: '/industries/financial-services', color: 'emerald', badge: null, cta: 'View Package' },
+              { title: 'Agency', desc: 'Client delivery audits, utilization analysis, and scope creep detection.', icon: '📣', path: '/industries/agency', color: 'pink', badge: null, cta: 'View Package' },
               { title: 'Website Scanner', desc: 'Enter any URL to find instant automation gaps, SEO leaks, and mobile risks.', icon: '🔍', path: '/scanner', color: 'indigo', badge: 'Free Tool', cta: 'Run Scan' },
               { title: 'Configurator', desc: 'Tell us your stack and we will map out your exact automation ROI in 60 seconds.', icon: '⚡', path: '/solutions/configurator', color: 'primary', badge: 'Interactive', cta: 'Launch Tool' },
             ].map((sol, i) => {
